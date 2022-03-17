@@ -17,40 +17,67 @@
     <!-- Default: Input Time. Limit inputs to 2 numbers per text box -->
     <span class="time" v-if="!start">
       <!-- Hours -->
-      <input type="text" :value="hours" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      <input
+        type="text"
+        v-model="hours"
+        maxlength="2"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+      />
       <span>&nbsp;:&nbsp;</span>
 
       <!-- Minutes -->
-      <input type="text" :value="minutes" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      <input
+        type="text"
+        v-model="minutes"
+        maxlength="2"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+      />
       <span>&nbsp;:&nbsp;</span>
 
       <!-- Seconds -->
-      <input type="text" :value="seconds" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      <input
+        type="text"
+        v-model="seconds"
+        maxlength="2"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+      />
     </span>
 
     <!-- Timer Started, prevent input -->
     <span class="time" v-else>
-      {{hours}} : {{minutes}} : {{seconds}}
+      {{formattedTime}}
     </span>
 
     <!-- BUTTONS -->
     <!-- Default: Start Timer -->
-    <div v-if="!start">
-      <button type="button" @click="startTimer">Start</button>
+    <div class="mt-3" v-if="!start">
+      <button
+        type="button"
+        class="btn btn-warning btn-sm text-light"
+        @click="toggleTimer"
+      >
+        Start
+      </button>
     </div>
 
     <!-- Timer Started, show take a break or end -->
-    <div v-else>
-      <button type="button" @click="takeBreak">Break</button>
+    <div class="mt-3" v-else>
+      <button type="button" class="btn btn-dark btn-sm" @click="takeBreak">
+        Break
+      </button>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" @click="startTimer">End</button>
+      <button
+        type="button"
+        class="btn btn-warning btn-sm text-light"
+        @click="toggleTimer"
+      >
+        End
+      </button>
     </div>
-
   </div>
 </template>
 
 <script>
-var bootstrap = require("bootstrap");
 export default {
   name: "Timer",
   data() {
@@ -58,20 +85,49 @@ export default {
       hours: "00",
       minutes: "00",
       seconds: "00",
-      start: false
+      start: false,
     };
   },
   computed: {
+    // Ensure that timing convention is followed 
+    formattedTime() {
+      let seconds = parseInt(this.seconds)
+      let minutes = parseInt(this.minutes)
+      let hours = parseInt(this.hours)
 
+      // Format seconds
+      if (seconds > 59) {
+        minutes += 1
+        seconds -= 60
+      }
+      if (seconds < 10) {
+        seconds = `0` + seconds
+      }
+
+      // Format minutes
+      if (minutes > 59) {
+        hours += 1
+        minutes -= 60
+      }
+      if (minutes < 10) {
+        minutes = `0` + minutes
+      }
+
+      if (hours < 10) {
+        hours = `0` + hours
+      }
+
+      return hours + " : " + minutes + " : " + seconds
+    }
   },
   methods: {
-    startTimer() {
-      this.start = !this.start
+    // Called when starting and ending timer
+    toggleTimer() {
+      this.start = !this.start;
     },
-    takeBreak() {
-
-    }
-  }
+    // Called when taking a break
+    takeBreak() {},
+  },
 };
 </script>
 
@@ -92,13 +148,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 40px;
+  color: orange;
 }
 
 input[type="text"] {
-  width: 22px;
-  height: 20px;
-  font-size: 20px;
+  width: 47px;
+  height: 40px;
+  font-size: 40px;
   border: none;
+  color: orange;
 }
 
 input::-webkit-outer-spin-button,
@@ -109,5 +168,9 @@ input::-webkit-inner-spin-button {
 
 *:focus {
   outline: none;
+}
+
+button {
+  width: 75px;
 }
 </style>
