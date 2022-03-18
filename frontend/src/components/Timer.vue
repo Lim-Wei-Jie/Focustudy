@@ -1,25 +1,29 @@
 <template>
   <div class="timer">
-    <!-- STUDY -->
-
     <!-- VISUAL -->
     <svg viewBox="0 0 100 100">
-      <circle
-        class="base"
-        cx="50"
-        cy="50"
-        r="46.5"
-        fill="none"
-        stroke="orange"
-        stroke-width="2"
-      />
+      <g class="pathContainer">
+        <circle class="base" cx="50" cy="50" r="45" />
+        <path
+          class="path"
+          :class="{'study': !startBreak, 'break': startBreak}"
+          d="
+            M 50, 50
+            m -45, 0
+            a 45,45 0 1,0 90,0
+            a 45,45 0 1,0 -90,0
+          "
+          :stroke-dasharray="studyDasharray"
+        ></path>
+      </g>
     </svg>
 
-    <!-- ACTUAL NUMBERS -->
+    <!-- TIME -->
     <!-- Default: Input Time. Limit inputs to 2 numbers per text box -->
-    <span class="time" v-if="!start">
+    <span class="time study" :class="{'study': !startBreak, 'break': startBreak}" v-if="!start">
       <!-- Hours -->
       <input
+        :class="{'study': !startBreak, 'break': startBreak}"
         type="text"
         v-model="inputHours"
         maxlength="2"
@@ -30,6 +34,7 @@
 
       <!-- Minutes -->
       <input
+        :class="{'study': !startBreak, 'break': startBreak}"
         type="text"
         v-model="inputMinutes"
         maxlength="2"
@@ -40,6 +45,7 @@
 
       <!-- Seconds -->
       <input
+        :class="{'study': !startBreak, 'break': startBreak}"
         type="text"
         v-model="inputSeconds"
         maxlength="2"
@@ -49,7 +55,7 @@
     </span>
 
     <!-- Timer Started, prevent input -->
-    <span class="time" v-else>
+    <span class="time study" :class="{'study': !startBreak, 'break': startBreak}" v-else>
       {{ formattedTime }}
     </span>
 
@@ -61,29 +67,25 @@
         class="btn btn-warning btn-sm text-light"
         @click="startTimer"
       >
-        Start
+        Study
+      </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-dark btn-sm" @click="startTimer(); takeBreak()">
+        Break
       </button>
     </div>
 
     <!-- Timer Started, show take a break or end -->
     <div class="mt-3" v-else>
-      <button type="button" class="btn btn-dark btn-sm" @click="takeBreak">
-        Break
-      </button>
-      &nbsp;&nbsp;&nbsp;&nbsp;
       <button
         type="button"
-        class="btn btn-warning btn-sm text-light"
+        class="btn btn-sm text-light"
+        :class="{'btn-warning': !startBreak, 'btn-dark': startBreak}"
         @click="endTimer"
       >
         End
       </button>
     </div>
-
-    <!-- ERROR -->
-    <p class="text-danger mt-3">{{ error }}</p>
-
-    <!-- BREAK -->
   </div>
 </template>
 
@@ -93,12 +95,18 @@ export default {
 
   data() {
     return {
+      // Statuses
+      start: false,
+      startBreak: false,
+
+      // Time inputs
       inputHours: "",
       inputMinutes: "",
       inputSeconds: "",
-      error: "",
-      start: false,
+
+      // Time data
       timerInterval: null,
+      initialTimeInSeconds: 0,
       timeInSeconds: 0,
     };
   },
@@ -129,10 +137,21 @@ export default {
 
       return hours + " : " + minutes + " : " + seconds;
     },
+
+    // Divide time left by total time
+    timeFraction() {
+      return this.timeInSeconds / this.initialTimeInSeconds;
+    },
+
+    // Update dashaway overtime
+    studyDasharray() {
+      let ratio = (this.timeFraction * 283).toFixed(0);
+      return ratio + " 283";
+    },
   },
 
   methods: {
-    // Called when starting timer
+    // Called when starting study session and break
     startTimer() {
       // Start timer status
       this.start = true;
@@ -159,26 +178,31 @@ export default {
       let minSec = minutes * 60;
       this.timeInSeconds = hrSec + minSec + seconds;
 
-      // Retain input from user after returning to default, with proper formatting
-      let timeList = this.formattedTime.split(" : ");
-      this.inputHours = timeList[0];
-      this.inputMinutes = timeList[1];
-      this.inputSeconds = timeList[2];
+      // Save initial time
+      this.initialTimeInSeconds = this.timeInSeconds;
+
+      // Retain input in proper formatting when returning to default
+      let timeList = this.formattedTime.split(" : ")
+      this.inputHours = timeList[0]
+      this.inputMinutes = timeList[1]
+      this.inputSeconds = timeList[2]
 
       // Start interval, decrease time by 1 per second
       this.timerInterval = setInterval(() => this.timeInSeconds--, 1000);
     },
 
-    // Called when taking a break
+    // Called when starting a break
     takeBreak() {
-      // Stop interval
-      clearInterval(this.timerInterval);
+      // Start break
+      this.startBreak = true
     },
 
     // Called when ending study session
     endTimer() {
-      // Reset timer status
+      // Reset timer
       this.start = false;
+      this.timeInSeconds = this.initialTimeInSeconds
+      this.startBreak = false
 
       // Stop interval
       clearInterval(this.timerInterval);
@@ -191,6 +215,7 @@ export default {
       if (newValue < 0) {
         // Reset timer status
         this.start = false;
+        this.startBreak = false
 
         // Stop interval
         clearInterval(this.timerInterval);
@@ -209,6 +234,42 @@ export default {
   text-align: center;
 }
 
+.pathContainer {
+  fill: none;
+}
+
+svg {
+  /* Flips the svg and makes the animation to move left-to-right*/
+  transform: scaleX(-1);
+}
+
+.base {
+  stroke: lightgrey;
+  stroke-width: 2;
+}
+
+.path {
+  stroke-width: 2;
+  stroke-linecap: round;
+
+  /* Makes sure the animation starts at the top of the circle */
+  transform: rotate(90deg);
+  transform-origin: center;
+
+  /* One second aligns with the speed of the countdown timer */
+  transition: 1s linear all;
+}
+
+.study {
+  stroke: orange;
+  color: orange;
+}
+
+.break {
+  stroke: darkgreen;
+  color: darkgreen;
+}
+
 .time {
   position: absolute;
   width: 300px;
@@ -218,7 +279,6 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  color: orange;
 }
 
 input[type="text"] {
@@ -226,7 +286,6 @@ input[type="text"] {
   height: 40px;
   font-size: 40px;
   border: none;
-  color: orange;
 }
 
 input::-webkit-outer-spin-button,
