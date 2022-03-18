@@ -10,7 +10,7 @@ const app = createApp(App);
 
 const gAuthOptions = {
   clientId:
-    "611802935306-9gjli8l6qcr5vbh150g0q60iqnv52u85.apps.googleusercontent.com",
+    "1085222991075-8id5dael3f6kb876kvl7dh7mi9pdvuvs.apps.googleusercontent.com",
   scope: "email",
   prompt: "consent",
   fetch_basic_profile: true,
