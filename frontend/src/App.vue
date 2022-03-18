@@ -4,6 +4,7 @@
     <!-- <router-link to="/">Home</router-link> | -->
     <!-- <router-link to="/about">About</router-link> -->
   <!-- </nav> -->
+  <!-- <HelloWorld msg="Hello Vue 3.0 + Vite" /> -->
   <router-view />
 </template>
 
