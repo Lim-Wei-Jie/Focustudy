@@ -1,5 +1,7 @@
 <template>
   <div class="timer">
+    <!-- STUDY -->
+
     <!-- VISUAL -->
     <svg viewBox="0 0 100 100">
       <circle
@@ -19,33 +21,36 @@
       <!-- Hours -->
       <input
         type="text"
-        v-model="hours"
+        v-model="inputHours"
         maxlength="2"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        placeholder="00"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
       />
       <span>&nbsp;:&nbsp;</span>
 
       <!-- Minutes -->
       <input
         type="text"
-        v-model="minutes"
+        v-model="inputMinutes"
         maxlength="2"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        placeholder="00"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
       />
       <span>&nbsp;:&nbsp;</span>
 
       <!-- Seconds -->
       <input
         type="text"
-        v-model="seconds"
+        v-model="inputSeconds"
         maxlength="2"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        placeholder="00"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
       />
     </span>
 
     <!-- Timer Started, prevent input -->
     <span class="time" v-else>
-      {{formattedTime}}
+      {{ formattedTime }}
     </span>
 
     <!-- BUTTONS -->
@@ -54,7 +59,7 @@
       <button
         type="button"
         class="btn btn-warning btn-sm text-light"
-        @click="toggleTimer"
+        @click="startTimer"
       >
         Start
       </button>
@@ -69,64 +74,128 @@
       <button
         type="button"
         class="btn btn-warning btn-sm text-light"
-        @click="toggleTimer"
+        @click="endTimer"
       >
         End
       </button>
     </div>
+
+    <!-- ERROR -->
+    <p class="text-danger mt-3">{{ error }}</p>
+
+    <!-- BREAK -->
   </div>
 </template>
 
 <script>
 export default {
   name: "Timer",
+
   data() {
     return {
-      hours: "00",
-      minutes: "00",
-      seconds: "00",
+      inputHours: "",
+      inputMinutes: "",
+      inputSeconds: "",
+      error: "",
       start: false,
+      timerInterval: null,
+      timeInSeconds: 0,
     };
   },
-  computed: {
-    // Ensure that timing convention is followed 
-    formattedTime() {
-      let seconds = parseInt(this.seconds)
-      let minutes = parseInt(this.minutes)
-      let hours = parseInt(this.hours)
 
-      // Format seconds
-      if (seconds > 59) {
-        minutes += 1
-        seconds -= 60
-      }
-      if (seconds < 10) {
-        seconds = `0` + seconds
+  computed: {
+    // Ensure that timing convention is followed (HH:MM:SS)
+    formattedTime() {
+      let timeLeft = this.timeInSeconds;
+
+      // Format hours
+      let hours = Math.floor(timeLeft / 3600);
+      if (hours < 10) {
+        hours = `0` + hours;
       }
 
       // Format minutes
-      if (minutes > 59) {
-        hours += 1
-        minutes -= 60
-      }
+      timeLeft %= 3600;
+      let minutes = Math.floor(timeLeft / 60);
       if (minutes < 10) {
-        minutes = `0` + minutes
+        minutes = `0` + minutes;
       }
 
-      if (hours < 10) {
-        hours = `0` + hours
+      // Format seconds
+      let seconds = timeLeft % 60;
+      if (seconds < 10) {
+        seconds = `0` + seconds;
       }
 
-      return hours + " : " + minutes + " : " + seconds
-    }
-  },
-  methods: {
-    // Called when starting and ending timer
-    toggleTimer() {
-      this.start = !this.start;
+      return hours + " : " + minutes + " : " + seconds;
     },
+  },
+
+  methods: {
+    // Called when starting timer
+    startTimer() {
+      // Start timer status
+      this.start = true;
+
+      // Convert string input to number
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+
+      if (this.inputHours != "") {
+        hours = parseInt(this.inputHours);
+      }
+
+      if (this.inputMinutes != "") {
+        minutes = parseInt(this.inputMinutes);
+      }
+
+      if (this.inputSeconds != "") {
+        seconds = parseInt(this.inputSeconds);
+      }
+
+      // Convert input time to seconds
+      let hrSec = hours * 60 * 60;
+      let minSec = minutes * 60;
+      this.timeInSeconds = hrSec + minSec + seconds;
+
+      // Retain input from user after returning to default, with proper formatting
+      let timeList = this.formattedTime.split(" : ");
+      this.inputHours = timeList[0];
+      this.inputMinutes = timeList[1];
+      this.inputSeconds = timeList[2];
+
+      // Start interval, decrease time by 1 per second
+      this.timerInterval = setInterval(() => this.timeInSeconds--, 1000);
+    },
+
     // Called when taking a break
-    takeBreak() {},
+    takeBreak() {
+      // Stop interval
+      clearInterval(this.timerInterval);
+    },
+
+    // Called when ending study session
+    endTimer() {
+      // Reset timer status
+      this.start = false;
+
+      // Stop interval
+      clearInterval(this.timerInterval);
+    },
+  },
+
+  watch: {
+    // Return to default input timer once countdown reaches 0
+    timeInSeconds(newValue) {
+      if (newValue < 0) {
+        // Reset timer status
+        this.start = false;
+
+        // Stop interval
+        clearInterval(this.timerInterval);
+      }
+    },
   },
 };
 </script>
