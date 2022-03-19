@@ -4,7 +4,14 @@ import router from "./router";
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+import { library } from "@fortawesome/fontawesome-svg-core";
+// import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import GAuth from "vue3-google-oauth2";
+
+// FontAwesome
+library.add(faGoogle);
 
 const app = createApp(App);
 
@@ -17,5 +24,5 @@ const gAuthOptions = {
 };
 
 app.use(GAuth, gAuthOptions);
-
+app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(store).use(router).mount("#app");
