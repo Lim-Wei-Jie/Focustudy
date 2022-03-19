@@ -4,7 +4,7 @@
     <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
     <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
     <h2 v-if="user">signed user: {{user}}</h2>
-    <button @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
+    <button type="button" class="btn btn-outline-dark" @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
       <font-awesome-icon :icon="['fab', 'google']" /> Sign in with Google
     </button>
     <button @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
