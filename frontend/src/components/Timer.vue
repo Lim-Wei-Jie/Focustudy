@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import {addTime} from "../endpoint/endpoint.js"
 export default {
   name: "Timer",
 
@@ -200,10 +201,10 @@ export default {
 
     // Called when ending study session
     endTimer() {
-      // Update store if in study mode
+      // Add new record to Timer database if in study mode
       if (!this.startBreak) {
         let time = this.initialTimeInSeconds - this.timeInSeconds
-        this.$store.commit("updateTime", {time})
+        addTime(time)
       }
 
       // Reset timer
@@ -220,10 +221,10 @@ export default {
     // Return to default input timer once countdown reaches 0
     timeInSeconds(newValue) {
       if (newValue < 0) {
-      // Update store if in study mode
+      // Add new record to Timer database if in study mode
       if (!this.startBreak) {
         let time = this.initialTimeInSeconds
-        this.$store.commit("updateTime", {time})
+        addTime(time)
       }
         // Reset timer status
         this.start = false;
