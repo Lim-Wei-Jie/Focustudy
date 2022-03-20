@@ -107,6 +107,7 @@ export default {
       inputSeconds: "",
 
       // Time data
+      startDate: "",
       timerInterval: null,
       initialTimeInSeconds: 0,
       timeInSeconds: 0,
@@ -191,6 +192,9 @@ export default {
 
       // Start interval, decrease time by 1 per second
       this.timerInterval = setInterval(() => this.timeInSeconds--, 1000);
+
+      // If studying, save date when timer was started
+      this.startDate = new Date().toISOString().slice(0, 10)
     },
 
     // Called when starting a break
@@ -204,7 +208,10 @@ export default {
       // Add new record to Timer database if in study mode
       if (!this.startBreak) {
         let time = this.initialTimeInSeconds - this.timeInSeconds
-        addTime(time)
+        addTime({
+          "startDate": this.startDate,
+          "duration": time
+        })
       }
 
       // Reset timer
@@ -223,8 +230,10 @@ export default {
       if (newValue < 0) {
       // Add new record to Timer database if in study mode
       if (!this.startBreak) {
-        let time = this.initialTimeInSeconds
-        addTime(time)
+        addTime({
+          "startDate": this.startDate,
+          "duration": this.initialTimeInSeconds
+        })
       }
         // Reset timer status
         this.start = false;
