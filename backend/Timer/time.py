@@ -1,12 +1,12 @@
-from asyncio.windows_events import NULL
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import extract, func
 from datetime import datetime
 from flask_cors import CORS
+from os import environ
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/timer'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -112,7 +112,7 @@ def getTimesWeek():
 @app.route("/addTime", methods=['POST'])
 def addTime():
     data = request.get_json()
-    time = Timer(NULL, **data)
+    time = Timer(0, **data)
 
     try:
         db.session.add(time)
