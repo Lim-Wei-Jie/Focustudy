@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="m-5">
-        <router-link to="/analytics" class="bg-dark p-2 text-light rounded text-decoration-none">Analytics</router-link>
+      <router-link
+        to="/analytics"
+        class="bg-light p-2 text-dark rounded-3 text-decoration-none border"
+        ><fa icon="chart-simple"
+      /></router-link>
     </div>
     <Timer></Timer>
   </div>
@@ -14,7 +18,7 @@ import Timer from "@/components/Timer.vue";
 export default {
   name: "Homeview",
   components: {
-    Timer
+    Timer,
   }
-}
+};
 </script>
