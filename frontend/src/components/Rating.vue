@@ -26,14 +26,14 @@
     <div v-show='!toggle'>
         <div class="d-flex justify-content-center">
                 <div class="content text-center">
-                    <form @submit="postData" method="post">
+                   
                         <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
-                            <button type="submit" class="btn btn-success" @click="catchd()">Exit</button>
+                            <button type="submit" class="btn btn-success" @click="catchd">Exit</button>
                     
                         </div>
-                    </form>
+                    
                 </div>
         </div>
     </div>
@@ -60,7 +60,7 @@ export default {
     name: 'Rating',
     data() {
     return {
-      picked: '1',
+      picked: null,
       toggle: true,
       toggle2: false
     }

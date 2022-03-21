@@ -14,6 +14,7 @@ CORS(app)
 # dialect+driver://username:password@host:port/database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/rating'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 db = SQLAlchemy(app)
 
@@ -44,8 +45,8 @@ def create_book():
     
     
     
-    #data = request.get_json()
-    rating = Rating(0, 2)
+    data = request.get_json()
+    rating = Rating(0, **data)
  
     try:
         db.session.add(rating)
@@ -57,7 +58,7 @@ def create_book():
                 "data": {
                     "isbn13": "7170"
                 },
-                "message": "An error occurred creating the book."
+                "message": "An error occurred posting the rating"
             }
         ), 500
  
