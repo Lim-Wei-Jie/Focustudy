@@ -26,9 +26,14 @@
     <div v-show='!toggle'>
         <div class="d-flex justify-content-center">
                 <div class="content text-center">
-                    <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
-                        <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
-                    </div>
+                    <form @submit="postData" method="post">
+                        <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
+                            <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
+
+                            <button type="submit" class="btn btn-success">Exit</button>
+                    
+                        </div>
+                    </form>
                 </div>
         </div>
     </div>
@@ -46,6 +51,10 @@
 
 
 <script>
+
+
+import axios from 'axios'
+
 export default {
     name: 'Rating',
     data() {
@@ -54,6 +63,14 @@ export default {
       toggle: true,
       toggle2: false
     }
+  },
+  methods: {
+      postData(e)
+      {
+          console.log(this.picked)
+          axios.post("http://localhost:5000/posttime",this.picked).then((result)=>{console.warn(result)})
+          e.preventDefault()
+      }
   }
 }
 </script>
