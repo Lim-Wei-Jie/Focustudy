@@ -1,35 +1,33 @@
 #App to make HTTP request to other sites, usually APIs. It makes an outgoing request and returns the response from the external site
 #Jsonify serializes data to JavaScript Object Notation (JSON) format
-from flask import Flask, request , jsonify
-from flask_cors import CORS
-#Python SQL toolkit and Object Relational Mapper (ORM)
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import extract, func
+from flask_cors import CORS
 from os import environ
 
-# __name__ refers to your file name
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 CORS(app)
 
-# dialect+driver://username:password@host:port/database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/rating'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 db = SQLAlchemy(app)
 
 class Rating(db.Model):
     __tablename__ = 'rating'
  
-    rating_id = db.Column(db.String(13), primary_key=True)
+    ratingId = db.Column(db.Integer, primary_key=True)
     productivity = db.Column(db.Integer, nullable=False)
 
     
     #constructor
  
-    def __init__(self,rating_id , productivity):
+    def __init__(self,ratingId , productivity):
         #set the properties when created
-        self.rating_id = rating_id
+        self.ratingId = ratingId
         self.productivity = productivity
  
         
@@ -37,19 +35,19 @@ class Rating(db.Model):
     # enables our object to be represented as a JSON string
  
     def json(self):
-        return {"rating_id": self.rating_id, "productivity": self.productivity}
+        return {"ratingId": self.ratingId, "productivity": self.productivity}
     
     
 @app.route("/posttime", methods=['POST'])
-def create_book():
+def create_rate():
     
     
     
     data = request.get_json()
-    rating = Rating(0, **data)
+    
  
     try:
-        db.session.add(rating)
+        db.session.add(data)
         db.session.commit()
     except:
         return jsonify(
@@ -65,7 +63,7 @@ def create_book():
     return jsonify(
         {
             "code": 201,
-            "data": rating.json()
+            "data": "rating posted"
         }
     ), 201
 
