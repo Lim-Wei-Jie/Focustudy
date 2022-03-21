@@ -77,7 +77,7 @@ export default {
       console.log(this.picked)
     
         catchRate({
-          "catchrate": this.picked
+          "productivity": this.picked
         })
     },
   }
