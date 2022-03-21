@@ -30,7 +30,7 @@
                         <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
-                            <button type="submit" class="btn btn-success">Exit</button>
+                            <button type="submit" class="btn btn-success" @click="catchd()">Exit</button>
                     
                         </div>
                     </form>
@@ -53,7 +53,8 @@
 <script>
 
 
-import axios from 'axios'
+
+import {catchRate} from "../endpoint/endpoint.js"
 
 export default {
     name: 'Rating',
@@ -64,14 +65,23 @@ export default {
       toggle2: false
     }
   },
+
   methods: {
-      postData(e)
-      {
-          console.log(this.picked)
-          axios.post("http://localhost:5000/posttime",this.picked).then((result)=>{console.warn(result)})
-          e.preventDefault()
-      }
+    
+
+    // Called when clicked
+    catchd() {
+      // Add new record to rating database
+
+
+      console.log(this.picked)
+    
+        catchRate({
+          "catchrate": this.picked
+        })
+    },
   }
+  
 }
 </script>
 <style scoped>
