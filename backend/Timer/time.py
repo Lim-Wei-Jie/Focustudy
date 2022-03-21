@@ -6,6 +6,7 @@ from flask_cors import CORS
 from os import environ
 
 app = Flask(__name__)
+# set dbURL=mysql+mysqlconnector://root@localhost:3306/timer
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -28,6 +29,7 @@ class Timer(db.Model):
         return {"timeId": self.timeId, "startDate": self.startDate, "duration": self.duration}
 
 # Retrieve all time records
+# http://127.0.0.1:5000/getTimesAll
 @app.route("/getTimesAll")
 def getTimesAll():
     timeList = Timer.query.all()
@@ -48,6 +50,7 @@ def getTimesAll():
     ), 404
 
 # Retrieve times this year
+# http://127.0.0.1:5000/getTimesYear
 @app.route("/getTimesYear")
 def getTimesYear():
     timeList = Timer.query.filter(extract('year', Timer.startDate) == datetime.today().year).all()
@@ -68,6 +71,7 @@ def getTimesYear():
     ), 404
 
 # Retrieve times this month
+# http://127.0.0.1:5000/getTimesMonth
 @app.route("/getTimesMonth")
 def getTimesMonth():
     timeList = Timer.query.filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).all()
@@ -88,6 +92,7 @@ def getTimesMonth():
     ), 404
 
 # Retrieve times this week
+# http://127.0.0.1:5000/getTimesWeek
 @app.route("/getTimesWeek")
 def getTimesWeek():
     day = func.dayofweek(datetime.today())
@@ -109,6 +114,7 @@ def getTimesWeek():
     ), 404
 
 # Add time record
+# http://127.0.0.1:5000/addTime
 @app.route("/addTime", methods=['POST'])
 def addTime():
     data = request.get_json()

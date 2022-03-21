@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div>
+    <div class="m-5">
+        <router-link to="/analytics" class="bg-dark p-2 text-light rounded text-decoration-none">Analytics</router-link>
+    </div>
     <Timer></Timer>
   </div>
 </template>
