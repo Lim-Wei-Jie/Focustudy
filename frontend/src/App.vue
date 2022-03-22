@@ -55,15 +55,15 @@ export default {
     this.tasks = [
       {
         id: 1,
-        text: "doc appointment",
+        text: "esm change report",
       },
       {
         id: 2,
-        text: "doc appointment2",
+        text: "task list front-end",
       },
       {
         id: 3,
-        text: "doc appointment",
+        text: "analytics wireframe",
       },
     ];
   },
