@@ -5,9 +5,9 @@
     <Header @show-task="showTask" :showAddTask="showAddTask"/>
     <AddTask v-if="showAddTask" @add-task="addTask" />
     <Tasks
-      @toggle-reminder="toggleReminder"
-      @delete-task="deleteTask"
-      :tasks="tasks"
+        @toggle-reminder="toggleReminder"
+        @delete-task="deleteTask"
+        :tasks="tasks"
     />
   </div>
 </template>
@@ -32,19 +32,20 @@ export default {
   },
   methods: {
     deleteTask(id) {
-      console.log("task", id);
-      if (confirm("Are you sure?")) {
+      // console.log("task", id);
+      // if (confirm("Are you sure?")) {
         this.tasks = this.tasks.filter((task) => task.id !== id);
-      }
+      // }
     },
     toggleReminder(id) {
-      console.log("reminder", id);
+      // console.log("reminder", id);
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
     },
     addTask(task) {
       this.tasks = [...this.tasks, task];
+      this.showAddTask = false
     },
     showTask() {
       this.showAddTask = !this.showAddTask;
@@ -78,11 +79,11 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  /* text-align: center; */
+  color: black;
 }
 
 /* nav {
@@ -109,24 +110,25 @@ nav a.router-link-exact-active {
 } */
 
 .container {
-  max-width: 500px;
+  max-width: 400px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  max-height: 500px;
   padding: 30px;
-  border-radius: 5px;
+  border-radius: 20px;
+  background: #F7F8F7;
+  box-shadow: 0.5px 5px 10px 12px #E4E4E4;
 }
-
 .btn {
   display: inline-block;
-  background: #000;
+  background: #043631;
   color: #fff;
   border: none;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
