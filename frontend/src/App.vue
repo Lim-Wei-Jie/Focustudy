@@ -56,20 +56,14 @@ export default {
       {
         id: 1,
         text: "doc appointment",
-        day: "21/03/2022",
-        reminder: true,
       },
       {
         id: 2,
         text: "doc appointment2",
-        day: "21/03/2022",
-        reminder: true,
       },
       {
         id: 3,
         text: "doc appointment",
-        day: "21/03/2022",
-        reminder: false,
       },
     ];
   },
