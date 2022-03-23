@@ -12,10 +12,10 @@ export function addTime(record) {
         });
 };
 
-export function getTimesAll() {
+export function getTimesAll(email) {
     let api_endpoint = `http://127.0.0.1:5000/getTimesAll`;
     axios
-        .get(api_endpoint)
+        .post(api_endpoint, email)
         .then((response) => {
             console.log(response.data);
         })
@@ -24,10 +24,10 @@ export function getTimesAll() {
         });
 }
 
-export function getTimesYear() {
+export function getTimesYear(email) {
     let api_endpoint = `http://127.0.0.1:5000/getTimesYear`;
     axios
-        .get(api_endpoint)
+        .post(api_endpoint, email)
         .then((response) => {
             console.log(response.data);
         })
@@ -36,10 +36,10 @@ export function getTimesYear() {
         });
 }
 
-export function getTimesMonth() {
+export function getTimesMonth(email) {
     let api_endpoint = `http://127.0.0.1:5000/getTimesMonth`;
     axios
-        .get(api_endpoint)
+        .post(api_endpoint, email)
         .then((response) => {
             console.log(response.data);
         })
@@ -48,10 +48,10 @@ export function getTimesMonth() {
         });
 }
 
-export function getTimesWeek() {
+export function getTimesWeek(email) {
     let api_endpoint = `http://127.0.0.1:5000/getTimesWeek`;
     axios
-        .get(api_endpoint)
+        .post(api_endpoint, email)
         .then((response) => {
             console.log(response.data);
         })

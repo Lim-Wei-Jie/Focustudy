@@ -17,22 +17,25 @@ class Timer(db.Model):
     __tablename__ = 'timer'
 
     timeId = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(320), nullable=False)
     startDate = db.Column(db.Date, nullable=False)
     duration = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, timeId, startDate, duration):
+    def __init__(self, timeId, email, startDate, duration):
         self.timeId = timeId
+        self.email = email
         self.startDate = startDate
         self.duration = duration
 
     def json(self):
-        return {"timeId": self.timeId, "startDate": self.startDate, "duration": self.duration}
+        return {"timeId": self.timeId, "email": self.email, "startDate": self.startDate, "duration": self.duration}
 
 # Retrieve all time records
 # http://127.0.0.1:5000/getTimesAll
-@app.route("/getTimesAll")
+@app.route("/getTimesAll", methods=["POST"])
 def getTimesAll():
-    timeList = Timer.query.all()
+    data = request.get_json()
+    timeList = Timer.query.filter(Timer.email == data["email"]).all()
     if len(timeList):
         return jsonify(
             {
@@ -51,9 +54,10 @@ def getTimesAll():
 
 # Retrieve times this year
 # http://127.0.0.1:5000/getTimesYear
-@app.route("/getTimesYear")
+@app.route("/getTimesYear", methods=["POST"])
 def getTimesYear():
-    timeList = Timer.query.filter(extract('year', Timer.startDate) == datetime.today().year).all()
+    data = request.get_json()
+    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).all()
     if timeList:
         return jsonify(
             {
@@ -72,9 +76,10 @@ def getTimesYear():
 
 # Retrieve times this month
 # http://127.0.0.1:5000/getTimesMonth
-@app.route("/getTimesMonth")
+@app.route("/getTimesMonth", methods=["POST"])
 def getTimesMonth():
-    timeList = Timer.query.filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).all()
+    data = request.get_json()
+    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).all()
     if timeList:
         return jsonify(
             {
@@ -91,12 +96,14 @@ def getTimesMonth():
         }
     ), 404
 
+# NOT CORRECT, NEED TO FIX
 # Retrieve times this week
 # http://127.0.0.1:5000/getTimesWeek
-@app.route("/getTimesWeek")
+@app.route("/getTimesWeek", methods=["POST"])
 def getTimesWeek():
+    data = request.get_json()
     day = func.dayofweek(datetime.today())
-    timeList = Timer.query.filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).filter(func.dayofweek(datetime.today()) <= day).all()
+    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).filter(func.dayofweek(datetime.today()) <= day).all()
     if timeList:
         return jsonify(
             {

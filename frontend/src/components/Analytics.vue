@@ -33,19 +33,21 @@ export default {
   },
   methods: {
     updateGraph() {
+      let emailObj = {"email": this.$store.state.email}
       if (this.timeRange == "all") {
-        getTimesAll();
+        getTimesAll(emailObj);
       } else if (this.timeRange == "year") {
-        getTimesYear();
+        getTimesYear(emailObj);
       } else if (this.timeRange == "month") {
-        getTimesMonth();
+        getTimesMonth(emailObj);
       } else {
-        getTimesWeek();
+        getTimesWeek(emailObj);
       }
     },
   },
   created() {
-    getTimesWeek();
+    let emailObj = {"email": this.$store.state.email}
+    getTimesWeek(emailObj);
   },
 };
 </script>

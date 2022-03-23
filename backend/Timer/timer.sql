@@ -4,5 +4,6 @@ USE timer;
 DROP TABLE IF EXISTS timer;
 CREATE TABLE timer (
 	timeId INT AUTO_INCREMENT PRIMARY KEY,
+	email VARCHAR(320) NOT NULL,
 	startDate DATE NOT NULL,
 	duration INT NOT NULL);

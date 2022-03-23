@@ -209,6 +209,7 @@ export default {
       if (!this.startBreak) {
         let time = this.initialTimeInSeconds - this.timeInSeconds
         addTime({
+          "email": this.$store.state.email,
           "startDate": this.startDate,
           "duration": time
         })
@@ -228,13 +229,15 @@ export default {
     // Return to default input timer once countdown reaches 0
     timeInSeconds(newValue) {
       if (newValue < 0) {
-      // Add new record to Timer database if in study mode
-      if (!this.startBreak) {
-        addTime({
-          "startDate": this.startDate,
-          "duration": this.initialTimeInSeconds
-        })
-      }
+        // Add new record to Timer database if in study mode
+        if (!this.startBreak) {
+          addTime({
+            "email": this.$store.state.email,
+            "startDate": this.startDate,
+            "duration": this.initialTimeInSeconds
+          })
+        }
+
         // Reset timer status
         this.start = false;
         this.startBreak = false
