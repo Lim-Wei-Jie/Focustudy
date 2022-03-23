@@ -2,7 +2,7 @@
   <form @submit="onSubmit" class="add-form" autocomplete="off">
     <div class="form-control">
       <label style="padding: 5px">Task Name</label>
-      <input type="text" v-model="text" name="text" placeholder="Add Task" />
+      <input type="text" v-model="text" name="text" placeholder="Add Task" maxlength="30" />
     </div>
     <input type="submit" value="Save Task" class="btn btn-block" />
   </form>
