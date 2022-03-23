@@ -28,7 +28,6 @@ def tasklist_by_email(email):
         return jsonify (
             {
                 "code": 200,
-                # "data": task_list.json()
                 "data": task_list
             }
         ), 200
