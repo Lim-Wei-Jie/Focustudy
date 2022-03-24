@@ -18,16 +18,20 @@ class Rating(db.Model):
  
     ratingId = db.Column(db.Integer, primary_key=True)
     productivity = db.Column(db.Integer, nullable=False)
+    email = db.Column(db.String(320), nullable=False)
+
+
     
     # constructor
-    def __init__(self,ratingId , productivity):
+    def __init__(self,ratingId , productivity,email):
         #set the properties when created
         self.ratingId = ratingId
         self.productivity = productivity
+        self.email = email
         
     # enables our object to be represented as a JSON string
     def json(self):
-        return {"ratingId": self.ratingId, "productivity": self.productivity}
+        return {"ratingId": self.ratingId, "productivity": self.productivity,"email": self.email}
 
 # http://127.0.0.1:5000/addRating
 @app.route("/addRating", methods=['POST'])

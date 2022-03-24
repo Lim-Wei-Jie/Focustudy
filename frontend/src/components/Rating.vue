@@ -61,6 +61,7 @@ export default {
     data() {
     return {
       picked: null,
+      email:"haha@gmail.com",
       toggle: true,
       toggle2: false
     }
@@ -77,7 +78,8 @@ export default {
       console.log(this.picked)
     
         catchRate({
-          "productivity": this.picked
+          "productivity": this.picked,
+          "email": this.email
         })
     },
   }
