@@ -10,10 +10,11 @@ app.config['SQLALEHCMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
 
-@app.route("/task_list/<string:email>")
-def tasklist_by_email(email):
+@app.route("/task_list", methods=['POST'])
+def tasklist_by_email():
 
-    initial = TaskList.query.filter_by(email=email)
+    data = request.get_json()
+    initial = TaskList.query.filter_by(email=data["email"])
     task_list = {}
 
     for task in initial:
@@ -39,11 +40,11 @@ def tasklist_by_email(email):
         }
     ), 404
 
-@app.route("/task_list/<string:email>", methods=['POST'])
-def create_task(email):
-
-    all_tasks = TaskList.query.filter_by(email=email)
+@app.route("/create_task", methods=['POST'])
+def create_task():
+    
     data = request.get_json()
+    all_tasks = TaskList.query.filter_by(email=data["email"])
 
     for task in all_tasks:
         if task.__dict__["task_description"] == data["task_description"]:
@@ -54,7 +55,7 @@ def create_task(email):
                 }
             ), 400
 
-    task = TaskList(email, **data)
+    task = TaskList(**data)
 
     try:
         db.session.add(task)
@@ -64,7 +65,7 @@ def create_task(email):
             {
                 "code": 500,
                 "data": {
-                    "email": email
+                    "email": data["email"]
                 },
                 "message": "An error occured creating the task."
             }
@@ -77,8 +78,8 @@ def create_task(email):
         }
     ), 201
 
-@app.route("/task_list/<string:email>/delete", methods=['DELETE'])
-def delete_task(email):
+@app.route("/task_list/delete", methods=['DELETE'])
+def delete_task():
 
     data = request.get_json()
     initial = TaskList.query.filter_by(task_description=data["task_description"]).first()
@@ -99,7 +100,7 @@ def delete_task(email):
             {
                 "code": 500,
                 "data": {
-                    "email": email
+                    "email": data["email"]
                 },
                 "message": "An error occured deleting the task."
             }
