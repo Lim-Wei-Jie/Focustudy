@@ -18,7 +18,7 @@ const app = createApp(App);
 const gAuthOptions = {
   clientId:
     "1085222991075-8id5dael3f6kb876kvl7dh7mi9pdvuvs.apps.googleusercontent.com",
-  scope: "email",
+  scope: "https://www.googleapis.com/auth/calendar.readonly",
   prompt: "consent",
   fetch_basic_profile: true,
 };

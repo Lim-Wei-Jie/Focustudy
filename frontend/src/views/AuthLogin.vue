@@ -75,7 +75,8 @@ export default {
         this.user = googleUser.getBasicProfile().getEmail();
         console.log("getId", this.user);
         console.log("getBasicProfile", googleUser.getBasicProfile());
-        console.log("getAuthResponse", googleUser.getAuthResponse());
+        var access_token = googleUser.getAuthResponse().access_token
+        console.log("getAuthResponse", access_token);
         console.log(
           "getAuthResponse",
           this.$gAuth.instance.currentUser.get().getAuthResponse()
