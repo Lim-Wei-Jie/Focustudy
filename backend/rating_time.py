@@ -56,6 +56,35 @@ def addRating():
             "data": "Rating posted"
         }
     ), 201
+    
+    
+@app.route("/getRating")
+def getRating():
+    #select * from rating
+    ratinglist = Rating.query.all()
+    print(type(ratinglist))
+    if len(ratinglist):
+        
+        #return in json format
+        return jsonify(
+            {
+                "code": 200,
+                "data": {
+                    
+                    #create a json representation for each book
+                    "ratings": [ rating.json() for rating in ratinglist]
+                }
+            }
+        )
+    return jsonify(
+        {
+            #message
+            "code": 404,
+            "message": "There are no books."
+        }
+        #error code
+    ), 404
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

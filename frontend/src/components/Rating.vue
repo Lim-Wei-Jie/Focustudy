@@ -31,12 +31,35 @@
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
                             <button type="submit" class="btn btn-success" @click="catchd">Exit</button>
+                            <button type="submit" class="btn btn-danger" @click="gethd">Get data</button>
                     
                         </div>
                     
                 </div>
         </div>
     </div>
+
+    <div class="container">
+
+        
+        <h3 class="p-3 text-center">Vue.js - Display a list of items with v-for</h3>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="user in users" :key="user.id">
+                    <td>{{user.firstName}} {{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.role}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
 
 </div>
 
@@ -55,6 +78,7 @@
 
 
 import {catchRate} from "../endpoint/endpoint.js"
+import {getRate} from "../endpoint/endpoint.js"
 
 export default {
     name: 'Rating',
@@ -63,7 +87,15 @@ export default {
       picked: null,
       email:"haha@gmail.com",
       toggle: true,
-      toggle2: false
+      toggle2: false,
+      userdata:"2",
+      users: [
+                { firstName: 'Frank', lastName: 'Murphy', email: 'frank.murphy@test.com', role: 'User' },
+                { firstName: 'Vic', lastName: 'Reynolds', email: 'vic.reynolds@test.com', role: 'Admin' },
+                { firstName: 'Gina', lastName: 'Jabowski', email: 'gina.jabowski@test.com', role: 'Admin' },
+                { firstName: 'Jessi', lastName: 'Glaser', email: 'jessi.glaser@test.com', role: 'User' },
+                { firstName: 'Jay', lastName: 'Bilzerian', email: 'jay.bilzerian@test.com', role: 'User' }
+            ]
     }
   },
 
@@ -82,6 +114,14 @@ export default {
           "email": this.email
         })
     },
+
+
+    gethd() {
+      // get record from database
+
+
+        this.userdata = getRate()
+    }
   }
   
 }
