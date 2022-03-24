@@ -15,8 +15,8 @@
           <table class="table table-bordered">
             <thead class="bg-light">
               <tr>
-                <th>{{timeHeader}}</th>
-                <th>Total Study Duration (s)</th>
+                <th>{{ timeHeader }}</th>
+                <th>Total Study Duration (h)</th>
               </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                 :key="[record.range, record.total]"
               >
                 <td>{{ record.range }}</td>
-                <td>{{ record.total }}</td>
+                <td>{{ (record.total / 3600).toFixed(2) }}</td>
               </tr>
             </tbody>
           </table>
@@ -57,14 +57,14 @@ export default {
   },
   computed: {
     timeHeader() {
-      if (this.timeRange == 'day' || this.timeRange == 'month') {
-        return 'Day'
+      if (this.timeRange == "day" || this.timeRange == "month") {
+        return "Day";
       } else if (this.timeRange == "year") {
-        return 'Month'
+        return "Month";
       } else {
-        return 'Year'
+        return "Year";
       }
-    }
+    },
   },
   created() {
     let emailObj = { email: this.$store.state.email };
