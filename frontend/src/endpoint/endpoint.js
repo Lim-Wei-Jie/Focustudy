@@ -17,10 +17,10 @@ export function getRate() {
     axios
         .get(api_endpoint)
         .then((response) => {
-            //console.log(response.data);
+            console.log(response.data);
             //console.log(response.data)
-            let email = response.data.data.ratings
-            console.log(email)
+            //let email = response.data.data.ratings
+            //console.log(email)
             return 322
         })
         .catch((error) => {

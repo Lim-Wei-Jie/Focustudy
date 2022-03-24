@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from os import environ
 
+
 app = Flask(__name__)
 # set dbURL=mysql+mysqlconnector://root@localhost:3306/rating 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
@@ -19,19 +20,21 @@ class Rating(db.Model):
     ratingId = db.Column(db.Integer, primary_key=True)
     productivity = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(320), nullable=False)
+    currentDate = db.Column(db.String(320), nullable=False)
 
 
     
     # constructor
-    def __init__(self,ratingId , productivity,email):
+    def __init__(self,ratingId , productivity,email,currentDate):
         #set the properties when created
         self.ratingId = ratingId
         self.productivity = productivity
         self.email = email
+        self.currentDate= currentDate
         
     # enables our object to be represented as a JSON string
     def json(self):
-        return {"ratingId": self.ratingId, "productivity": self.productivity,"email": self.email}
+        return {"ratingId": self.ratingId, "productivity": self.productivity,"email": self.email,"currentDate":self.currentDate}
 
 # http://127.0.0.1:5000/addRating
 @app.route("/addRating", methods=['POST'])

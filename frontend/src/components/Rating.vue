@@ -30,7 +30,7 @@
                         <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
-                            <button type="submit" class="btn btn-success" @click="catchd">Exit</button>
+                            <button type="submit" class="btn btn-success" @click="currentDate() ; catchd()">Exit</button>
                             <button type="submit" class="btn btn-danger" @click="gethd">Get data</button>
                     
                         </div>
@@ -42,22 +42,21 @@
     
 
     <div class="container">
-
-        {{this.userdata}}
-        <h3 class="p-3 text-center">Vue.js - Display a list of items with v-for</h3>
+        <h3 class="p-3 text-center">Rating table</h3>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Date</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Ratings</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="user in userdata" :key="user.ratingiId">
-                    <td>{{user.ratingId}} </td>
+                    <td>{{user.currentDate}} </td>
                     <td>{{user.email}}</td>
                     <td>{{user.productivity}}</td>
+                    
                 </tr>
             </tbody>
         </table>
@@ -78,9 +77,12 @@
 <script>
 
 
+//import something from "../endpoint/endpoint.js"
 
 import {catchRate} from "../endpoint/endpoint.js"
-import {getRate} from "../endpoint/endpoint.js"
+import axios from "axios";
+let url = "http://127.0.0.1:5000/getRating"
+
 
 
 export default {
@@ -91,7 +93,9 @@ export default {
       email:"haha@gmail.com",
       toggle: true,
       toggle2: false,
-      userdata:"",
+      userdata:2,
+      currentdate:""
+      
      
     }
   },
@@ -104,25 +108,34 @@ export default {
       // Add new record to rating database
 
 
-      console.log(this.picked)
     
         catchRate({
           "productivity": this.picked,
-          "email": this.email
+          "email": this.email,
+          "currentDate": this.currentdate
         })
+
+
+        
     },
 
 
     gethd() {
       // get record from database
 
+      axios.get(url).then(response => {
+            this.results = response.data
+            console.log(response.data)
+            this.userdata =response.data.data.ratings 
+          })
        
-      this.userdata = getRate()
-  
+    },
+
+    currentDate() {
+      const current = new Date();
+      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+      this.currentdate = date
       
-      return this.userdata 
- 
-       
     }
   }
   
