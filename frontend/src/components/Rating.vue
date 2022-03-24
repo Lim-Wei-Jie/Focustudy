@@ -39,9 +39,11 @@
         </div>
     </div>
 
+    
+
     <div class="container">
 
-        
+        {{this.userdata}}
         <h3 class="p-3 text-center">Vue.js - Display a list of items with v-for</h3>
         <table class="table table-striped table-bordered">
             <thead>
@@ -52,10 +54,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id">
-                    <td>{{user.firstName}} {{user.lastName}}</td>
+                <tr v-for="user in userdata" :key="user.ratingiId">
+                    <td>{{user.ratingId}} </td>
                     <td>{{user.email}}</td>
-                    <td>{{user.role}}</td>
+                    <td>{{user.productivity}}</td>
                 </tr>
             </tbody>
         </table>
@@ -80,6 +82,7 @@
 import {catchRate} from "../endpoint/endpoint.js"
 import {getRate} from "../endpoint/endpoint.js"
 
+
 export default {
     name: 'Rating',
     data() {
@@ -88,14 +91,8 @@ export default {
       email:"haha@gmail.com",
       toggle: true,
       toggle2: false,
-      userdata:"2",
-      users: [
-                { firstName: 'Frank', lastName: 'Murphy', email: 'frank.murphy@test.com', role: 'User' },
-                { firstName: 'Vic', lastName: 'Reynolds', email: 'vic.reynolds@test.com', role: 'Admin' },
-                { firstName: 'Gina', lastName: 'Jabowski', email: 'gina.jabowski@test.com', role: 'Admin' },
-                { firstName: 'Jessi', lastName: 'Glaser', email: 'jessi.glaser@test.com', role: 'User' },
-                { firstName: 'Jay', lastName: 'Bilzerian', email: 'jay.bilzerian@test.com', role: 'User' }
-            ]
+      userdata:"",
+     
     }
   },
 
@@ -119,12 +116,20 @@ export default {
     gethd() {
       // get record from database
 
-
-        this.userdata = getRate()
+       
+      this.userdata = getRate()
+  
+      
+      return this.userdata 
+ 
+       
     }
   }
   
 }
+
+
+
 </script>
 <style scoped>
 
