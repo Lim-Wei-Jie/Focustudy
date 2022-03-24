@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col mx-5">
         <div class="d-flex justify-content-between">
-          <h1>Study Duration</h1>
+          <h3>Study Duration</h3>
           <select class="p-2 bg-light rounded border" v-model="timeRange">
             <option value="day">Last 7 Days</option>
             <option value="month">This Month</option>
@@ -12,28 +12,12 @@
           </select>
         </div>
         <div class="mt-4">
-          <table class="table table-bordered">
-            <thead class="bg-light">
-              <tr>
-                <th>{{ timeHeader }}</th>
-                <th>Total Study Duration (h)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="record in timeList"
-                :key="[record.range, record.total]"
-              >
-                <td>{{ record.range }}</td>
-                <td>{{ (record.total / 3600).toFixed(2) }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <column-chart :xtitle="timeHeader" ytitle="Hours" :data="timeList" :colors="['orange']" :precision="3"></column-chart>
         </div>
       </div>
       <div class="col mx-5">
         <div class="d-flex justify-content-between">
-          <h1>Productivity</h1>
+          <h3>Productivity</h3>
         </div>
       </div>
     </div>
@@ -70,7 +54,10 @@ export default {
     let emailObj = { email: this.$store.state.email };
     getTimesDay(emailObj)
       .then((success) => {
-        this.timeList = success;
+        this.timeList = []
+        for (let row of success) {
+          this.timeList.push([row["range"], row["total"]])
+        }
       })
       .catch((failure) => {
         this.timeList = failure;
@@ -82,7 +69,10 @@ export default {
       if (newValue == "all") {
         getTimesAll(emailObj)
           .then((success) => {
-            this.timeList = success;
+            this.timeList = []
+            for (let row of success) {
+              this.timeList.push([row["range"], row["total"]])
+            }
           })
           .catch((failure) => {
             this.timeList = failure;
@@ -90,7 +80,10 @@ export default {
       } else if (newValue == "year") {
         getTimesYear(emailObj)
           .then((success) => {
-            this.timeList = success;
+            this.timeList = []
+            for (let row of success) {
+              this.timeList.push([row["range"], row["total"]])
+            }
           })
           .catch((failure) => {
             this.timeList = failure;
@@ -98,7 +91,10 @@ export default {
       } else if (newValue == "month") {
         getTimesMonth(emailObj)
           .then((success) => {
-            this.timeList = success;
+            this.timeList = []
+            for (let row of success) {
+              this.timeList.push([row["range"], row["total"]])
+            }
           })
           .catch((failure) => {
             this.timeList = failure;
@@ -106,7 +102,10 @@ export default {
       } else {
         getTimesDay(emailObj)
           .then((success) => {
-            this.timeList = success;
+            this.timeList = []
+            for (let row of success) {
+              this.timeList.push([row["range"], row["total"]])
+            }
           })
           .catch((failure) => {
             this.timeList = failure;

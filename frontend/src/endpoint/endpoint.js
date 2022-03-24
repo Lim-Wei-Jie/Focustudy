@@ -23,7 +23,7 @@ export function getTimesAll(email) {
             })
             .catch((error) => {
                 console.log(error)
-                reject(0)
+                reject([])
             });
     })
 }
@@ -39,7 +39,7 @@ export function getTimesYear(email) {
             })
             .catch((error) => {
                 console.log(error)
-                reject(0)
+                reject([])
             });
     })
 }
@@ -55,7 +55,7 @@ export function getTimesMonth(email) {
             })
             .catch((error) => {
                 console.log(error)
-                reject(0)
+                reject([])
             });
     })
 }
@@ -71,7 +71,7 @@ export function getTimesDay(email) {
             })
             .catch((error) => {
                 console.log(error)
-                reject(0)
+                reject([])
             });
     })
 }

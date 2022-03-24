@@ -46,7 +46,7 @@ def getTimesAll():
         for time in timeList:
             result.append({
                 "range": time.range,
-                "total": time.total
+                "total": time.total / 3600
             })
         return jsonify(
             {
@@ -80,7 +80,7 @@ def getTimesYear():
         for time in timeList:
             result.append({
                 "range": months[time.range - 1],
-                "total": time.total
+                "total": time.total / 3600
             })
         return jsonify(
             {
@@ -113,7 +113,7 @@ def getTimesMonth():
         for time in timeList:
             result.append({
                 "range": time.range,
-                "total": time.total
+                "total": time.total / 3600
             })
         return jsonify(
             {
@@ -147,7 +147,7 @@ def getTimesDay():
         for time in timeList:
             result.append({
                 "range": time.range,
-                "total": time.total
+                "total": time.total / 3600
             })
         return jsonify(
             {
