@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import extract, func
-from datetime import datetime
+from sqlalchemy import extract, and_, func
+from datetime import date, timedelta
 from flask_cors import CORS
 from os import environ
 
@@ -35,13 +35,24 @@ class Timer(db.Model):
 @app.route("/getTimesAll", methods=["POST"])
 def getTimesAll():
     data = request.get_json()
-    timeList = Timer.query.filter(Timer.email == data["email"]).all()
+    timeList = db.session.\
+        query(extract('year', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
+            group_by(extract('year', Timer.startDate)).\
+                order_by(extract('year', Timer.startDate)).\
+                    filter(Timer.email == data["email"]).\
+                        all()
     if len(timeList):
+        result = []
+        for time in timeList:
+            result.append({
+                "range": time.range,
+                "total": time.total
+            })
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "times": [time.json() for time in timeList]
+                    "times": result
                 }
             }
         )
@@ -57,13 +68,25 @@ def getTimesAll():
 @app.route("/getTimesYear", methods=["POST"])
 def getTimesYear():
     data = request.get_json()
-    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).all()
-    if timeList:
+    timeList = db.session.\
+        query(extract('month', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
+            group_by(extract('month', Timer.startDate)).\
+                order_by(extract('month', Timer.startDate)).\
+                    filter(and_(Timer.email == data["email"], extract('year', Timer.startDate) == date.today().year)).\
+                        all()
+    if len(timeList):
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        result = []
+        for time in timeList:
+            result.append({
+                "range": months[time.range - 1],
+                "total": time.total
+            })
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "times": [time.json() for time in timeList]
+                    "times": result
                 }
             }
         )
@@ -79,13 +102,24 @@ def getTimesYear():
 @app.route("/getTimesMonth", methods=["POST"])
 def getTimesMonth():
     data = request.get_json()
-    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).all()
-    if timeList:
+    timeList = db.session.\
+        query(extract('day', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
+            group_by(extract('day', Timer.startDate)).\
+                order_by(extract('day', Timer.startDate)).\
+                    filter(and_(Timer.email == data["email"], extract('year', Timer.startDate) == date.today().year, extract('month', Timer.startDate) == date.today().month)).\
+                        all()
+    if len(timeList):
+        result = []
+        for time in timeList:
+            result.append({
+                "range": time.range,
+                "total": time.total
+            })
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "times": [time.json() for time in timeList]
+                    "times": result
                 }
             }
         )
@@ -96,20 +130,30 @@ def getTimesMonth():
         }
     ), 404
 
-# NOT CORRECT, NEED TO FIX
-# Retrieve times this week
-# http://127.0.0.1:5000/getTimesWeek
-@app.route("/getTimesWeek", methods=["POST"])
-def getTimesWeek():
+# Retrieve times from last 7 days
+# http://127.0.0.1:5000/getTimesDay
+@app.route("/getTimesDay", methods=["POST"])
+def getTimesDay():
     data = request.get_json()
-    day = func.dayofweek(datetime.today())
-    timeList = Timer.query.filter(Timer.email == data["email"]).filter(extract('year', Timer.startDate) == datetime.today().year).filter(extract('month', Timer.startDate) == datetime.today().month).filter(func.dayofweek(datetime.today()) <= day).all()
-    if timeList:
+    sevenDaysAgo = date.today() - timedelta(days=7)
+    timeList = db.session.\
+        query(extract('day', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
+            group_by(extract('day', Timer.startDate)).\
+                order_by(extract('day', Timer.startDate)).\
+                    filter(and_(Timer.email == data["email"], Timer.startDate >= sevenDaysAgo)).\
+                        all()
+    if len(timeList):
+        result = []
+        for time in timeList:
+            result.append({
+                "range": time.range,
+                "total": time.total
+            })
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "times": [time.json() for time in timeList]
+                    "times": result
                 }
             }
         )
