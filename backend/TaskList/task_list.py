@@ -5,6 +5,8 @@ from os import environ
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/TaskList'
+# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+# export dbURL=mysql+mysqlconnector://root:root@localhost:3306/TaskList
 app.config['SQLALEHCMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
