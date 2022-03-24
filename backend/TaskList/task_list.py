@@ -77,21 +77,54 @@ def create_task(email):
         }
     ), 201
 
+@app.route("/task_list/<string:email>/delete", methods=['DELETE'])
+def delete_task(email):
+
+    data = request.get_json()
+    initial = TaskList.query.filter_by(task_description=data["task_description"]).first()
+
+    if initial == None:
+        return jsonify (
+            {
+                "code": 404,
+                "data": "No such task in task list."
+            }
+        ), 404
+
+    try:
+        db.session.delete(initial)
+        db.session.commit()
+    except:
+        return jsonify (
+            {
+                "code": 500,
+                "data": {
+                    "email": email
+                },
+                "message": "An error occured deleting the task."
+            }
+        ), 500
+
+    return jsonify (
+        {
+            "code": 202,
+            "data": "Task successfully deleted."
+        }
+    ), 202
+
 class TaskList(db.Model):
     __tablename__ = 'task_list'
     
     task_id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), nullable=False)
     task_description = db.Column(db.String(30), nullable=False)
-    status = db.Column(db.Boolean, default=False, nullable=True)
  
-    def __init__(self, email, task_description, status):
+    def __init__(self, email, task_description, ):
         self.email = email
         self.task_description = task_description
-        self.status = status
  
     def json(self):
-        return {"email": self.email, "task_description": self.task_description, "status": self.status}
+        return {"task_id": self.task_id, "email": self.email, "task_description": self.task_description}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

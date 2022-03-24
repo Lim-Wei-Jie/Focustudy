@@ -34,22 +34,21 @@ DROP TABLE IF EXISTS `task_list`;
 CREATE TABLE IF NOT EXISTS `task_list` (
     `task_id` INT AUTO_INCREMENT PRIMARY KEY,
     `email` varchar(64) NOT NULL,
-    `task_description` varchar(30) NOT NULL,
-    `status` boolean NOT NULL
+    `task_description` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `task_list`
 --
 
-INSERT INTO `task_list` (`email`, `task_description`, `status`) VALUES
-('huiqing.koh.2020@smu.edu.sg', 'esm change report', 'false'),
-('huiqing.koh.2020@smu.edu.sg', 'analytics wireframe', 'false'),
-('huiqing.koh.2020@smu.edu.sg', 'task list backend', 'false'),
-('sanchanag.2020@smu.edu.sg', 'spotify api', 'false'),
-('sanchanag.2020@smu.edu.sg', 'gcal api', 'false'),
-('sophia.chow.2020@smu.edu.sg', 'sleep', 'false'),
-('sophia.chow.2020@smu.edu.sg', 'sleep more', 'false');
+INSERT INTO `task_list` (`email`, `task_description`) VALUES
+('huiqing.koh.2020@smu.edu.sg', 'esm change report'),
+('huiqing.koh.2020@smu.edu.sg', 'analytics wireframe'),
+('huiqing.koh.2020@smu.edu.sg', 'task list backend'),
+('sanchanag.2020@smu.edu.sg', 'spotify api'),
+('sanchanag.2020@smu.edu.sg', 'gcal api'),
+('sophia.chow.2020@smu.edu.sg', 'sleep'),
+('sophia.chow.2020@smu.edu.sg', 'sleep more');
 
 COMMIT;
 
