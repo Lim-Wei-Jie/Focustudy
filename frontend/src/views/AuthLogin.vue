@@ -41,6 +41,7 @@
     <h2 v-if="user">signed user: {{user}}</h2>
     <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
     <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
+    <!-- <button type="button" class="btn btn-outline-dark" @click="handleGoogleApi" :disabled="!Vue3GoogleOauth.isInit">get cal</button> -->
     <!-- <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button> -->
   </div>
 </template>
@@ -61,6 +62,7 @@ export default {
   data() {
     return {
       user: "",
+      access_token: "",
     };
   },
 
@@ -75,8 +77,8 @@ export default {
         this.user = googleUser.getBasicProfile().getEmail();
         console.log("getId", this.user);
         console.log("getBasicProfile", googleUser.getBasicProfile());
-        var access_token = googleUser.getAuthResponse().access_token
-        console.log("getAuthResponse", access_token);
+        this.access_token = googleUser.getAuthResponse().access_token
+        console.log("getAuthResponse", this.access_token);
         console.log(
           "getAuthResponse",
           this.$gAuth.instance.currentUser.get().getAuthResponse()
@@ -108,6 +110,20 @@ export default {
         console.error(error);
       }
     },
+
+    // try gaxios
+    // async handleGoogleApi() {
+    //   var serviceURL = "https://www.googleapis.com/calendar/v3/calendar?access_token=" + this.access_token
+    //   try {
+    //     const response = await fetch(serviceURL, { method: 'GET' });
+    //     const result = await response.json();
+    //     if (response.status === 200) {
+    //       console.log(result);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 
     // handleClickDisconnect() {
     //   window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
