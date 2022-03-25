@@ -38,17 +38,20 @@
   <div>
     <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
     <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
-    <h2 v-if="user">signed user: {{user}}</h2>
+    <h2 v-if="user">signed user: {{ email }}</h2>
     <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
     <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
     <!-- <button type="button" class="btn btn-outline-dark" @click="handleGoogleApi" :disabled="!Vue3GoogleOauth.isInit">get cal</button> -->
     <!-- <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button> -->
   </div>
+  <HelloWorld/>
 </template>
 
 <script>
 import { inject, toRefs } from "vue";
 import { Icon } from "@iconify/vue";
+import { mapState, mapMutations } from "vuex"
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "AuthLogin",
@@ -57,6 +60,7 @@ export default {
   },
   components: {
     Icon,
+    HelloWorld
   },
 
   data() {
@@ -64,6 +68,10 @@ export default {
       user: "",
       access_token: "",
     };
+  },
+
+  computed: {
+    ...mapState(["email"])
   },
 
   methods: {
@@ -75,6 +83,7 @@ export default {
         }
         console.log("googleUser", googleUser);
         this.user = googleUser.getBasicProfile().getEmail();
+        this.updateEmail(this.user)
         console.log("getId", this.user);
         console.log("getBasicProfile", googleUser.getBasicProfile());
         this.access_token = googleUser.getAuthResponse().access_token
@@ -110,6 +119,8 @@ export default {
         console.error(error);
       }
     },
+
+    ...mapMutations(["updateEmail"])
 
     // try gaxios
     // async handleGoogleApi() {
