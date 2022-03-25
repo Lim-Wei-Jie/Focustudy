@@ -95,7 +95,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .gcal {
     max-width: 500px;
     margin: 30px auto;

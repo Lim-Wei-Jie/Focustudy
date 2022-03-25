@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .spotify {
     background-color: black;
     max-width: 500px;
