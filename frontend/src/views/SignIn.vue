@@ -44,14 +44,12 @@
     <!-- <button type="button" class="btn btn-outline-dark" @click="handleGoogleApi" :disabled="!Vue3GoogleOauth.isInit">get cal</button> -->
     <!-- <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button> -->
   </div>
-  <HelloWorld/>
 </template>
 
 <script>
 import { inject, toRefs } from "vue";
 import { Icon } from "@iconify/vue";
 import { mapState, mapMutations } from "vuex"
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "AuthLogin",
@@ -60,7 +58,6 @@ export default {
   },
   components: {
     Icon,
-    HelloWorld
   },
 
   data() {
@@ -82,9 +79,8 @@ export default {
           return null;
         }
         console.log("googleUser", googleUser);
-        this.user = googleUser.getBasicProfile().getEmail();
-        this.updateEmail(this.user)
-        console.log("getId", this.user);
+        this.updateEmail(googleUser.getBasicProfile().getEmail())
+        console.log("getId", this.email);
         console.log("getBasicProfile", googleUser.getBasicProfile());
         this.access_token = googleUser.getAuthResponse().access_token
         console.log("getAuthResponse", this.access_token);
