@@ -31,7 +31,7 @@
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
                             <button type="submit" class="btn btn-success" @click="currentDate() ; classifytime(this.currenTime); catchd();">Exit</button>
-                            <button type="submit" class="btn btn-danger" @click="gethd();">Get data</button>
+                            <button type="submit" class="btn btn-danger" @click="gethd(); calculateAverage(); ">Get data</button>
                     
                         </div>
                     
@@ -42,7 +42,6 @@
     
 
     <div class="container">
-        {{this.morningGPAList}}
         {{this.avgMorningGpa}}
         {{this.avgAfternoonGpa}}
         {{this.avgNightGpa}}
@@ -104,6 +103,7 @@ export default {
       nightGPA:0,
       morningGPA:0,
       afternoonGPA:0,
+      extralist:[],
       morningGPAList:[],
       afternoonGPAList:[],
       nightGPAList:[],
@@ -116,7 +116,9 @@ export default {
   },
 
   methods: {
-    
+
+
+
 
     // Called when clicked
     catchd() {
@@ -141,29 +143,7 @@ export default {
         
     },
 
-
-     populateList()
-    {
-        for (const [key1, value1] of Object.entries(this.userdata)) {
-
-            console.log({key1})
-
-            for (const [key, value] of Object.entries(value1))
-            {
-                //console.log(`${key}`);
-                if (`${key}` == "morningGPA" )
-                {
-                    console.log('here')
-                    //console.log('hahaha')
-                    this.morningGPAList.push(Number(`${value}`))
-                }
-            }
-            
-            }
-
-
-           
-    },
+   
 
 
 
@@ -176,6 +156,62 @@ export default {
             console.log(response.data)
             this.userdata =response.data.data.ratings 
             console.log(this.userdata)
+
+
+
+
+             for (const [key1, value1] of Object.entries(this.userdata)) {
+
+                    console.log({key1})
+
+                    for (const [key, value] of Object.entries(value1))
+                    {
+                        //console.log(`${key}`);
+                        if (`${key}` == "morningGPA" )
+                        {
+                            //console.log('here')
+                            //console.log('hahaha')
+                            this.morningGPAList.push(Number(`${value}`))
+                        }
+                    }
+                    
+                    }
+        
+                //console.log(this.morningGPAList)
+
+
+                
+
+                this.avgMorningGpa = 0;
+                var total = 0;
+                //this.morningGPAList=[]
+
+                for(var j = 0; j < this.morningGPAList.length; j++) {
+                   total += Number(this.morningGPAList[j]);
+                }
+                this.avgMorningGpa = total / this.morningGPAList.length;
+                //console.log(total)
+
+
+
+
+
+
+
+           
+
+
+
+                    //this.morningGPAList = this.extralist
+
+
+
+
+
+
+
+                    
+
             
           })
 
@@ -188,6 +224,8 @@ export default {
        
     },
 
+    
+
     currentDate() {
       const current = new Date();
       const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -197,10 +235,6 @@ export default {
       console.log(this.currenTime)
       
     },
-
-
-   
-
     
     classifytime(x) {
     if ((x >= 0) && (x <= 12)){
@@ -218,33 +252,44 @@ export default {
         return 'Night'
     }
     
-},
+    },
 
 
     calculateAverage() {
 
-         var total = 0;
+
+        
+
+         
 
         if (this.partDay == "Morning")
+        
         {
+            
+            //console.log(this.morningGPAList)
 
-            this.avgMorningGpa = 0;
-            for(var i = 0; i < this.morningGPAList.length; i++) {
-                total += Number(this.morningGPAList[i]);
-            }
-            this.avgMorningGpa = total / this.morningGPAList.length;
-            console.log(total)
+
+   
+
+            
+            
+            //this.avgMorningGpa = 32
+            //console.log(this.avgMorningGpa)
+            //console.log(44)
 
         }
+
+        
+
 
         if (this.partDay == "Afternoon")
         {
 
             this.avgAfternoongGpa = 0;
             for(var j = 0; j < this.afternoonGPAList.length; j++) {
-                total += Number(this.afternoonGPAList[j]);
+                //total += Number(this.afternoonGPAList[j]);
             }
-            this.avgafternoonGpa = total / this.afternoonGPAList.length;
+            //this.avgafternoonGpa = total / this.afternoonGPAList.length;
             //console.log(total)
 
         }
@@ -255,9 +300,9 @@ export default {
 
             this.avgNightGpa = 0;
             for(var z = 0; z < this.nightGPAList.length; z++) {
-                total += Number(this.afternoonGPAList[z]);
+                //total += Number(this.afternoonGPAList[z]);
             }
-            this.avgNightGpa = total / this.nightGPAList.length;
+            //this.avgNightGpa = total / this.nightGPAList.length;
             //console.log(total)
 
         }
@@ -267,7 +312,10 @@ export default {
        
     }
 
+    
+
   }
+  
 
 }
 
