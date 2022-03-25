@@ -3,15 +3,12 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
+      // Test email
       email: "a@gmail.com"
     }
   },
   getters: {},
-  mutations: {
-    updateEmail(state, { email }) {
-      state.email = email
-    }
-  },
+  mutations: {},
   actions: {},
   modules: {},
 });

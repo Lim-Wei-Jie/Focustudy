@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Add time record
 export function addTime(record) {
     let api_endpoint = `http://127.0.0.1:5000/addTime`;
     axios
@@ -12,6 +13,7 @@ export function addTime(record) {
         });
 };
 
+// Retrieve all times
 export function getTimesAll(email) {
     return new Promise((resolve, reject) => {
         let api_endpoint = `http://127.0.0.1:5000/getTimesAll`;
@@ -28,6 +30,7 @@ export function getTimesAll(email) {
     })
 }
 
+// Retrieve times this year
 export function getTimesYear(email) {
     return new Promise((resolve, reject) => {
         let api_endpoint = `http://127.0.0.1:5000/getTimesYear`;
@@ -44,6 +47,7 @@ export function getTimesYear(email) {
     })
 }
 
+// Retrieve times this month
 export function getTimesMonth(email) {
     return new Promise((resolve, reject) => {
         let api_endpoint = `http://127.0.0.1:5000/getTimesMonth`;
@@ -60,6 +64,7 @@ export function getTimesMonth(email) {
     })
 }
 
+// Retrieve times from last 7 days (today inclusive)
 export function getTimesDay(email) {
     return new Promise((resolve, reject) => {
         let api_endpoint = `http://127.0.0.1:5000/getTimesDay`;

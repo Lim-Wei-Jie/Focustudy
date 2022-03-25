@@ -130,12 +130,12 @@ def getTimesMonth():
         }
     ), 404
 
-# Retrieve times from last 7 days
+# Retrieve times from last 7 days (today inclusive)
 # http://127.0.0.1:5000/getTimesDay
 @app.route("/getTimesDay", methods=["POST"])
 def getTimesDay():
     data = request.get_json()
-    sevenDaysAgo = date.today() - timedelta(days=7)
+    sevenDaysAgo = date.today() - timedelta(days=6)
     timeList = db.session.\
         query(extract('day', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
             group_by(extract('day', Timer.startDate)).\

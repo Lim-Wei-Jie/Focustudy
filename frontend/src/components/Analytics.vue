@@ -1,9 +1,15 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+
+      <!-- STUDY DURATION -->
       <div class="col mx-5">
+
+        <!-- Header -->
         <div class="d-flex justify-content-between">
+          <!-- Title -->
           <h3>Study Duration</h3>
+          <!-- Dropdown -->
           <select class="p-2 bg-light rounded border" v-model="timeRange">
             <option value="day">Last 7 Days</option>
             <option value="month">This Month</option>
@@ -11,15 +17,25 @@
             <option value="all">All Time</option>
           </select>
         </div>
+
+        <!-- Chart -->
         <div class="mt-4">
           <column-chart :xtitle="timeHeader" ytitle="Hours" :data="timeList" :colors="['orange']" :precision="3"></column-chart>
         </div>
+
       </div>
+
+      <!-- PRODUCTIVITY -->
       <div class="col mx-5">
+
+        <!-- Header -->
         <div class="d-flex justify-content-between">
+          <!-- Title -->
           <h3>Productivity</h3>
         </div>
+
       </div>
+
     </div>
   </div>
 </template>
@@ -31,15 +47,18 @@ import {
   getTimesMonth,
   getTimesDay,
 } from "../endpoint/endpoint.js";
+
 export default {
   name: "Analytics",
   data() {
     return {
+      // Study Duration
       timeRange: "day",
       timeList: [],
     };
   },
   computed: {
+    // Change time chart x-axis value based on timeRange selection
     timeHeader() {
       if (this.timeRange == "day" || this.timeRange == "month") {
         return "Day";
@@ -51,7 +70,10 @@ export default {
     },
   },
   created() {
+    // Default chart: Last 7 days
     let emailObj = { email: this.$store.state.email };
+
+    // Study Duration
     getTimesDay(emailObj)
       .then((success) => {
         this.timeList = []
@@ -64,8 +86,11 @@ export default {
       });
   },
   watch: {
+    // Change time chart based on selection
     timeRange(newValue) {
       let emailObj = { email: this.$store.state.email };
+
+      // All-time selected
       if (newValue == "all") {
         getTimesAll(emailObj)
           .then((success) => {
@@ -77,6 +102,8 @@ export default {
           .catch((failure) => {
             this.timeList = failure;
           });
+
+      // This year selected
       } else if (newValue == "year") {
         getTimesYear(emailObj)
           .then((success) => {
@@ -88,6 +115,8 @@ export default {
           .catch((failure) => {
             this.timeList = failure;
           });
+
+      // This month selected
       } else if (newValue == "month") {
         getTimesMonth(emailObj)
           .then((success) => {
@@ -99,6 +128,8 @@ export default {
           .catch((failure) => {
             this.timeList = failure;
           });
+
+      // Last 7 days selected
       } else {
         getTimesDay(emailObj)
           .then((success) => {

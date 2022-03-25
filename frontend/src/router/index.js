@@ -3,11 +3,13 @@ import HomeView from "../views/HomeView.vue";
 import AnalyticsView from "../views/AnalyticsView.vue";
 
 const routes = [
+  // Homepage
   {
     path: "/",
     name: "home",
     component: HomeView,
   },
+  // Analytics
   {
     path: "/analytics",
     name: "analytics",

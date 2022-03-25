@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="m-5">
+      <!-- Navigate to homepage -->
       <router-link
         to="/"
         class="bg-light p-2 text-dark rounded-3 text-decoration-none border"
         ><fa icon="clock"
       /></router-link>
     </div>
+    <!-- Analytics component -->
     <Analytics></Analytics>
   </div>
 </template>
