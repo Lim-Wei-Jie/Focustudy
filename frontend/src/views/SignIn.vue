@@ -13,35 +13,18 @@
             </span>
           </div>
           <!-- Card -->
-          <div class="card">
-            <div class="row g-0">
-              <!-- left card img -->
-              <div class="col-md-6 col-lg-6 d-none d-md-block">
-                <img src="../assets/auth.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
-              </div>
-              <!-- right card sign in -->
-              <div class="col-md-6 col-lg-6 d-flex align-items-center">
-                <div class="card-body p-4 p-lg-5 text-black">
-                  <!-- sign in -->
-                  <button type="button" class="btn btn-outline-dark" @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
-                    <font-awesome-icon :icon="['fab', 'google']" /> Sign in with Google
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SignInCard />
         </div>
       </div>
     </div>
   </section>
-  
+
   <div>
     <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
     <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
-    <h2 v-if="user">signed user: {{ email }}</h2>
+    <h2 v-if="email">signed user: {{ email }}</h2>
     <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
     <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
-    <!-- <button type="button" class="btn btn-outline-dark" @click="handleGoogleApi" :disabled="!Vue3GoogleOauth.isInit">get cal</button> -->
     <!-- <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button> -->
   </div>
 </template>
@@ -50,21 +33,16 @@
 import { inject, toRefs } from "vue";
 import { Icon } from "@iconify/vue";
 import { mapState, mapMutations } from "vuex"
+import SignInCard from "@/components/SignInCard.vue"
 
 export default {
-  name: "AuthLogin",
+  name: "SignIn",
   props: {
     msg: String,
   },
   components: {
     Icon,
-  },
-
-  data() {
-    return {
-      user: "",
-      access_token: "",
-    };
+    SignInCard,
   },
 
   computed: {
@@ -72,28 +50,6 @@ export default {
   },
 
   methods: {
-    async handleClickSignIn() {
-      try {
-        const googleUser = await this.$gAuth.signIn();
-        if (!googleUser) {
-          return null;
-        }
-        console.log("googleUser", googleUser);
-        this.updateEmail(googleUser.getBasicProfile().getEmail())
-        console.log("getId", this.email);
-        console.log("getBasicProfile", googleUser.getBasicProfile());
-        this.access_token = googleUser.getAuthResponse().access_token
-        console.log("getAuthResponse", this.access_token);
-        console.log(
-          "getAuthResponse",
-          this.$gAuth.instance.currentUser.get().getAuthResponse()
-        );
-      } catch (error) {
-        //on fail do something
-        console.error(error);
-        return null;
-      }
-    },
 
     async handleClickGetAuthCode() {
       try {
@@ -110,27 +66,13 @@ export default {
       try {
         await this.$gAuth.signOut();
         console.log("isAuthorized", this.Vue3GoogleOauth.isAuthorized);
-        this.user = "";
+        this.updateEmail("");
       } catch (error) {
         console.error(error);
       }
     },
 
     ...mapMutations(["updateEmail"])
-
-    // try gaxios
-    // async handleGoogleApi() {
-    //   var serviceURL = "https://www.googleapis.com/calendar/v3/calendar?access_token=" + this.access_token
-    //   try {
-    //     const response = await fetch(serviceURL, { method: 'GET' });
-    //     const result = await response.json();
-    //     if (response.status === 200) {
-    //       console.log(result);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
 
     // handleClickDisconnect() {
     //   window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
@@ -150,7 +92,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button:disabled {
   background: #fff;
   color: #ddd;
