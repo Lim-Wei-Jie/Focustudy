@@ -21,20 +21,28 @@ class Rating(db.Model):
     productivity = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(320), nullable=False)
     currentDate = db.Column(db.String(320), nullable=False)
+    partDay = db.Column(db.String(320), nullable=False)
+    morningGPA = db.Column(db.Integer, nullable=False)
+    afternoonGPA = db.Column(db.Integer, nullable=False)
+    nightGPA = db.Column(db.Integer, nullable=False)
 
 
     
     # constructor
-    def __init__(self,ratingId , productivity,email,currentDate):
+    def __init__(self,ratingId , productivity,email,currentDate,partDay,morningGPA,afternoonGPA,nightGPA):
         #set the properties when created
         self.ratingId = ratingId
         self.productivity = productivity
         self.email = email
+        self.partDay = partDay
         self.currentDate= currentDate
+        self.morningGPA= morningGPA
+        self.afternoonGPA= afternoonGPA
+        self.nightGPA = nightGPA
         
     # enables our object to be represented as a JSON string
     def json(self):
-        return {"ratingId": self.ratingId, "productivity": self.productivity,"email": self.email,"currentDate":self.currentDate}
+        return {"ratingId": self.ratingId, "productivity": self.productivity,"email": self.email,"currentDate":self.currentDate,"partDay":self.partDay,"morningGPA":self.morningGPA,"afternoonGPA":self.afternoonGPA, "nightGPA":self.nightGPA}
 
 # http://127.0.0.1:5000/addRating
 @app.route("/addRating", methods=['POST'])

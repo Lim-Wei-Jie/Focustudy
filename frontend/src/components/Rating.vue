@@ -30,8 +30,8 @@
                         <div class="ratings"> <h2>You rated:</h2> <span class="product-rating">{{picked}}</span><span>/5</span>
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
-                            <button type="submit" class="btn btn-success" @click="currentDate() ; catchd()">Exit</button>
-                            <button type="submit" class="btn btn-danger" @click="gethd">Get data</button>
+                            <button type="submit" class="btn btn-success" @click="currentDate() ; classifytime(this.currenTime); catchd();">Exit</button>
+                            <button type="submit" class="btn btn-danger" @click="gethd();">Get data</button>
                     
                         </div>
                     
@@ -42,20 +42,24 @@
     
 
     <div class="container">
+        {{this.morningGPAList}}
+        {{this.avgMorningGpa}}
+        {{this.avgAfternoonGpa}}
+        {{this.avgNightGpa}}
         <h3 class="p-3 text-center">Rating table</h3>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Email</th>
-                    <th>Ratings</th>
+                    <th>Morning</th>
+                    <th>Afternoon</th>
+                    <th>Night</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in userdata" :key="user.ratingiId">
-                    <td>{{user.currentDate}} </td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.productivity}}</td>
+                <tr>
+                    <td>{{this.avgMorningGpa}} </td>
+                    <td>{{this.avgAfternoonGpa}}</td>
+                    <td>{{this.avgNightGpa}}</td>
                     
                 </tr>
             </tbody>
@@ -93,8 +97,19 @@ export default {
       email:"haha@gmail.com",
       toggle: true,
       toggle2: false,
-      userdata:2,
-      currentdate:""
+      userdata:[],
+      currentdate:"",
+      currenTime:"",
+      partDay:"",
+      nightGPA:0,
+      morningGPA:0,
+      afternoonGPA:0,
+      morningGPAList:[],
+      afternoonGPAList:[],
+      nightGPAList:[],
+      avgMorningGpa:0,
+      avgAfternoonGpa:0,
+      avgNightGpa:0
       
      
     }
@@ -112,12 +127,45 @@ export default {
         catchRate({
           "productivity": this.picked,
           "email": this.email,
-          "currentDate": this.currentdate
+          "currentDate": this.currentdate,
+          "partDay": this.partDay,
+          "morningGPA": this.morningGPA,
+          "afternoonGPA": this.afternoonGPA,
+          "nightGPA":this.nightGPA
         })
 
 
         
+
+
+        
     },
+
+
+     populateList()
+    {
+        for (const [key1, value1] of Object.entries(this.userdata)) {
+
+            console.log({key1})
+
+            for (const [key, value] of Object.entries(value1))
+            {
+                //console.log(`${key}`);
+                if (`${key}` == "morningGPA" )
+                {
+                    console.log('here')
+                    //console.log('hahaha')
+                    this.morningGPAList.push(Number(`${value}`))
+                }
+            }
+            
+            }
+
+
+           
+    },
+
+
 
 
     gethd() {
@@ -127,18 +175,100 @@ export default {
             this.results = response.data
             console.log(response.data)
             this.userdata =response.data.data.ratings 
+            console.log(this.userdata)
+            
           })
+
+       
+         //this.morningGPAList.push(this.picked)
+
+         
+         
+
        
     },
 
     currentDate() {
       const current = new Date();
       const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+      const time = current.getHours()
       this.currentdate = date
+      this.currenTime = time
+      console.log(this.currenTime)
       
+    },
+
+
+   
+
+    
+    classifytime(x) {
+    if ((x >= 0) && (x <= 12)){
+        this.partDay = 'Morning'
+        this.morningGPA = this.picked
+        //this.morningGPAList.push(this.picked)
+        console.log(this.morningGPAList)
+        return 'Morning'
+    } else if ((x > 12) && (x <= 18 )){
+        this.partDay = 'Afternoon'
+        return 'Afternoon'
+    } else {
+        this.partDay = 'Night'
+        console.log("Night")
+        return 'Night'
     }
+    
+},
+
+
+    calculateAverage() {
+
+         var total = 0;
+
+        if (this.partDay == "Morning")
+        {
+
+            this.avgMorningGpa = 0;
+            for(var i = 0; i < this.morningGPAList.length; i++) {
+                total += Number(this.morningGPAList[i]);
+            }
+            this.avgMorningGpa = total / this.morningGPAList.length;
+            console.log(total)
+
+        }
+
+        if (this.partDay == "Afternoon")
+        {
+
+            this.avgAfternoongGpa = 0;
+            for(var j = 0; j < this.afternoonGPAList.length; j++) {
+                total += Number(this.afternoonGPAList[j]);
+            }
+            this.avgafternoonGpa = total / this.afternoonGPAList.length;
+            //console.log(total)
+
+        }
+
+
+        if (this.partDay == "Night")
+        {
+
+            this.avgNightGpa = 0;
+            for(var z = 0; z < this.nightGPAList.length; z++) {
+                total += Number(this.afternoonGPAList[z]);
+            }
+            this.avgNightGpa = total / this.nightGPAList.length;
+            //console.log(total)
+
+        }
+        
+
+                    //console.log(this.nightGPA)
+       
+    }
+
   }
-  
+
 }
 
 
