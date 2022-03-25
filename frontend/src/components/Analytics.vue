@@ -78,6 +78,7 @@ export default {
       .then((success) => {
         this.timeList = []
         for (let row of success) {
+          // Chartkick readable [x,y]
           this.timeList.push([row["range"], row["total"]])
         }
       })

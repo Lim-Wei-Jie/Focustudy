@@ -27,20 +27,20 @@ class Timer(db.Model):
         self.startDate = startDate
         self.duration = duration
 
-    def json(self):
-        return {"timeId": self.timeId, "email": self.email, "startDate": self.startDate, "duration": self.duration}
-
 # Retrieve all time records
 # http://127.0.0.1:5000/getTimesAll
 @app.route("/getTimesAll", methods=["POST"])
 def getTimesAll():
     data = request.get_json()
+
+    # For selected user, sum durations in same year, order by year
     timeList = db.session.\
         query(extract('year', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
             group_by(extract('year', Timer.startDate)).\
                 order_by(extract('year', Timer.startDate)).\
                     filter(Timer.email == data["email"]).\
                         all()
+
     if len(timeList):
         result = []
         for time in timeList:
@@ -56,6 +56,7 @@ def getTimesAll():
                 }
             }
         )
+
     return jsonify(
         {
             "code": 404,
@@ -68,12 +69,15 @@ def getTimesAll():
 @app.route("/getTimesYear", methods=["POST"])
 def getTimesYear():
     data = request.get_json()
+
+    # For selected user and year, sum durations in same month, order by month
     timeList = db.session.\
         query(extract('month', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
             group_by(extract('month', Timer.startDate)).\
                 order_by(extract('month', Timer.startDate)).\
                     filter(and_(Timer.email == data["email"], extract('year', Timer.startDate) == date.today().year)).\
                         all()
+
     if len(timeList):
         months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         result = []
@@ -90,6 +94,7 @@ def getTimesYear():
                 }
             }
         )
+
     return jsonify(
         {
             "code": 404,
@@ -102,12 +107,15 @@ def getTimesYear():
 @app.route("/getTimesMonth", methods=["POST"])
 def getTimesMonth():
     data = request.get_json()
+
+    # For selected user, year and month, sum durations in same day, order by day
     timeList = db.session.\
         query(extract('day', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
             group_by(extract('day', Timer.startDate)).\
                 order_by(extract('day', Timer.startDate)).\
                     filter(and_(Timer.email == data["email"], extract('year', Timer.startDate) == date.today().year, extract('month', Timer.startDate) == date.today().month)).\
                         all()
+
     if len(timeList):
         result = []
         for time in timeList:
@@ -123,6 +131,7 @@ def getTimesMonth():
                 }
             }
         )
+
     return jsonify(
         {
             "code": 404,
@@ -136,12 +145,15 @@ def getTimesMonth():
 def getTimesDay():
     data = request.get_json()
     sevenDaysAgo = date.today() - timedelta(days=6)
+
+    # For selected user and time range, sum durations in same day, order by day
     timeList = db.session.\
         query(extract('day', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
             group_by(extract('day', Timer.startDate)).\
                 order_by(extract('day', Timer.startDate)).\
                     filter(and_(Timer.email == data["email"], Timer.startDate >= sevenDaysAgo)).\
                         all()
+
     if len(timeList):
         result = []
         for time in timeList:
@@ -157,6 +169,7 @@ def getTimesDay():
                 }
             }
         )
+
     return jsonify(
         {
             "code": 404,
@@ -169,11 +182,14 @@ def getTimesDay():
 @app.route("/addTime", methods=['POST'])
 def addTime():
     data = request.get_json()
+
+    # PRI KEY auto increment
     time = Timer(0, **data)
 
     try:
         db.session.add(time)
         db.session.commit()
+
     except:
         return jsonify(
             {

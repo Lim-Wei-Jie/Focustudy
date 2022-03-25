@@ -6,9 +6,11 @@ export function addTime(record) {
     axios
         .post(api_endpoint, record)
         .then((response) => {
+            // {"code": 201, "data": "New time recorded."}
             console.log(response.data);
         })
         .catch((error) => {
+            // {"code": 500, "data": "An error occurred creating time record."}
             console.log(error)
         });
 };
@@ -21,10 +23,12 @@ export function getTimesAll(email) {
             .post(api_endpoint, email)
             .then((response) => {
                 console.log(response.data);
+                // Array of {"range": year(int), "total": hours(float)}
                 resolve(response.data.data.times)
             })
             .catch((error) => {
                 console.log(error)
+                // No data screen
                 reject([])
             });
     })
@@ -38,10 +42,12 @@ export function getTimesYear(email) {
             .post(api_endpoint, email)
             .then((response) => {
                 console.log(response.data);
+                // Array of {"range": month(str), "total": hours(float)}
                 resolve(response.data.data.times)
             })
             .catch((error) => {
                 console.log(error)
+                // No data screen
                 reject([])
             });
     })
@@ -55,10 +61,12 @@ export function getTimesMonth(email) {
             .post(api_endpoint, email)
             .then((response) => {
                 console.log(response.data);
+                // Array of {"range": day(int), "total": hours(float)}
                 resolve(response.data.data.times)
             })
             .catch((error) => {
                 console.log(error)
+                // No data screen
                 reject([])
             });
     })
@@ -72,10 +80,12 @@ export function getTimesDay(email) {
             .post(api_endpoint, email)
             .then((response) => {
                 console.log(response.data);
+                // Array of {"range": day(int), "total": hours(float)}
                 resolve(response.data.data.times)
             })
             .catch((error) => {
                 console.log(error)
+                // No data screen
                 reject([])
             });
     })
