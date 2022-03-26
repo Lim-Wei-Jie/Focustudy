@@ -31,7 +31,7 @@
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
                             <button type="submit" class="btn btn-success" @click="currentDate() ; classifytime(this.currenTime); catchd();">Exit</button>
-                            <button type="submit" class="btn btn-danger" @click="gethd(); calculateAverage(); ">Get data</button>
+                            <button type="submit" class="btn btn-danger" @click="multiFunctionData(); ">Get data</button>
                     
                         </div>
                     
@@ -42,9 +42,6 @@
     
 
     <div class="container">
-        {{this.avgMorningGpa}}
-        {{this.avgAfternoonGpa}}
-        {{this.avgNightGpa}}
         <h3 class="p-3 text-center">Rating table</h3>
         <table class="table table-striped table-bordered">
             <thead>
@@ -56,9 +53,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{this.avgMorningGpa}} </td>
-                    <td>{{this.avgAfternoonGpa}}</td>
-                    <td>{{this.avgNightGpa}}</td>
+                    <td>{{this.avgMorningGpa.toFixed(2)}}/5</td>
+                    <td>{{this.avgAfternoonGpa.toFixed(2)}}/5</td>
+                    <td>{{this.avgNightGpa.toFixed(2)}}/5</td>
                     
                 </tr>
             </tbody>
@@ -118,9 +115,6 @@ export default {
   methods: {
 
 
-
-
-    // Called when clicked
     catchd() {
       // Add new record to rating database
 
@@ -143,88 +137,7 @@ export default {
         
     },
 
-   
 
-
-
-
-    gethd() {
-      // get record from database
-
-      axios.get(url).then(response => {
-            this.results = response.data
-            console.log(response.data)
-            this.userdata =response.data.data.ratings 
-            console.log(this.userdata)
-
-
-
-
-             for (const [key1, value1] of Object.entries(this.userdata)) {
-
-                    console.log({key1})
-
-                    for (const [key, value] of Object.entries(value1))
-                    {
-                        //console.log(`${key}`);
-                        if (`${key}` == "morningGPA" )
-                        {
-                            //console.log('here')
-                            //console.log('hahaha')
-                            this.morningGPAList.push(Number(`${value}`))
-                        }
-                    }
-                    
-                    }
-        
-                //console.log(this.morningGPAList)
-
-
-                
-
-                this.avgMorningGpa = 0;
-                var total = 0;
-                //this.morningGPAList=[]
-
-                for(var j = 0; j < this.morningGPAList.length; j++) {
-                   total += Number(this.morningGPAList[j]);
-                }
-                this.avgMorningGpa = total / this.morningGPAList.length;
-                //console.log(total)
-
-
-
-
-
-
-
-           
-
-
-
-                    //this.morningGPAList = this.extralist
-
-
-
-
-
-
-
-                    
-
-            
-          })
-
-       
-         //this.morningGPAList.push(this.picked)
-
-         
-         
-
-       
-    },
-
-    
 
     currentDate() {
       const current = new Date();
@@ -245,77 +158,144 @@ export default {
         return 'Morning'
     } else if ((x > 12) && (x <= 18 )){
         this.partDay = 'Afternoon'
+        this.afternoonGPA = this.picked
         return 'Afternoon'
     } else {
         this.partDay = 'Night'
-        console.log("Night")
+        this.nightGPA = this.picked
         return 'Night'
     }
     
     },
 
 
-    calculateAverage() {
+    multiFunctionData() {
+    let method = 'get' // ex. get | post | put | delete , etc
+    return axios[method](url)
+        .then((response) => {
+            // success
+            //-> save response to state, notification
+            //console.log(response.data.data.ratings)
+            this.userdata =response.data.data.ratings 
+            //console.log(this.userdata)
+
+            return true // pass to finish
+        })
+        .catch((error) => {
+            // failed
+            //-> prepare, notify, handle error
+            //let error = 2
+            console.log(error)
+
+            return false // pass to finish
+        })
+        .then((resultBoolean) => {
+            // do something after success or error
+
+             for (const [key1, value1] of Object.entries(this.userdata)) {
+
+                    console.log({key1})
+
+                    for (const [key, value] of Object.entries(value1))
+                    {
+                        //console.log(`${key}`);
+                        if (`${key}` == "morningGPA" )
+                        {
+                            //console.log('here')
+                            //console.log('hahaha')
+                            if (Number(`${value}`) != 0)
+                            {
+                                this.morningGPAList.push(Number(`${value}`))
+                            }
+                            
+                        }
+
+                        if (`${key}` == "afternoonGPA" )
+                        {
+                            //console.log('here')
+                            //console.log('hahaha')
+                            if (Number(`${value}`) != 0)
+                            {
+                                this.afternoonGPAList.push(Number(`${value}`))
+                            }
+                            
+                            //console.log(`${value}`)
+                        }
+
+                        if (`${key}` == "nightGPA" )
+                        {
+                            //console.log('here')
+                            //console.log('hahaha')
+                            if (Number(`${value}`) != 0)
+                            {
+                                this.nightGPAList.push(Number(`${value}`))
+                            }
+                            
+                            //console.log(`${value}`)
+                        }
+                    }
+                    
+                    }
+
+            console.log(this.nightGPAList.length)
+
+            return resultBoolean // for await purpose
+        }).then((resultBoolean2) => {
+            // do something after success or error
+
+              this.avgMorningGpa = 0;
+                var total = 0;
+                //this.morningGPAList=[]
+
+                for(var j = 0; j < this.morningGPAList.length; j++) {
+                   total += Number(this.morningGPAList[j]);
+                }
+                this.avgMorningGpa = total / this.morningGPAList.length;
+
+            console.log(this.avgMorningGpa)
+
+            return resultBoolean2 // for await purpose
+        }).then((resultBoolean3) => {
+            // do something after success or error
+
+              this.avgAfternoonGpa = 0;
+                var total = 0;
+                //this.morningGPAList=[]
+
+                for(var i = 0; i < this.afternoonGPAList.length; i++) {
+                   total += Number(this.afternoonGPAList[i]);
+                }
+                this.avgAfternoonGpa = total / this.afternoonGPAList.length;
+
+            console.log(this.avgAfternoonGpa)
+            //console.log('aaa')
+
+            return resultBoolean3 // for await purpose
+        }).then((resultBoolean4) => {
+            // do something after success or error
+
+              this.avgNightGpa = 0;
+                var total = 0;
+                //this.morningGPAList=[]
+
+                for(var z = 0; z < this.nightGPAList.length; z++) {
+                   total += Number(this.nightGPAList[z]);
+                }
+                this.avgNightGpa = total / this.nightGPAList.length;
+
+            console.log(this.avgNightGpa)
+            //console.log('aaa')
+
+            return resultBoolean4 // for await purpose
+        })
 
 
-        
-
-         
-
-        if (this.partDay == "Morning")
-        
-        {
-            
-            //console.log(this.morningGPAList)
-
-
-   
-
-            
-            
-            //this.avgMorningGpa = 32
-            //console.log(this.avgMorningGpa)
-            //console.log(44)
-
-        }
-
-        
-
-
-        if (this.partDay == "Afternoon")
-        {
-
-            this.avgAfternoongGpa = 0;
-            for(var j = 0; j < this.afternoonGPAList.length; j++) {
-                //total += Number(this.afternoonGPAList[j]);
-            }
-            //this.avgafternoonGpa = total / this.afternoonGPAList.length;
-            //console.log(total)
-
-        }
-
-
-        if (this.partDay == "Night")
-        {
-
-            this.avgNightGpa = 0;
-            for(var z = 0; z < this.nightGPAList.length; z++) {
-                //total += Number(this.afternoonGPAList[z]);
-            }
-            //this.avgNightGpa = total / this.nightGPAList.length;
-            //console.log(total)
-
-        }
-        
-
-                    //console.log(this.nightGPA)
-       
-    }
-
+    // Called when clicked
+    
     
 
   }
-  
+  }
 
 }
 
