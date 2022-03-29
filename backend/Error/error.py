@@ -4,3 +4,5 @@ import json
 import os
 
 import amqp_setup
+
+monitorBindingKey='*.error'
