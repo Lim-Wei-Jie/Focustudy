@@ -265,7 +265,7 @@ export default {
                    total += Number(this.afternoonGPAList[i]);
                 }
                 this.avgAfternoonGpa = total / this.afternoonGPAList.length;
-                this.afternoonGPA(this.avgAfternoonGpa)
+                this.updateAfternoonGPA(this.avgAfternoonGpa)
 
             console.log(this.avgAfternoonGpa)
             //console.log('aaa')
@@ -282,7 +282,7 @@ export default {
                    total += Number(this.nightGPAList[z]);
                 }
                 this.avgNightGpa = total / this.nightGPAList.length;
-                this.nightGPA(this.avgNightGpa)
+                this.updateNightGPA(this.avgNightGpa)
 
             console.log(this.avgNightGpa)
             //console.log('aaa')
