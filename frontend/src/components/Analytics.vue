@@ -32,6 +32,8 @@
         <div class="d-flex justify-content-between">
           <!-- Title -->
           <h3>Productivity</h3>
+          <h3>{{ this.avgMorningGpa }}</h3>
+          <h3>{{ this.avgAfternoonGpa }}</h3>
         </div>
 
       </div>
