@@ -47,6 +47,7 @@ import {
   getTimesMonth,
   getTimesDay,
 } from "../endpoint/endpoint.js";
+import { mapState } from "vuex"
 
 export default {
   name: "Analytics",
@@ -68,6 +69,7 @@ export default {
         return "Year";
       }
     },
+    ...mapState(["email", "avgMorningGpa", "avgAfternoonGpa", "avgNightGpa"])
   },
   created() {
     // Default chart: Last 7 days
