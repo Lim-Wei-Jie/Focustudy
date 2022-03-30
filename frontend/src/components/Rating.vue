@@ -92,7 +92,7 @@ export default {
     data() {
         return {
             picked: null,
-            email:"haha@gmail.com",
+            // email:"haha@gmail.com",
             toggle: true,
             toggle2: false,
             userdata:[],
@@ -106,9 +106,9 @@ export default {
             morningGPAList:[],
             afternoonGPAList:[],
             nightGPAList:[],
-            // avgMorningGpa:0,
-            // avgAfternoonGpa:0,
-            // avgNightGpa:0
+            avgMorningGpa:0,
+            avgAfternoonGpa:0,
+            avgNightGpa:0
         
       
         }
@@ -241,19 +241,20 @@ export default {
         }).then((resultBoolean2) => {
             // do something after success or error
 
-              this.avgMorningGpa = 0;
-                var total = 0;
-                //this.morningGPAList=[]
+            this.avgMorningGpa = 0;
+            var total = 0;
+            //this.morningGPAList=[]
 
-                for(var j = 0; j < this.morningGPAList.length; j++) {
-                   total += Number(this.morningGPAList[j]);
-                }
-                this.avgMorningGpa = total / this.morningGPAList.length;
-                this.updateMorningGPA(this.avgMorningGpa)
+            for(var j = 0; j < this.morningGPAList.length; j++) {
+                total += Number(this.morningGPAList[j]);
+            }
+            this.avgMorningGpa = total / this.morningGPAList.length;
+            this.updateMorningGPA(this.avgMorningGpa)
 
             console.log(this.avgMorningGpa)
 
             return resultBoolean2 // for await purpose
+
         }).then((resultBoolean3) => {
             // do something after success or error
 
