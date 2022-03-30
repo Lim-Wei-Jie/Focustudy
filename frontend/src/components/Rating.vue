@@ -106,9 +106,9 @@ export default {
             morningGPAList:[],
             afternoonGPAList:[],
             nightGPAList:[],
-            avgMorningGpa:0,
-            avgAfternoonGpa:0,
-            avgNightGpa:0
+            // avgMorningGpa:0,
+            // avgAfternoonGpa:0,
+            // avgNightGpa:0
         
       
         }
@@ -248,8 +248,8 @@ export default {
             for(var j = 0; j < this.morningGPAList.length; j++) {
                 total += Number(this.morningGPAList[j]);
             }
-            this.avgMorningGpa = total / this.morningGPAList.length;
-            this.updateMorningGPA(this.avgMorningGpa)
+            // this.avgMorningGpa = total / this.morningGPAList.length;
+            this.updateMorningGPA(total / this.morningGPAList.length)
 
             console.log(this.avgMorningGpa)
 
@@ -265,8 +265,8 @@ export default {
                 for(var i = 0; i < this.afternoonGPAList.length; i++) {
                    total += Number(this.afternoonGPAList[i]);
                 }
-                this.avgAfternoonGpa = total / this.afternoonGPAList.length;
-                this.updateAfternoonGPA(this.avgAfternoonGpa)
+                // this.avgAfternoonGpa = total / this.afternoonGPAList.length;
+                this.updateAfternoonGPA(total / this.afternoonGPAList.length)
 
             console.log(this.avgAfternoonGpa)
             //console.log('aaa')
@@ -282,8 +282,8 @@ export default {
                 for(var z = 0; z < this.nightGPAList.length; z++) {
                    total += Number(this.nightGPAList[z]);
                 }
-                this.avgNightGpa = total / this.nightGPAList.length;
-                this.updateNightGPA(this.avgNightGpa)
+                // this.avgNightGpa = total / this.nightGPAList.length;
+                this.updateNightGPA(total / this.nightGPAList.length)
 
             console.log(this.avgNightGpa)
             //console.log('aaa')
