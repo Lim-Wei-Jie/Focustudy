@@ -81,6 +81,8 @@
 
 import {catchRate} from "../endpoint/endpoint.js"
 import axios from "axios";
+import { mapState, mapMutations } from "vuex"
+
 let url = "http://127.0.0.1:5000/getRating"
 
 
@@ -88,54 +90,50 @@ let url = "http://127.0.0.1:5000/getRating"
 export default {
     name: 'Rating',
     data() {
-    return {
-      picked: null,
-      email:"haha@gmail.com",
-      toggle: true,
-      toggle2: false,
-      userdata:[],
-      currentdate:"",
-      currenTime:"",
-      partDay:"",
-      nightGPA:0,
-      morningGPA:0,
-      afternoonGPA:0,
-      extralist:[],
-      morningGPAList:[],
-      afternoonGPAList:[],
-      nightGPAList:[],
-      avgMorningGpa:0,
-      avgAfternoonGpa:0,
-      avgNightGpa:0
+        return {
+            picked: null,
+            email:"haha@gmail.com",
+            toggle: true,
+            toggle2: false,
+            userdata:[],
+            currentdate:"",
+            currenTime:"",
+            partDay:"",
+            nightGPA:0,
+            morningGPA:0,
+            afternoonGPA:0,
+            extralist:[],
+            morningGPAList:[],
+            afternoonGPAList:[],
+            nightGPAList:[],
+            avgMorningGpa:0, //
+            avgAfternoonGpa:0, //
+            avgNightGpa:0 //
+        
       
-     
-    }
-  },
-
-  methods: {
-
-
-    catchd() {
-      // Add new record to rating database
-
-
-    
-        catchRate({
-          "productivity": this.picked,
-          "email": this.email,
-          "currentDate": this.currentdate,
-          "partDay": this.partDay,
-          "morningGPA": this.morningGPA,
-          "afternoonGPA": this.afternoonGPA,
-          "nightGPA":this.nightGPA
-        })
-
-
-        
-
-
-        
+        }
     },
+    computed: {
+        ...mapState(["email", "userData"])
+    },
+
+    methods: {
+
+        ...mapMutations(["updateUserData"]),
+
+        catchd() {
+            // Add new record to rating database
+            catchRate({
+                "productivity": this.picked,
+                "email": this.email,
+                "currentDate": this.currentdate,
+                "partDay": this.partDay,
+                "morningGPA": this.morningGPA,
+                "afternoonGPA": this.afternoonGPA,
+                "nightGPA":this.nightGPA
+            })
+        
+        },
 
 
 
@@ -175,8 +173,9 @@ export default {
         .then((response) => {
             // success
             //-> save response to state, notification
-            //console.log(response.data.data.ratings)
-            this.userdata =response.data.data.ratings 
+            // =response.data.data.ratings 
+            console.log(response.data.data.ratings)
+            this.updateUserData()
             //console.log(this.userdata)
 
             return true // pass to finish
