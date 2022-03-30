@@ -31,7 +31,7 @@
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
                             <button type="submit" class="btn btn-success" @click="currentDate() ; classifytime(this.currenTime); catchd();">Exit</button>
-                            <button type="submit" class="btn btn-danger" @click="multiFunctionData(); ">Get data</button>
+                            <button type="submit" class="btn btn-danger" @click="getAllRatings(); ">Get data</button>
                     
                         </div>
                     
@@ -166,6 +166,27 @@ export default {
         return 'Night'
     }
     
+    },
+
+    getAllRatings () {
+        const response =
+            fetch("http://localhost:5100/getRating")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(response);
+                    if (data.code === 404) {
+                        // no book in db
+                        console.log('fail');
+                    } else {
+                        console.log(data);
+                    }
+                })
+                .catch(error => {
+                    // Errors when calling the service; such as network error, 
+                    // service offline, etc
+                    console.log(this.message + error);
+
+                });
     },
 
 

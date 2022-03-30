@@ -1,10 +1,8 @@
-#App to make HTTP request to other sites, usually APIs. It makes an outgoing request and returns the response from the external site
-#Jsonify serializes data to JavaScript Object Notation (JSON) format
+#!/usr/bin/env python3
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from os import environ
-
 
 app = Flask(__name__)
 # set dbURL=mysql+mysqlconnector://root@localhost:3306/rating 
