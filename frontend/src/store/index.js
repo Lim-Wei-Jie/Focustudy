@@ -12,14 +12,14 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    updateMorningGPA (state, morningGpa) {
-      state.avgMorningGpa = morningGpa
+    updateMorningGPA (state, avgMorningGpa) {
+      state.avgMorningGpa = avgMorningGpa
     },
-    updateAfternoonGPA (state, afternoonGpa) {
-      state.avgMorningGpa = afternoonGpa
+    updateAfternoonGPA (state, avgAfternoonGpa) {
+      state.avgAfternoonGpa = avgAfternoonGpa
     },
-    updateNightGPA (state, nightGpa) {
-      state.avgMorningGpa = nightGpa
+    updateNightGPA (state, avgNightGpa) {
+      state.avgNightGpa = avgNightGpa
     }
   },
   actions: {},

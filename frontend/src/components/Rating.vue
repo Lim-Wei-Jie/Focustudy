@@ -258,32 +258,33 @@ export default {
         }).then((resultBoolean3) => {
             // do something after success or error
 
-              this.avgAfternoonGpa = 0;
-                var total = 0;
-                //this.morningGPAList=[]
+            this.avgAfternoonGpa = 0;
+            var total = 0;
+            //this.morningGPAList=[]
 
-                for(var i = 0; i < this.afternoonGPAList.length; i++) {
-                   total += Number(this.afternoonGPAList[i]);
-                }
-                // this.avgAfternoonGpa = total / this.afternoonGPAList.length;
-                this.updateAfternoonGPA(total / this.afternoonGPAList.length)
+            for(var i = 0; i < this.afternoonGPAList.length; i++) {
+                total += Number(this.afternoonGPAList[i]);
+            }
+            // this.avgAfternoonGpa = total / this.afternoonGPAList.length;
+            this.updateAfternoonGPA(total / this.afternoonGPAList.length)
 
             console.log(this.avgAfternoonGpa)
             //console.log('aaa')
 
             return resultBoolean3 // for await purpose
+
         }).then((resultBoolean4) => {
             // do something after success or error
 
-              this.avgNightGpa = 0;
-                var total = 0;
-                //this.morningGPAList=[]
+            this.avgNightGpa = 0;
+            var total = 0;
+            //this.morningGPAList=[]
 
-                for(var z = 0; z < this.nightGPAList.length; z++) {
-                   total += Number(this.nightGPAList[z]);
-                }
-                // this.avgNightGpa = total / this.nightGPAList.length;
-                this.updateNightGPA(total / this.nightGPAList.length)
+            for(var z = 0; z < this.nightGPAList.length; z++) {
+                total += Number(this.nightGPAList[z]);
+            }
+            // this.avgNightGpa = total / this.nightGPAList.length;
+            this.updateNightGPA(total / this.nightGPAList.length)
 
             console.log(this.avgNightGpa)
             //console.log('aaa')
