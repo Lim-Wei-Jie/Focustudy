@@ -106,20 +106,20 @@ export default {
             morningGPAList:[],
             afternoonGPAList:[],
             nightGPAList:[],
-            avgMorningGpa:0, //
-            avgAfternoonGpa:0, //
-            avgNightGpa:0 //
+            // avgMorningGpa:0,
+            // avgAfternoonGpa:0,
+            // avgNightGpa:0
         
       
         }
     },
     computed: {
-        ...mapState(["email", "userData"])
+        ...mapState(["email", "avgMorningGpa", "avgAfternoonGpa", "avgNightGpa"])
     },
 
     methods: {
 
-        ...mapMutations(["updateUserData"]),
+        ...mapMutations(["updateMorningGPA", "updateAfternoonGPA", "updateNightGPA"]),
 
         catchd() {
             // Add new record to rating database
@@ -173,9 +173,8 @@ export default {
         .then((response) => {
             // success
             //-> save response to state, notification
-            // =response.data.data.ratings 
             console.log(response.data.data.ratings)
-            this.updateUserData()
+            this.userdata = response.data.data.ratings
             //console.log(this.userdata)
 
             return true // pass to finish
@@ -250,6 +249,7 @@ export default {
                    total += Number(this.morningGPAList[j]);
                 }
                 this.avgMorningGpa = total / this.morningGPAList.length;
+                this.updateMorningGPA(this.avgMorningGpa)
 
             console.log(this.avgMorningGpa)
 
@@ -265,6 +265,7 @@ export default {
                    total += Number(this.afternoonGPAList[i]);
                 }
                 this.avgAfternoonGpa = total / this.afternoonGPAList.length;
+                this.afternoonGPA(this.avgAfternoonGpa)
 
             console.log(this.avgAfternoonGpa)
             //console.log('aaa')
@@ -281,6 +282,7 @@ export default {
                    total += Number(this.nightGPAList[z]);
                 }
                 this.avgNightGpa = total / this.nightGPAList.length;
+                this.nightGPA(this.avgNightGpa)
 
             console.log(this.avgNightGpa)
             //console.log('aaa')
