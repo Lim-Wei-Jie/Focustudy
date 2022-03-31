@@ -45,6 +45,7 @@ class Rating(db.Model):
 # http://127.0.0.1:5000/addRating
 @app.route("/addRating", methods=['POST'])
 def addRating():
+
     data = request.get_json()
     rating = Rating(0, **data)
     

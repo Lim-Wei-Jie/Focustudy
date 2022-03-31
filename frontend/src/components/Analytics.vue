@@ -31,7 +31,11 @@
         <!-- Header -->
         <div class="d-flex justify-content-between">
           <!-- Title -->
+
+     
+
           <h3>Productivity</h3>
+
 
             <div class="container">
               <h3 class="p-3 text-center">Rating table</h3>
@@ -79,6 +83,7 @@ export default {
       // Study Duration
       timeRange: "day",
       timeList: [],
+
     };
   },
   computed: {

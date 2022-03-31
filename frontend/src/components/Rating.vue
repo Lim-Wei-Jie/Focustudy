@@ -31,7 +31,7 @@
                             <div class="rating-text"> <span>Thank you for using FocusStudy</span> </div>
 
                             <button type="submit" class="btn btn-success" @click="currentDate() ; classifytime(this.currenTime); catchd();">Exit</button>
-                            <button type="submit" class="btn btn-danger" @click="getAllRatings(); ">Get data</button>
+                            <button type="submit" class="btn btn-danger" @click="getAllRatings();">Get data</button>
                     
                         </div>
                     

@@ -14,17 +14,14 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-getRating_URL = "http://localhost:5000/getRating"
+getRating_URL = "http://127.0.0.1:5000/getRating"
 
 @app.route("/getRating", methods=['GET'])
 def get_rating():
 
   # Simple check of input format and data of the request are JSON
   try:
-    print(request)
-    rating = request.get_json()
-    print("\nReceived ratings in JSON:", rating)
-
+    rating = request.json
     result = processGetRating(rating)
     print('\n------------------------')
     print('\nresult: ', result)
@@ -47,7 +44,7 @@ def processGetRating(rating):
   # 2. Send the order info {cart items}
   # Invoke the order microservice
   print('\n-----Invoking rating microservice-----')
-  rating_result = invoke_http(getRating_URL, method='GET', json=rating)
+  rating_result = invoke_http(getRating_URL, method='GET',json=rating)
   print('rating_result:', rating_result)
   return {
     "code": 201,
