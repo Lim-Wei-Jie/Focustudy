@@ -21,6 +21,7 @@ def get_rating():
 
   # Simple check of input format and data of the request are JSON
   try:
+    print(request)
     rating = request.get_json()
     print("\nReceived ratings in JSON:", rating)
 
@@ -59,4 +60,4 @@ def processGetRating(rating):
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
   print("This is flask " + os.path.basename(__file__) + " for getting rating...")
-  app.run(host="0.0.0.0", port=5100, debug=True)
+  app.run(host="0.0.0.0", port=5008, debug=True)

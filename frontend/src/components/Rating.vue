@@ -168,27 +168,6 @@ export default {
     
     },
 
-    getAllRatings () {
-        const response =
-            fetch("http://localhost:5100/getRating")
-                .then(response => response.json())
-                .then(data => {
-                    console.log(response);
-                    if (data.code === 404) {
-                        // no book in db
-                        console.log('fail');
-                    } else {
-                        console.log(data);
-                    }
-                })
-                .catch(error => {
-                    // Errors when calling the service; such as network error, 
-                    // service offline, etc
-                    console.log(this.message + error);
-
-                });
-    },
-
 
     multiFunctionData() {
     let method = 'get' // ex. get | post | put | delete , etc

@@ -32,6 +32,27 @@
         <div class="d-flex justify-content-between">
           <!-- Title -->
           <h3>Productivity</h3>
+
+            <div class="container">
+              <h3 class="p-3 text-center">Rating table</h3>
+              <table class="table table-striped table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Morning</th>
+                          <th>Afternoon</th>
+                          <th>Night</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>/5</td>
+                          <td>/5</td>
+                          <td>/5</td>
+                          
+                      </tr>
+                  </tbody>
+              </table>
+            </div> 
         </div>
 
       </div>
@@ -46,6 +67,9 @@ import {
   getTimesYear,
   getTimesMonth,
   getTimesDay,
+  getAllRatings
+
+  
 } from "../endpoint/endpoint.js";
 
 export default {
@@ -70,9 +94,12 @@ export default {
     },
   },
   created() {
-    // Default chart: Last 7 days
-    let emailObj = { email: this.$store.state.email };
 
+
+     getAllRatings()
+    
+    // Default chart: Last 7 days
+    let emailObj = { email: this.$store.state.email }
     // Study Duration
     getTimesDay(emailObj)
       .then((success) => {
@@ -85,7 +112,10 @@ export default {
       .catch((failure) => {
         this.timeList = failure;
       });
+      
   },
+
+  
   watch: {
     // Change time chart based on selection
     timeRange(newValue) {
