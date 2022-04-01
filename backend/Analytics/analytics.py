@@ -97,4 +97,4 @@ def processPostRating(rating):
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
   print("This is flask " + os.path.basename(__file__) + " for getting rating...")
-  app.run(host="0.0.0.0", port=5008, debug=True)
+  app.run(host="0.0.0.0", port=5100, debug=True)

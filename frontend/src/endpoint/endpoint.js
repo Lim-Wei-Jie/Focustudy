@@ -111,8 +111,6 @@ export function getAllRatings () {
         axios
             .get(api_endpoint)
             .then((res) => {
-                // definitely need to cut this shit LOL
-                console.log(res.data.data.rating_result.data.ratings);
                 resolve(res.data.data.rating_result.data.ratings)
             })
             .catch((err) => {
