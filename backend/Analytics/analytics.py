@@ -14,12 +14,12 @@ import json
 app = Flask(__name__)
 CORS(app)
 
+############### Get rating ###############
 getRating_URL = "http://localhost:5000/getRating"
 
 @app.route("/getRating", methods=['GET'])
 def get_rating():
 
-  # Simple check of input format and data of the request are JSON
   try:
     rating = request.get_json()
     print("\nReceived ratings in JSON:", rating)
@@ -38,9 +38,8 @@ def get_rating():
 
     return jsonify({
       "code": 500,
-      "message": "place_order.py internal error: " + ex_str
+      "message": "analytics.py internal error: " + ex_str
     }), 500
-
 
 def processGetRating(rating):
   # 2. Send the order info {cart items}
@@ -55,6 +54,47 @@ def processGetRating(rating):
     }
   }
 
+############### Post rating ###############
+postRating_URL = "http://localhost:5000/addRating"
+
+@app.route("/addRating", methods=['POST'])
+def add_rating():
+
+  # Simple check of input format and data of the request are JSON
+  if request.is_json:
+    try:
+      rating = request.get_json()
+      print("\nReceived ratings in JSON:", rating)
+
+      result = processPostRating(rating)
+      print('\n------------------------')
+      print('\nresult: ', result)
+      return jsonify(result), result["code"]
+
+    except Exception as e:
+      # Unexpected error in code
+      exc_type, exc_obj, exc_tb = sys.exc_info()
+      fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+      ex_str = str(e) + " at " + str(exc_type) + ": " + fname + ": line " + str(exc_tb.tb_lineno)
+      print(ex_str)
+
+      return jsonify({
+        "code": 500,
+        "message": "analytics.py internal error: " + ex_str
+      }), 500
+
+def processPostRating(rating):
+  # 2. Send the order info {cart items}
+  # Invoke the order microservice
+  print('\n-----Invoking rating microservice-----')
+  rating_result = invoke_http(postRating_URL, method='POST', json=rating)
+  print('rating_result:', rating_result)
+  return {
+    "code": 201,
+    "data": {
+      "rating_result": rating_result
+    }
+  }
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":

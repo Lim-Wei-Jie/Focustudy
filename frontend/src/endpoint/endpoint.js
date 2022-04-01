@@ -93,7 +93,7 @@ export function getTimesDay(email) {
 
 
 export function catchRate(record) {
-    let api_endpoint = `http://127.0.0.1:5000/addRating`;
+    let api_endpoint = "http://localhost:5100/addRating";
     axios
         .post(api_endpoint, record)
         .then((response) => {
@@ -102,4 +102,22 @@ export function catchRate(record) {
         .catch((error) => {
             console.log(error)
         });
+};
+
+
+export function getAllRatings () {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = "http://localhost:5100/getRating"
+        axios
+            .get(api_endpoint)
+            .then((res) => {
+                // definitely need to cut this shit LOL
+                console.log(res.data.data.rating_result.data.ratings);
+                resolve(res.data.data.rating_result.data.ratings)
+            })
+            .catch((err) => {
+                console.log(err);
+                reject([])
+            })
+    })
 };

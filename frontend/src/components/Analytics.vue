@@ -32,6 +32,27 @@
         <div class="d-flex justify-content-between">
           <!-- Title -->
           <h3>Productivity</h3>
+
+          <div class="container">
+            <h3 class="p-3 text-center">Rating table</h3>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Morning</th>
+                  <th>Afternoon</th>
+                  <th>Night</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{this.avgMorningRating.toFixed(2)}}/5</td>
+                  <td>{{this.avgAfternoonRating.toFixed(2)}}/5</td>
+                  <td>{{this.avgNightRating.toFixed(2)}}/5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
 
       </div>
@@ -46,6 +67,7 @@ import {
   getTimesYear,
   getTimesMonth,
   getTimesDay,
+  getAllRatings
 } from "../endpoint/endpoint.js";
 
 export default {
@@ -55,8 +77,12 @@ export default {
       // Study Duration
       timeRange: "day",
       timeList: [],
+      avgMorningRating: 0,
+      avgAfternoonRating: 0,
+      avgNightRating: 0
     };
   },
+
   computed: {
     // Change time chart x-axis value based on timeRange selection
     timeHeader() {
@@ -69,6 +95,7 @@ export default {
       }
     },
   },
+
   created() {
     // Default chart: Last 7 days
     let emailObj = { email: this.$store.state.email };
@@ -85,7 +112,48 @@ export default {
       .catch((failure) => {
         this.timeList = failure;
       });
+    
+    getAllRatings()
+      .then((res) => {
+        // this.ratings = res
+        this.processRating(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   },
+
+  methods: {
+    processRating(userData) {
+      var avgMorningGpa = []
+      var avgAfternoonGpa = []
+      var avgNightGpa = []
+      for (var key in userData) {
+        if (userData[key]['morningGPA'] != 0) {
+          avgMorningGpa.push(userData[key]['morningGPA'])
+        }
+        if (userData[key]['afternoonGPA'] != 0) {
+          avgAfternoonGpa.push(userData[key]['afternoonGPA'])
+        }
+        if (userData[key]['nightGPA'] != 0) {
+          avgNightGpa.push(userData[key]['nightGPA'])
+        }
+      }
+
+      avgMorningGpa.length != 0 
+      ? this.avgMorningRating = avgMorningGpa.reduce((acc, curr) => acc + curr, 0) / avgMorningGpa.length 
+      : this.avgMorningRating = 0
+
+      avgAfternoonGpa.length != 0
+      ? this.avgAfternoonRating = avgAfternoonGpa.reduce((acc, curr) => acc + curr, 0) / avgAfternoonGpa.length
+      : this.avgAfternoonRating = 0
+
+      avgNightGpa.length != 0
+      ? this.avgNightRating = avgNightGpa.reduce((acc, curr) => acc + curr, 0) / avgNightGpa.length
+      : this.avgNightRating = 0
+    }
+  },
+
   watch: {
     // Change time chart based on selection
     timeRange(newValue) {

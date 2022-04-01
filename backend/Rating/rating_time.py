@@ -58,7 +58,7 @@ def addRating():
                 "data": "An error occurred posting the rating"
             }
         ), 500
- 
+
     return jsonify(
         {
             "code": 201,
