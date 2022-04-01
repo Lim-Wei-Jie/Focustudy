@@ -31,6 +31,9 @@
         <!-- Header -->
         <div class="d-flex justify-content-between">
           <!-- Title -->
+
+     
+
           <h3>Productivity</h3>
 
           <div class="container">
@@ -97,9 +100,12 @@ export default {
   },
 
   created() {
-    // Default chart: Last 7 days
-    let emailObj = { email: this.$store.state.email };
 
+
+     getAllRatings()
+    
+    // Default chart: Last 7 days
+    let emailObj = { email: this.$store.state.email }
     // Study Duration
     getTimesDay(emailObj)
       .then((success) => {

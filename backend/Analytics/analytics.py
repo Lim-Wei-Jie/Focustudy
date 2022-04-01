@@ -21,9 +21,7 @@ getRating_URL = "http://localhost:5000/getRating"
 def get_rating():
 
   try:
-    rating = request.get_json()
-    print("\nReceived ratings in JSON:", rating)
-
+    rating = request.json
     result = processGetRating(rating)
     print('\n------------------------')
     print('\nresult: ', result)
@@ -45,7 +43,7 @@ def processGetRating(rating):
   # 2. Send the order info {cart items}
   # Invoke the order microservice
   print('\n-----Invoking rating microservice-----')
-  rating_result = invoke_http(getRating_URL, method='GET', json=rating)
+  rating_result = invoke_http(getRating_URL, method='GET',json=rating)
   print('rating_result:', rating_result)
   return {
     "code": 201,
@@ -99,4 +97,4 @@ def processPostRating(rating):
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
   print("This is flask " + os.path.basename(__file__) + " for getting rating...")
-  app.run(host="0.0.0.0", port=5100, debug=True)
+  app.run(host="0.0.0.0", port=5008, debug=True)
