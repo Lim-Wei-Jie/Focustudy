@@ -100,9 +100,6 @@ export default {
   },
 
   created() {
-
-
-     getAllRatings()
     
     // Default chart: Last 7 days
     let emailObj = { email: this.$store.state.email }
