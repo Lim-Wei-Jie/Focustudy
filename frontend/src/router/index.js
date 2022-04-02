@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AnalyticsView from "../views/AnalyticsView.vue";
-import  rating from "../views/RatingView.vue";
+import RatingView from "../views/RatingView.vue";
 
 const routes = [
   // Homepage
@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/rating",
     name: "rating",
-    component: rating,
+    component: RatingView,
   }
 ];
 
