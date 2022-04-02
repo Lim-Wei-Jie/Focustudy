@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Add time record
 export function addTime(record) {
-    let api_endpoint = `http://127.0.0.1:5000/addTime`;
+    let api_endpoint = `http://127.0.0.1:5100/addTime`;
     axios
         .post(api_endpoint, record)
         .then((response) => {
@@ -18,7 +18,7 @@ export function addTime(record) {
 // Retrieve all times
 export function getTimesAll(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://127.0.0.1:5000/getTimesAll`;
+        let api_endpoint = `http://127.0.0.1:5100/getTimesAll`;
         axios
             .post(api_endpoint, email)
             .then((response) => {
@@ -37,7 +37,7 @@ export function getTimesAll(email) {
 // Retrieve times this year
 export function getTimesYear(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://127.0.0.1:5000/getTimesYear`;
+        let api_endpoint = `http://127.0.0.1:5100/getTimesYear`;
         axios
             .post(api_endpoint, email)
             .then((response) => {
@@ -56,7 +56,7 @@ export function getTimesYear(email) {
 // Retrieve times this month
 export function getTimesMonth(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://127.0.0.1:5000/getTimesMonth`;
+        let api_endpoint = `http://127.0.0.1:5100/getTimesMonth`;
         axios
             .post(api_endpoint, email)
             .then((response) => {
@@ -75,7 +75,7 @@ export function getTimesMonth(email) {
 // Retrieve times from last 7 days (today inclusive)
 export function getTimesDay(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://127.0.0.1:5000/getTimesDay`;
+        let api_endpoint = `http://127.0.0.1:5100/getTimesDay`;
         axios
             .post(api_endpoint, email)
             .then((response) => {
