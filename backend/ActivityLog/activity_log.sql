@@ -8,5 +8,5 @@ CREATE TABLE activity_log
     email VARCHAR(320) NOT NULL,
     date VARCHAR(320) NOT NULL,
     duration INT NOT NULL,
-    tasks NVARCHAR(MAX) NOT NULL
+    tasks VARCHAR(1000) NOT NULL
 );
