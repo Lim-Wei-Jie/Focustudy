@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 
 ############### Get rating ###############
-getRating_URL = "http://localhost:5000/getRating"
+getRating_URL = "http://127.0.0.1:5000/getRating"
 
 @app.route("/getRating", methods=['GET'])
 def get_rating():
@@ -53,7 +53,7 @@ def processGetRating(rating):
   }
 
 ############### Post rating ###############
-postRating_URL = "http://localhost:5000/addRating"
+postRating_URL = "http://127.0.0.1:5000/addRating"
 
 @app.route("/addRating", methods=['POST'])
 def add_rating():
