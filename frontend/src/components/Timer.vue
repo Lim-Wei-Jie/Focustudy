@@ -222,6 +222,9 @@ export default {
 
       // Stop interval
       clearInterval(this.timerInterval);
+
+      // Go on to Rating
+      this.$emit('endSession', true)
     },
   },
 
@@ -244,6 +247,9 @@ export default {
 
         // Stop interval
         clearInterval(this.timerInterval);
+
+        // Go on to Rating
+        this.$emit('endSession', true)
       }
     },
   },

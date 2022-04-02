@@ -1,8 +1,10 @@
 import axios from "axios";
 
+// TIME
+
 // Add time record
 export function addTime(record) {
-    let api_endpoint = `http://127.0.0.1:5100/addTime`;
+    let api_endpoint = `http://127.0.0.1:5000/addTime`;
     axios
         .post(api_endpoint, record)
         .then((response) => {
@@ -92,30 +94,35 @@ export function getTimesDay(email) {
 }
 
 
-export function catchRate(record) {
-    let api_endpoint = "http://127.0.0.1:5100/addRating";
+// RATING
+
+// Add rating record
+export function addRating(record) {
+    let api_endpoint = "http://127.0.0.1:5000/addRating";
     axios
         .post(api_endpoint, record)
         .then((response) => {
+            // { "code": 201, "data": "Rating posted." }
             console.log(response.data);
         })
         .catch((error) => {
+            // { "code": 500, "data": "An error occurred creating time record." }
             console.log(error)
         });
 }
 
-
-export function getAllRatings () {
+// Retrieve all ratings
+export function getRatings(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = "http://127.0.0.1:5100/getRating"
+        let api_endpoint = `http://127.0.0.1:5100/getRatings`;
         axios
-            .get(api_endpoint)
-            .then((res) => {
-                resolve(res.data.data.rating_result.data.ratings)
+            .post(api_endpoint, email)
+            .then((response) => {
+                console.log(response.data);
+                resolve(response.data)
             })
-            .catch((err) => {
-                console.log(err);
-                reject([])
-            })
+            .catch((error) => {
+                reject(error)
+            });
     })
 };
