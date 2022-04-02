@@ -133,7 +133,7 @@ def getTimesDay():
 def processGetTime(timeReq, URL_endpoint):
   print('\n-----Invoking time microservice-----')
   times_result = invoke_http(URL_endpoint, method='POST', json=timeReq)
-  print('rating_result:', times_result)
+  print('times_result:', times_result)
   return {
     "code": 201,
     "data": {
