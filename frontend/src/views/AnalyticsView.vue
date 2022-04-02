@@ -9,18 +9,22 @@
       /></router-link>
     </div>
     <!-- Analytics component -->
-    <Analytics></Analytics>
+    <Analytics />
+    <!-- Activity Log component -->
+    <ActivityLog />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Analytics from "@/components/Analytics.vue";
+import ActivityLog from "@/components/ActivityLog.vue"
 
 export default {
   name: "AnalyticsView",
   components: {
     Analytics,
+    ActivityLog,
   },
 };
 </script>
