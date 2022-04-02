@@ -1,6 +1,8 @@
 import axios from "axios";
 
-// TIME
+// ----------------------------------------------------------------------------------------------------------------
+
+// TIME: ADD RECORD
 
 // Add time record
 export function addTime(record) {
@@ -16,6 +18,10 @@ export function addTime(record) {
             console.log(error)
         });
 };
+
+// ----------------------------------------------------------------------------------------------------------------
+
+// TIME: GET RECORDS
 
 // Retrieve all times
 export function getTimesAll(email) {
@@ -93,8 +99,9 @@ export function getTimesDay(email) {
     })
 }
 
+// ----------------------------------------------------------------------------------------------------------------
 
-// RATING
+// RATING: ADD RECORD
 
 // Add rating record
 export function addRating(record) {
@@ -110,6 +117,10 @@ export function addRating(record) {
             console.log(error)
         });
 }
+
+// ----------------------------------------------------------------------------------------------------------------
+
+// RATING: GET RECORDS
 
 // Retrieve all ratings
 export function getRatings(email) {

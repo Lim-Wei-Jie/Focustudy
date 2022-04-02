@@ -89,7 +89,6 @@
   </div>
 </template>
 
-
 <script>
 import { addRating } from "../endpoint/endpoint.js";
 
@@ -103,6 +102,7 @@ export default {
   },
 
   methods: {
+    // Add new record to rating database
     postRating() {
       let record = {
         email: this.$store.state.email,
@@ -110,7 +110,7 @@ export default {
         rating: this.picked,
       };
 
-      // Add new record to rating database
+      // From endpoint.js
       addRating(record);
 
       // Return to default view
@@ -124,11 +124,10 @@ export default {
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 @import url(//fonts.googleapis.com/css?family=Open+Sans&display=swap);
 
-/* Styling h1 and links
-––––––––––––––––––––––––––––––––– */
 h1[alt="Simple"] {
   color: white;
 }
+
 a[href],
 a[href]:hover {
   color: grey;

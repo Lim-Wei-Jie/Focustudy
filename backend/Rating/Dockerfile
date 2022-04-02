@@ -2,5 +2,5 @@ FROM python:3-slim
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN python -m pip install --no-cache-dir -r requirements.txt
-COPY ./rating_time.py .
-CMD [ "python", "./rating_time.py" ]
+COPY ./rating.py .
+CMD [ "python", "./rating.py" ]
