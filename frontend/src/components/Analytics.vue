@@ -72,6 +72,7 @@ import {
   getTimesDay,
   getAllRatings
 } from "../endpoint/endpoint.js";
+import { mapState } from "vuex"
 
 export default {
   name: "Analytics",
@@ -88,6 +89,8 @@ export default {
 
   computed: {
     // Change time chart x-axis value based on timeRange selection
+    ...mapState(["email", "avgMorningGpa", "avgAfternoonGpa", "avgNightGpa"]),
+
     timeHeader() {
       if (this.timeRange == "day" || this.timeRange == "month") {
         return "Day";
@@ -97,6 +100,7 @@ export default {
         return "Year";
       }
     },
+    
   },
 
   created() {
