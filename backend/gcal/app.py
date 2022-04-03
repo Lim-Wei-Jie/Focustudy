@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            creds = flow.run_local_server(port=8080)
+            creds = flow.run_local_server(port=5000)
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
@@ -34,7 +34,37 @@ def main():
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     events = service.events().list(calendarId='primary', timeMin=now, singleEvents=True, orderBy='startTime').execute()
     all_events.append(events)
-    print(all_events)
+    # print(all_events)
+
+@app.route("/calendar", methods=["POST"])
+def get_all_events():
+
+    data = all_events
+    final_events = {}
+
+    for event in data[0]['items']:
+        # print(event)
+        id = event['id']
+        name = event['summary']
+        start = event['start']
+        end = event['end']
+        link = event['htmlLink']
+        final_events[id] = {'name': name, 'start': start, 'end': end, 'link': link}
+
+    if final_events:
+        return jsonify (
+            {
+                "code": 200,
+                "data": final_events
+            }
+        ), 200
+
+    return jsonify (
+        {
+            "code": 404,
+            "message": "No events in calendar." 
+        }
+    ), 404
 
 if __name__ == "__main__":
     main()
