@@ -2,7 +2,7 @@
   <!-- eslint-disable -->
 
   <div class="container">
-    <Header @show-task="showTask" :showAddTask="showAddTask" />
+    <Header @show-task="showAdd" :showAddTask="showAddTask" />
     <AddTask v-if="showAddTask" @add-task="addTask" />
     <Tasks
       @toggle-reminder="toggleReminder"
@@ -10,6 +10,7 @@
       :tasks="tasks"
     />
   </div>
+  <button @click="allTasks">check</button>
 </template>
 
 <script>
@@ -29,6 +30,7 @@ export default {
     return {
       tasks: [],
       showAddTask: false,
+      // render: true,
     };
   },
   methods: {
@@ -36,9 +38,10 @@ export default {
       // console.log("task", id);
       if (confirm("Are you sure?")) {
         deleteTask({
-          "email": this.$store.state.email,
-          "task_id": id
-        })
+          email: this.$store.state.email,
+          task_id: id,
+        });
+        // this.force();
       }
     },
     toggleReminder(id) {
@@ -49,36 +52,38 @@ export default {
     },
     addTask() {
       // this.tasks = [...this.tasks, task];
+      console.log(this.tasks);
       this.showAddTask = false;
-      console.log("calling alltasks after pressing submit")
-      this.allTasks();
-      console.log(this.tasks)
-      console.log("calling alltasks after pressing submit x2")
-      this.allTasks();
-      console.log(this.tasks)
+      // this.force();
     },
-    showTask() {
+    showAdd() {
       this.showAddTask = !this.showAddTask;
     },
     allTasks() {
       getTasks({
-        "email": this.$store.state.email,
+        email: this.$store.state.email,
       })
         .then((retrievedTasks) => {
           this.tasks = [];
           for (var id of Object.keys(retrievedTasks.data)) {
-            this.tasks.push(
-              {
-                "id": id,
-                "task_description": retrievedTasks.data[id]["task_description"]
-              }
-            );
+            this.tasks.push({
+              id: id,
+              task_description: retrievedTasks.data[id]["task_description"],
+            });
           }
+          console.log(this.tasks);
         })
         .catch((error_message) => {
           console.log(error_message);
         });
     },
+    // force() {
+    //   this.render = false;
+
+    //   this.$nextTick(() => {
+    //     this.render = true;
+    //   });
+    // },
   },
   created() {
     this.allTasks();

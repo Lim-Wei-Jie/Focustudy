@@ -4,8 +4,8 @@ from flask_cors import CORS
 from os import environ
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/TaskList'
-# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/TaskList'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
 # export dbURL=mysql+mysqlconnector://root:root@localhost:3306/TaskList
 app.config['SQLALEHCMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -42,7 +42,7 @@ def tasklist_by_email():
         }
     ), 404
 
-@app.route("/create_task", methods=['POST'])
+@app.route("/task_list/create", methods=['POST'])
 def create_task():
     
     data = request.get_json()
@@ -85,7 +85,6 @@ def create_task():
 def delete_task():
 
     data = request.get_json()
-    # print(data)
     initial = TaskList.query.filter_by(task_id=data["task_id"]).first()
 
     if initial == None:

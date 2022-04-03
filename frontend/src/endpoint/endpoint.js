@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function addTask(email, task_description) {
-    let api_endpoint = `http://127.0.0.1:5000/create_task`;
+    let api_endpoint = `http://127.0.0.1:5000/task_list/create`;
     axios
         .post(api_endpoint, email, task_description)
         .then((response) => {
@@ -18,7 +18,7 @@ export function getTasks(email) {
         axios
             .post(api_endpoint, email)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 resolve(response.data)
             })
             .catch((error) => {

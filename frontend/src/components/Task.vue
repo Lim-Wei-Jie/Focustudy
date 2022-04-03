@@ -1,6 +1,6 @@
 <template>
 
-    <div @click="$emit('toggle-reminder', task.id)" :class="[task.reminder ? 'reminder' : '', 'task']">
+    <div @click="$emit('toggle-reminder', task.task_id)" :class="[task.reminder ? 'reminder' : '', 'task']">
         <p class="align-left">
             <i @click="strikethrough" class="tick fa-solid fa-check fa-lg"></i>
             <span style="padding-left: 10px;" :style="{textDecoration: striked ? 'line-through' : ''}">
