@@ -1,0 +1,88 @@
+# docker-compose up -d
+
+version: "3.8"
+
+volumes:
+  rabbitmq_data:
+
+services:
+
+  #######################
+  # Timer microservice
+  #######################
+  timer:
+    build:
+      context: ./Timer/
+      dockerfile: Dockerfile
+    image: 01371965/time:focustudy
+    restart: always
+    environment:
+      dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/timer
+      PYTHONUNBUFFERED: 1
+
+  #######################
+  # Rating microservice
+  #######################
+  rating:
+    build:
+      context: ./Rating/
+      dockerfile: Dockerfile
+    image: 01371965/rating:focustudy
+    restart: always
+    environment:
+      dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/rating
+      PYTHONUNBUFFERED: 1
+
+  ####################################
+  # RabbitMQ: The messaging broker   
+  ####################################
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: focustudy-rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes: 
+      - rabbitmq_data:/var/lib/rabbitmq
+  
+  ###################################
+  # Error microservice
+  ###################################
+  error:
+    build:
+      context: ./Error/
+      dockerfile: Dockerfile
+    image: 01371965/error:focustudy
+    restart: always
+    # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
+
+  #########################################
+  # Record Session complex microservice
+  #########################################
+  record_session:
+    build:
+      context: ./Record_Session/
+      dockerfile: Dockerfile
+    image: 01371965/record_session:focustudy
+    restart: always
+    # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
+    depends_on:
+      - timer
+      - rating
+      - error
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      addTime_URL: http://127.0.0.1:5002/addTime
+      addRating_URL: http://127.0.0.1:5001/addRating
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5100:5100"
