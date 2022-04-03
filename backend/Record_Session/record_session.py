@@ -49,8 +49,27 @@ def processRecordSession(session_data):
   time_data = session_data['timeData']
   rating_data = session_data['ratingData']
 
-  # print('\n-----Invoking rating microservice-----')
-  # rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
+  print('\n-----Invoking time microservice-----')
+  time_result = invoke_http(addTime_URL, method='POST', json=time_data)
+  print('time_result:', time_result)
+  # Check the time_result if is failure, send to error MS errorMS()
+
+  print('\n-----Invoking rating microservice-----')
+  rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
+  print('rating_result:', rating_result)
+  # Check the rating_result if is failure, send to error MS errorMS()
+
+  # Return created time and rating
+  return {
+      "code": 201,
+      "data": {
+        "time_result": time_result,
+        "rating_result": rating_result
+      }
+  }
+
+def errorMS():
+  return
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
