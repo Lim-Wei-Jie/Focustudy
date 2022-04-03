@@ -31,7 +31,7 @@ class Rating(db.Model):
     def json(self):
         return {"ratingId": self.ratingId, "email": self.email, "currentDate":self.currentDate, "rating": self.rating}
 
-# http://127.0.0.1:5000/addRating
+# http://127.0.0.1:5001/addRating
 @app.route("/addRating", methods=['POST'])
 def addRating():
 
@@ -56,7 +56,7 @@ def addRating():
         }
     ), 201
     
-# http://127.0.0.1:5000/getRatings
+# http://127.0.0.1:5001/getRatings
 @app.route("/getRatings", methods=["POST"])
 def getRatings():
     data = request.get_json()
@@ -87,4 +87,4 @@ def getRatings():
     
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

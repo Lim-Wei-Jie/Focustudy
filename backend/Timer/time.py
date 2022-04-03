@@ -28,7 +28,7 @@ class Timer(db.Model):
         self.duration = duration
 
 # Retrieve all time records
-# http://127.0.0.1:5000/getTimesAll
+# http://127.0.0.1:5002/getTimesAll
 @app.route("/getTimesAll", methods=["POST"])
 def getTimesAll():
     data = request.get_json()
@@ -65,7 +65,7 @@ def getTimesAll():
     ), 404
 
 # Retrieve times this year
-# http://127.0.0.1:5000/getTimesYear
+# http://127.0.0.1:5002/getTimesYear
 @app.route("/getTimesYear", methods=["POST"])
 def getTimesYear():
     data = request.get_json()
@@ -103,7 +103,7 @@ def getTimesYear():
     ), 404
 
 # Retrieve times this month
-# http://127.0.0.1:5000/getTimesMonth
+# http://127.0.0.1:5002/getTimesMonth
 @app.route("/getTimesMonth", methods=["POST"])
 def getTimesMonth():
     data = request.get_json()
@@ -140,7 +140,7 @@ def getTimesMonth():
     ), 404
 
 # Retrieve times from last 7 days (today inclusive)
-# http://127.0.0.1:5000/getTimesDay
+# http://127.0.0.1:5002/getTimesDay
 @app.route("/getTimesDay", methods=["POST"])
 def getTimesDay():
     data = request.get_json()
@@ -178,7 +178,7 @@ def getTimesDay():
     ), 404
 
 # Add time record
-# http://127.0.0.1:5000/addTime
+# http://127.0.0.1:5002/addTime
 @app.route("/addTime", methods=['POST'])
 def addTime():
     data = request.get_json()
@@ -206,4 +206,4 @@ def addTime():
     ), 201
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5002, debug=True)
