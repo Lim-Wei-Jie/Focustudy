@@ -7,11 +7,23 @@
 
 <script>
 
+import getTopTracks from '../endpoint/spotify.js'
+
 export default {
     name: "Spotify",
     data() {
+        return {
+            tracks: null,
+            show: false
+        }
+    },
+
+    created() {
+        this.tracks = getTopTracks()
+        console.log(this.tracks)
+        },
     }
-}
+
 </script>
 
 <style scoped>

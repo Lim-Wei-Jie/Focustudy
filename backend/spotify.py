@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 client_ID='61da850bbe2a4846a02394330c92992b'
 client_SECRET='59b2d5bfd8f143c48211b04a5767d5ac'   
-redirect_url='http://127.0.0.1:5000/'
+redirect_url='http://0.0.0.1:5000/'
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ CORS(app)
 
 print("you're in")
 
-@app.route("/music")
+@app.route("/music", methods=["POST", "GET"])
 def top_tracks():
     scope = 'user-top-read'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_ID, client_secret= client_SECRET, redirect_uri=redirect_url, scope=scope))
