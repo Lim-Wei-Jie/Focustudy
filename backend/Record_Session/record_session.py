@@ -57,7 +57,7 @@ def processRecordSession(session_data):
   print('\n-----Invoking time microservice-----')
   time_result = invoke_http(addTime_URL, method='POST', json=time_data)
 
-  # Check the time_result if is failure, send to error MS errorMS()
+  # Check the time_result if is failure, send to error MS
   time_code = time_result["code"]
 
   if time_code not in range(200, 300):
@@ -84,7 +84,7 @@ def processRecordSession(session_data):
   print('\n-----Invoking rating microservice-----')
   rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
 
-  # Check the rating_result if is failure, send to error MS errorMS()
+  # Check the rating_result if is failure, send to error MS
   rating_code = rating_result["code"]
 
   if rating_code not in range(200, 300):

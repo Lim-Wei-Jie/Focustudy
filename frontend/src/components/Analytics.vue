@@ -70,7 +70,7 @@ import {
   getTimesYear,
   getTimesMonth,
   getTimesDay,
-  getAllRatings
+  // getAllRatings
 } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
@@ -120,14 +120,14 @@ export default {
         this.timeList = failure;
       });
     
-    getAllRatings()
-      .then((res) => {
-        // this.ratings = res
-        this.processRating(res)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    // getAllRatings()
+    //   .then((res) => {
+    //     // this.ratings = res
+    //     this.processRating(res)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
   },
 
   methods: {
