@@ -127,6 +127,7 @@ export default {
 
       // From endpoint.js
       recordSession(sessionData);
+      // .then for the return data from endpoint.js to be store in vuex store for analytics - created analytics MS, post the return data to analytics db, get all data from db for analytics
 
       // Return to default view
       this.$emit("ratingComplete", false);

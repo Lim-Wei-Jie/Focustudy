@@ -148,6 +148,7 @@ export function recordSession(sessionData) {
             .post(api_endpoint, sessionData)
             .then((res) => {
                 console.log(res.data);
+                // returns to rating.vue
                 resolve(res.data)
             })
             .catch((err) => {

@@ -59,12 +59,12 @@ def processRecordSession(session_data):
   print('rating_result:', rating_result)
   # Check the rating_result if is failure, send to error MS errorMS()
 
-  # Return created time and rating
+  # Return created time and rating for analytics
   return {
       "code": 201,
       "data": {
-        "time_result": time_result,
-        "rating_result": rating_result
+        "time_data": time_data,
+        "rating_data": rating_data
       }
   }
 
