@@ -19,6 +19,7 @@ services:
     environment:
       dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/timer
       PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
 
   #######################
   # Rating microservice
@@ -32,6 +33,7 @@ services:
     environment:
       dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/rating
       PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
 
   ####################################
   # RabbitMQ: The messaging broker   
@@ -62,6 +64,7 @@ services:
       rabbit_host: rabbitmq
       rabbit_port: 5672
       PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
 
   #########################################
   # Record Session complex microservice
@@ -84,5 +87,6 @@ services:
       addTime_URL: http://127.0.0.1:5002/addTime
       addRating_URL: http://127.0.0.1:5001/addRating
       PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5100:5100"
