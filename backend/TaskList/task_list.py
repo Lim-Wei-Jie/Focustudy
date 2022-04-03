@@ -9,6 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localh
 # export dbURL=mysql+mysqlconnector://root:root@localhost:3306/TaskList
 app.config['SQLALEHCMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 CORS(app)
 
 @app.route("/task_list", methods=['POST'])
@@ -45,6 +46,7 @@ def tasklist_by_email():
 def create_task():
     
     data = request.get_json()
+    # print(data)
     all_tasks = TaskList.query.filter_by(email=data["email"])
 
     for task in all_tasks:
@@ -79,11 +81,12 @@ def create_task():
         }
     ), 201
 
-@app.route("/task_list/delete", methods=['DELETE'])
+@app.route("/task_list/delete", methods=['POST'])
 def delete_task():
 
     data = request.get_json()
-    initial = TaskList.query.filter_by(task_description=data["task_description"]).first()
+    # print(data)
+    initial = TaskList.query.filter_by(task_id=data["task_id"]).first()
 
     if initial == None:
         return jsonify (

@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export function addTask(task_description) {
-    let api_endpoint = `http://0.0.0.0:5000/create_task`;
+export function addTask(email, task_description) {
+    let api_endpoint = `http://127.0.0.1:5000/create_task`;
     axios
-        .post(api_endpoint, task_description)
+        .post(api_endpoint, email, task_description)
         .then((response) => {
             console.log(response.data);
         })
@@ -14,7 +14,7 @@ export function addTask(task_description) {
 
 export function getTasks(email) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://0.0.0.0:5000/task_list`;
+        let api_endpoint = `http://127.0.0.1:5000/task_list`;
         axios
             .post(api_endpoint, email)
             .then((response) => {
@@ -28,11 +28,11 @@ export function getTasks(email) {
     })
 }
 
-export function deleteTask(email) {
+export function deleteTask(email, task_id) {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://0.0.0.0:5000/task_list/delete`;
+        let api_endpoint = `http://127.0.0.1:5000/task_list/delete`;
         axios
-            .delete(api_endpoint, email, task_description)
+            .post(api_endpoint, email, task_id)
             .then((response) => {
                 console.log(response.data);
                 resolve(response.data)

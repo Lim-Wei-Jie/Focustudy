@@ -2,12 +2,12 @@
   <!-- eslint-disable -->
 
   <div class="container">
-    <Header @show-task="showTask" :showAddTask="showAddTask"/>
+    <Header @show-task="showTask" :showAddTask="showAddTask" />
     <AddTask v-if="showAddTask" @add-task="addTask" />
     <Tasks
-        @toggle-reminder="toggleReminder"
-        @delete-task="deleteTask"
-        :tasks="tasks"
+      @toggle-reminder="toggleReminder"
+      @delete-task="deleteTask"
+      :tasks="tasks"
     />
   </div>
 </template>
@@ -16,6 +16,7 @@
 import Header from "./components/Header.vue";
 import Tasks from "./components/Tasks.vue";
 import AddTask from "./components/AddTask.vue";
+import { getTasks, deleteTask } from "./endpoint/endpoint.js";
 
 export default {
   name: "App",
@@ -34,7 +35,10 @@ export default {
     deleteTask(id) {
       // console.log("task", id);
       if (confirm("Are you sure?")) {
-        this.tasks = this.tasks.filter((task) => task.id !== id);
+        deleteTask({
+          "email": this.$store.state.email,
+          "task_id": id
+        })
       }
     },
     toggleReminder(id) {
@@ -43,29 +47,41 @@ export default {
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
     },
-    addTask(task) {
-      this.tasks = [...this.tasks, task];
-      this.showAddTask = false
+    addTask() {
+      // this.tasks = [...this.tasks, task];
+      this.showAddTask = false;
+      console.log("calling alltasks after pressing submit")
+      this.allTasks();
+      console.log(this.tasks)
+      console.log("calling alltasks after pressing submit x2")
+      this.allTasks();
+      console.log(this.tasks)
     },
     showTask() {
       this.showAddTask = !this.showAddTask;
     },
+    allTasks() {
+      getTasks({
+        "email": this.$store.state.email,
+      })
+        .then((retrievedTasks) => {
+          this.tasks = [];
+          for (var id of Object.keys(retrievedTasks.data)) {
+            this.tasks.push(
+              {
+                "id": id,
+                "task_description": retrievedTasks.data[id]["task_description"]
+              }
+            );
+          }
+        })
+        .catch((error_message) => {
+          console.log(error_message);
+        });
+    },
   },
   created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "esm change report",
-      },
-      {
-        id: 2,
-        text: "task list front-end",
-      },
-      {
-        id: 3,
-        text: "analytics wireframe",
-      },
-    ];
+    this.allTasks();
   },
 };
 </script>
@@ -73,7 +89,8 @@ export default {
 
 <style>
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
@@ -111,8 +128,8 @@ nav a.router-link-exact-active {
   max-height: 500px;
   padding: 30px;
   border-radius: 20px;
-  background: #F7F8F7;
-  box-shadow: 0.5px 5px 10px 12px #E4E4E4;
+  background: #f7f8f7;
+  box-shadow: 0.5px 5px 10px 12px #e4e4e4;
 }
 .btn {
   display: inline-block;

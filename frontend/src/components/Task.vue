@@ -4,11 +4,11 @@
         <p class="align-left">
             <i @click="strikethrough" class="tick fa-solid fa-check fa-lg"></i>
             <span style="padding-left: 10px;" :style="{textDecoration: striked ? 'line-through' : ''}">
-                {{ task.text }}
+                {{ task.task_description }}
             </span>
         </p>
         <p class="align-right">
-            <i @click="$emit('delete-task', task.id)" class="fas fa-times fa-lg"></i>
+            <i @click="$emit('delete-task', task.task_id)" class="fas fa-times fa-lg"></i>
         </p>
         <!-- <br> -->
         <!-- <p v-if="task.day!=''" class="align-left">
@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         strikethrough() {
-            // console.log(this.striked)
             this.striked = !this.striked
         }
     }
