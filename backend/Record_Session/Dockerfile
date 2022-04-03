@@ -2,5 +2,5 @@ FROM python:3-slim
 WORKDIR /usr/src/app
 COPY ./http.reqs.txt ./amqp.reqs.txt ./
 RUN python -m pip install --no-cache-dir -r http.reqs.txt -r amqp.reqs.txt
-COPY ./analytics.py ./invokes.py ./amqp_setup.py ./
-CMD [ "python", "./analytics.py" ]
+COPY ./record_session.py ./invokes.py ./amqp_setup.py ./
+CMD [ "python", "./record_session.py" ]
