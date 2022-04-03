@@ -18,7 +18,7 @@ addRating_URL = "http://127.0.0.1:5001/addRating"
 addTime_URL = "http://127.0.0.1:5002/addTime"
 
 
-@app.route("/record_session", method=["POST"])
+@app.route("/record_session", methods=["POST"])
 def record_session():
   # Simple check of input format and data of the request are JSON
   if request.is_json:
@@ -45,11 +45,12 @@ def record_session():
       }), 500
 
 def processRecordSession(session_data):
-  rating_data = session_data
-  time_data = session_data
 
-  print('\n-----Invoking rating microservice-----')
-  rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
+  time_data = session_data['timeData']
+  rating_data = session_data['ratingData']
+
+  # print('\n-----Invoking rating microservice-----')
+  # rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":

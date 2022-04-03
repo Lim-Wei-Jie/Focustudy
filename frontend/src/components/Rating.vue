@@ -90,7 +90,8 @@
 </template>
 
 <script>
-import { addRating } from "../endpoint/endpoint.js";
+import { recordSession } from "../endpoint/endpoint.js";
+import { mapState, mapMutations } from "vuex"
 
 export default {
   name: "Rating",
@@ -101,17 +102,31 @@ export default {
     };
   },
 
+  computed: {
+
+    ...mapState(["email", "timeData", "ratingData"]),
+  },
+
   methods: {
+
+    ...mapMutations(["updateRatingData"]),
+
     // Add new record to rating database
     postRating() {
-      let record = {
-        email: this.$store.state.email,
+      
+      this.updateRatingData({
+        email: this.email,
         currentDate: new Date().toISOString().slice(0, 10),
         rating: this.picked,
+      })
+
+      let sessionData = {
+        timeData: this.timeData,
+        ratingData: this.ratingData
       };
 
       // From endpoint.js
-      addRating(record);
+      recordSession(sessionData);
 
       // Return to default view
       this.$emit("ratingComplete", false);

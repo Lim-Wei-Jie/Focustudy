@@ -137,3 +137,21 @@ export function getRatings(email) {
             });
     })
 };
+
+// ----------------------------------------------------------------------------------------------------------------
+
+// Call record_session complex MS
+export function recordSession(sessionData) {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = "http://127.0.0.1:5100/record_session"
+        axios
+            .post(api_endpoint, sessionData)
+            .then((res) => {
+                console.log(res.data);
+                resolve(res.data)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}

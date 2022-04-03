@@ -22,7 +22,7 @@ import Timer from "@/components/Timer.vue";
 import Rating from "@/components/Rating.vue"
 
 export default {
-  name: "Homeview",
+  name: "HomeView",
   data() {
     return {
       sessionEnded: false

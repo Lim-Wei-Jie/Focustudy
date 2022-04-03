@@ -91,7 +91,9 @@
 </template>
 
 <script>
-import {addTime} from "../endpoint/endpoint.js"
+// import {addTime} from "../endpoint/endpoint.js"
+import { mapState, mapMutations } from "vuex"
+
 export default {
   name: "Timer",
 
@@ -115,6 +117,9 @@ export default {
   },
 
   computed: {
+
+    ...mapState(["email"]),
+
     // Ensure that timing convention is followed (HH:MM:SS)
     formattedTime() {
       let timeLeft = this.timeInSeconds;
@@ -154,6 +159,9 @@ export default {
   },
 
   methods: {
+
+    ...mapMutations(["updateTimeData"]),
+
     // Called when starting study session and break
     startTimer() {
       // Start timer status
@@ -208,8 +216,13 @@ export default {
       // Add new record to Timer database if in study mode
       if (!this.startBreak) {
         let time = this.initialTimeInSeconds - this.timeInSeconds
-        addTime({
-          "email": this.$store.state.email,
+        // addTime({
+        //   "email": this.email,
+        //   "startDate": this.startDate,
+        //   "duration": time
+        // })
+        this.updateTimeData({
+          "email": this.email,
           "startDate": this.startDate,
           "duration": time
         })
@@ -234,8 +247,13 @@ export default {
       if (newValue < 0) {
         // Add new record to Timer database if in study mode
         if (!this.startBreak) {
-          addTime({
-            "email": this.$store.state.email,
+          // addTime({
+          //   "email": this.email,
+          //   "startDate": this.startDate,
+          //   "duration": this.initialTimeInSeconds
+          // })
+          this.updateTimeData({
+            "email": this.email,
             "startDate": this.startDate,
             "duration": this.initialTimeInSeconds
           })

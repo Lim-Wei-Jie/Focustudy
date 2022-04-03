@@ -5,21 +5,17 @@ export default createStore({
     return {
       // Test email
       email: "a@gmail.com",
-      avgMorningGpa:0, //
-      avgAfternoonGpa:0, //
-      avgNightGpa:0 //
+      timeData: {},
+      ratingData: {}
     }
   },
   getters: {},
   mutations: {
-    updateMorningGPA (state, avgMorningGpa) {
-      state.avgMorningGpa = avgMorningGpa
+    updateTimeData(state, timeData) {
+      state.timeData = timeData
     },
-    updateAfternoonGPA (state, avgAfternoonGpa) {
-      state.avgAfternoonGpa = avgAfternoonGpa
-    },
-    updateNightGPA (state, avgNightGpa) {
-      state.avgNightGpa = avgNightGpa
+    updateRatingData(state, ratingData) {
+      state.ratingData = ratingData
     }
   },
   actions: {},
