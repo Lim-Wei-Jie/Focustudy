@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `task_list` (
 --
 
 INSERT INTO `task_list` (`email`, `task_description`) VALUES
-('huiqing.koh.2020@smu.edu.sg', 'esm change report'),
+('a@gmail.com', 'esm change report'),
 ('huiqing.koh.2020@smu.edu.sg', 'analytics wireframe'),
 ('huiqing.koh.2020@smu.edu.sg', 'task list backend'),
 ('sanchanag.2020@smu.edu.sg', 'spotify api'),

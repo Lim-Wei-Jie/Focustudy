@@ -17,7 +17,7 @@ services:
     image: 01371965/time:focustudy
     restart: always
     environment:
-      dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/timer
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/timer
       PYTHONUNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
 
@@ -31,7 +31,7 @@ services:
     image: 01371965/rating:focustudy
     restart: always
     environment:
-      dbURL: set dbURL=mysql+mysqlconnector://root@localhost:3306/rating
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/rating
       PYTHONUNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
 
@@ -84,9 +84,25 @@ services:
     environment:
       rabbit_host: rabbitmq
       rabbit_port: 5672
-      addTime_URL: http://127.0.0.1:5002/addTime
-      addRating_URL: http://127.0.0.1:5001/addRating
+      addTime_URL: http://timer:5002/addTime
+      addRating_URL: http://rating:5001/addRating
       PYTHONUNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5100:5100"
+
+  #######################
+  # TaskList microservice
+  #######################
+  tasklist:
+    build:
+      context: ./TaskList/
+      dockerfile: Dockerfile
+    image: 01371965/tasklist:focustudy
+    restart: always
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/tasklist
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+    ports:
+      - "5000:5000"

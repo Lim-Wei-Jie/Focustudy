@@ -14,8 +14,8 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-addRating_URL = environ.get('addRating_URL') or "http://127.0.0.1:5001/addRating"
-addTime_URL = environ.get('addTime_URL') or "http://127.0.0.1:5002/addTime"
+addRating_URL = environ.get('addRating_URL') or "http://localhost:5001/addRating"
+addTime_URL = environ.get('addTime_URL') or "http://localhost:5002/addTime"
 
 @app.route("/record_session", methods=["POST"])
 def record_session():
