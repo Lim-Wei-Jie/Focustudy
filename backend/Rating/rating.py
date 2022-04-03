@@ -80,7 +80,7 @@ def getRatings():
         {
             # Message
             "code": 404,
-            "message": "No ratings found."
+            "data": "No ratings found."
         }
         # Error code
     ), 404

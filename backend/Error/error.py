@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import json
 import os
 
@@ -25,14 +23,10 @@ def callback(channel, method, properties, body):
 def processError(errorMsg):
   print("Printing the error message:")
   try:
-    error = json.loads(errorMsg)
-    print("--JSON:", error)
-  except Exception as e:
-    print("--NOT JSON:", e)
     print("--DATA:", errorMsg)
+  except Exception as e:
+    print("--ERROR:", e)
   print()
-
-
 
 if __name__ == "__main__":  # execute this program only if it is run as a script (not by 'import')    
   print("\nThis is " + os.path.basename(__file__), end='')
