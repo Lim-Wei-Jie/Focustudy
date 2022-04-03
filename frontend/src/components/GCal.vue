@@ -1,39 +1,55 @@
 <template>
     <div class="gcal">
         gcal!
-    <!-- <button id="authorize_button">Authorize</button>
-    <button id="signout_button">Sign Out</button> -->
-    <span>
-        <button type="button" class="btn btn-dark"  v-if="!authorized" @click="handleAuthClick">Login</button> 
-    </span>
 
     <span>
-    <button type="button" class="btn btn-dark" v-if="authorized" @click="handleSignOutClick">Sign Out</button>
+    <button type="button" class="btn btn-dark" @click="showEvents()">Get Events</button>
     </span>
 
-    <span>
-    <button type="button" class="btn btn-dark" v-if="authorized" @click="getEvents">Get Events</button>
-    </span>
+    <div v-if="this.events !== null">
+        {{this.events}}
+        <!-- <div v-for="event in events">
+            <div>
+                <h3>{{ event.summary }}</h3>
+                <p>{{ event.description }}</p>
+                <p>{{ event.start.dateTime }}</p>
+                <p>{{ event.end.dateTime }}</p>
+            </div>
+        </div> -->
+        
+    </div>
 
     </div>
 </template>
 
 <script>
+import getEvents from '../endpoint/endpoint.js'
+
 export default {
     name: "GCal",
     data() {
         return {
-            
+            events: null,
+            show: false
         }
     },
 
-    mounted() {
-    },
-
     created() {
+        this.events = getEvents()
+        console.log(this.events)
+
+        // id = event['id']
+        // name = event['summary']
+        // start = event['start'] - can be date or datetime
+        // end = event['end'] - can be date or datetime
+        // link = event['htmlLink']
+        // final_events[id] = {'name': name, 'start': start, 'end': end, 'link': link}
     },
 
     methods: {
+        showEvents() {
+            this.show = true
+        }
     }
 
 }

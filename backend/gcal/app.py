@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 import os.path
 # import requests
@@ -26,7 +28,7 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            creds = flow.run_local_server(port=5000)
+            creds = flow.run_console()
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
@@ -67,17 +69,5 @@ def get_all_events():
     ), 404
 
 if __name__ == "__main__":
+    # app.run(host="127.0.0.1", port=5000, debug=True)
     main()
-
-        # try:
-        #     credentials = get_credentials()
-        #     service = build('calendar', 'v3', credentials=credentials)
-        #     print('Authentication successful!')
-        #     print('Attempting to get calendar data...')
-        #     get_calendar_data(service)
-        #     print('Calendar data retrieved!')
-        #     print('Attempting to write calendar data to file...')
-        #     write_calendar_data_to_file()
-        #     print('Calendar data written to file!')
-        # except:
-        #     print('Authentication failed!')

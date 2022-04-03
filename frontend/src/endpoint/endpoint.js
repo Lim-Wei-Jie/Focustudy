@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export function getEvents() {
+export default function getEvents() {
     return new Promise((resolve, reject) => {
-        let api_endpoint = `http://0.0.0.0:5000/calendar`;
+        let api_endpoint = 'http://127.0.0.1:5000/calendar';
         axios
             .post(api_endpoint)
             .then((response) => {
@@ -13,4 +13,5 @@ export function getEvents() {
                 console.log(error)
                 reject([])
             });
-    })
+    });
+}
