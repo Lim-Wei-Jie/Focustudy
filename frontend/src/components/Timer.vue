@@ -257,6 +257,9 @@ export default {
             "startDate": this.startDate,
             "duration": this.initialTimeInSeconds
           })
+
+          // Go on to Rating
+          this.$emit('endSession', true)
         }
 
         // Reset timer status
@@ -265,9 +268,6 @@ export default {
 
         // Stop interval
         clearInterval(this.timerInterval);
-
-        // Go on to Rating
-        this.$emit('endSession', true)
       }
     },
   },

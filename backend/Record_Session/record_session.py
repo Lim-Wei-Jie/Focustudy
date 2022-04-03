@@ -71,7 +71,7 @@ def processRecordSession(session_data):
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nTime status ({:d}) published to the RabbitMQ Exchange.")
+    print("\nTime status published to the RabbitMQ Exchange.")
 
     return {
       "code": 500,
@@ -98,7 +98,7 @@ def processRecordSession(session_data):
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nRating status ({:d}) published to the RabbitMQ Exchange.")
+    print("\nRating status published to the RabbitMQ Exchange.")
 
     return {
         "code": 400,

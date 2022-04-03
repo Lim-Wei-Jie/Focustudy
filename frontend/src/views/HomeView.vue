@@ -1,18 +1,14 @@
 <template>
   <div>
-    <div class="m-5">
-      <!-- Navigate to analytics -->
-      <router-link
-        to="/analytics"
-        class="bg-light p-2 text-dark rounded-3 text-decoration-none border"
-        ><fa icon="chart-simple"
-      /></router-link>
+    <div class="mx-4 mt-3 mb-5 d-flex justify-content-between">
+      <h3>Focustudy</h3>
+      <button class="btn btn-dark rounded-circle"><fa icon="right-from-bracket"/></button>
     </div>
     <!-- Default Page -->
-    <Timer v-if="!sessionEnded" @endSession="showRating"></Timer>
-
-    <TaskList/>
-
+    <div v-if="!sessionEnded" class="d-flex">
+      <Timer @endSession="showRating"></Timer>
+      <TaskList></TaskList>
+    </div>
     <!-- Rating Page -->
     <Rating v-if="sessionEnded" @ratingComplete='returnDefault'></Rating>
   </div>

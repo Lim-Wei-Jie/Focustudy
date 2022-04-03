@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable -->
   <div class="container">
     <Header @show-task="showAdd" :showAddTask="showAddTask" />
     <AddTask v-if="showAddTask" @add-task="addTask" />
@@ -8,8 +7,8 @@
       @delete-task="deleteTask"
       :tasks="tasks"
     />
+    <button class="btn btn-dark btn-sm" @click="allTasks">Refresh</button>
   </div>
-  <button @click="allTasks">check</button>
 </template>
 
 <script>
@@ -90,71 +89,16 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: black;
-}
-
-/* nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-} */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* body {
-  font-family: 'Poppins', sans-serif;
-} */
-
+<style scoped>
 .container {
-  max-width: 400px;
-  margin: 30px auto;
+  max-width: 300px;
+  margin: auto;
   overflow: auto;
   min-height: 300px;
   max-height: 500px;
-  padding: 30px;
+  padding: 20px;
   border-radius: 20px;
   background: #f7f8f7;
   box-shadow: 0.5px 5px 10px 12px #e4e4e4;
-}
-.btn {
-  display: inline-block;
-  background: #043631;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  /* cursor: pointer; */
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-.btn:focus {
-  outline: none;
-}
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
 }
 </style>
