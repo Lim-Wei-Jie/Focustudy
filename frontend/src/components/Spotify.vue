@@ -1,6 +1,8 @@
 <template>
     <div class="spotify" style="color:white">
-        spotify!
+        <div v-if=show style="color:white">
+            {{this.tracks}}
+        </div>
     </div>
 </template>
 
@@ -22,6 +24,19 @@ export default {
         this.tracks = getTopTracks()
         console.log(this.tracks)
         },
+    
+    methods: {
+        getTopTracks() {
+            this.show = true
+            this.tracks = getTopTracks()
+        },
+
+        showTracks() {
+            if (this.tracks != null) {
+                this.show = true
+            }
+        }
+    }
     }
 
 </script>
