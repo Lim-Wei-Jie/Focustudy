@@ -106,3 +106,15 @@ services:
       PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5000:5000"
+
+  #######################
+  # Spotify microservice
+  #######################
+  spotify:
+    build:
+      context: ./Spotify/
+      dockerfile: Dockerfile
+    image: 01371965/spotify:focustudy
+    restart: always
+    ports:
+      - "5005:5005"
