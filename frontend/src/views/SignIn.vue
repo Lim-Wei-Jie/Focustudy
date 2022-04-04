@@ -8,9 +8,10 @@
         <div class="col col-xl-10">
           <!-- App Logo -->
           <div class="d-flex align-items-center mb-3 pb-1">
-            <span class="h1 fw-bold mb-0">
-              <Icon icon="arcticons:bookshelf" width="80" color="white" />
+            <span class="h1 fw-bold">
+              <Icon icon="arcticons:bookshelf" width="50" color="white" />
             </span>
+            <h3 class="text-light">Focustudy</h3>
           </div>
           <!-- Card -->
           <SignInCard />

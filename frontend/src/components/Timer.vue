@@ -325,6 +325,7 @@ input[type="text"] {
   height: 40px;
   font-size: 40px;
   border: none;
+  background: transparent;
 }
 
 input::-webkit-outer-spin-button,
@@ -339,5 +340,9 @@ input::-webkit-inner-spin-button {
 
 button {
   width: 75px;
+}
+
+::placeholder {
+  color: orange;
 }
 </style>

@@ -9,9 +9,11 @@
       <!-- right card sign in -->
       <div class="col-md-6 col-lg-6 d-flex align-items-center">
         <div class="card-body p-4 p-lg-5 text-black">
+          <h1>Welcome.</h1>
+          <br>
           <!-- sign in -->
-          <button type="button" class="btn btn-outline-dark" @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
-            <font-awesome-icon :icon="['fab', 'google']" /> Sign in with Google
+          <button type="button" class="btn btn-sm btn-outline-dark px-3" @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
+            <font-awesome-icon :icon="['fab', 'google']" /> Continue with Google
           </button>
         </div>
       </div>

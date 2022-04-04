@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="mx-4 mt-3 mb-5 d-flex justify-content-between">
+  <div class="vh-100 bg-light">
+    <div class="mx-4 pt-3 mb-5 d-flex justify-content-between">
       <div class="d-flex">
         <Icon icon="arcticons:bookshelf" width="40" color="black" />
         <h3>Focustudy</h3>
@@ -89,3 +89,6 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+</style>
