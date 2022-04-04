@@ -19,7 +19,7 @@
 
 <script>
 
-import getTopTracks from '../endpoint/spotify.js'
+import getTopTracks from '../endpoint/endpoint.js'
 
 export default {
     name: "Spotify",
@@ -56,14 +56,6 @@ export default {
                 console.log(collected)
                 this.display = collected
 
-                // this.$store.commit("updateSpotify",
-                //                     {collected})
-
-                // this.display = this.$store.state.spotify
-                // console.log(this.display)
-                // return collected
-                // error, cannot access this.display
-                // this.display = collected
             })
         },
     }
