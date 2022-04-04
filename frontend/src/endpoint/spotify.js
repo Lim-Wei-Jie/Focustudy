@@ -6,8 +6,8 @@ export default function getTopTracks() {
         axios
             .post(api_endpoint)
             .then((response) => {
-                console.log(response.data);
-                resolve(response.data)
+                console.log(response.data.data);
+                resolve(response.data.data);
             })
             .catch((error) => {
                 console.log(error)

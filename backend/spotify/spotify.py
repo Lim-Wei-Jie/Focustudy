@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 client_ID='61da850bbe2a4846a02394330c92992b'
 client_SECRET='59b2d5bfd8f143c48211b04a5767d5ac'   
-redirect_url='http://0.0.0.1:5000/'
+redirect_url='http://0.0.0.0:5000/'
 
 app = Flask(__name__)
 
@@ -26,14 +26,15 @@ print("you're in")
 def top_tracks():
     scope = 'user-top-read'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_ID, client_secret= client_SECRET, redirect_uri=redirect_url, scope=scope))
-    results = sp.current_user_top_tracks(limit=10, offset=0, time_range='short_term')
+    results = sp.current_user_top_tracks(limit=20, offset=0, time_range='short_term')
+    # print(type(results))
     
     if len(results):
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "tracks": results["items"]
+                    "tracks": results
                 }
             }
         )
