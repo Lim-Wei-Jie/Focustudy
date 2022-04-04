@@ -3,7 +3,7 @@
     <!-- Stars Input -->
     <div v-show="toggle">
       <div class="d-flex justify-content-center text-center">
-        <div class="card" style="width: 68rem">
+        <div class="card rounded" style="width: 30rem">
           <div class="card-body">
             <h5 class="card-title">How was your study session today?</h5>
             <div class="container">
@@ -16,6 +16,7 @@
                   flex-row-reverse
                 "
               >
+              
                 <input
                   type="radio"
                   id="star5"
@@ -23,7 +24,8 @@
                   value="5"
                   v-model="picked"
                   @click="toggle = !toggle"
-                /><label for="star5" title="5 star">5</label>
+                /><label for="star5" title="Great"></label>
+
                 <input
                   type="radio"
                   id="star4"
@@ -31,7 +33,8 @@
                   value="4"
                   v-model="picked"
                   @click="toggle = !toggle"
-                /><label for="star4" title="4 star">4</label>
+                /><label for="star4" title="Good"></label>
+
                 <input
                   type="radio"
                   id="star3"
@@ -39,7 +42,8 @@
                   value="3"
                   v-model="picked"
                   @click="toggle = !toggle"
-                /><label for="star3" title="3 star">3</label>
+                /><label for="star3" title="Average"></label>
+
                 <input
                   type="radio"
                   id="star2"
@@ -47,7 +51,8 @@
                   value="2"
                   v-model="picked"
                   @click="toggle = !toggle"
-                /><label for="star2" title="2 star">2</label>
+                /><label for="star2" title="Below Average"></label>
+
                 <input
                   type="radio"
                   id="star1"
@@ -55,7 +60,8 @@
                   value="1"
                   v-model="picked"
                   @click="toggle = !toggle"
-                /><label for="star1" title="1 star">1</label>
+                /><label for="star1" title="Bad"></label>
+
               </div>
             </div>
           </div>
@@ -66,18 +72,18 @@
     <!-- Confirmation Message -->
     <div v-show="!toggle">
       <div class="d-flex justify-content-center">
-        <div class="content text-center">
+        <div class="text-center rounded" style="width: 30rem">
           <div class="ratings">
-            <h2>You rated:</h2>
+            <h5>You rated:</h5>
             <span class="product-rating">{{ picked }}</span
             ><span>/5</span>
             <div class="rating-text">
-              <span>Thank you for using Focustudy</span>
+              <span>Thank you for using Focustudy.</span>
             </div>
             <br />
             <button
               type="submit"
-              class="btn btn-warning text-light"
+              class="btn btn-warning text-light btn-sm px-3"
               @click="postRating()"
             >
               Exit
@@ -155,6 +161,10 @@ body {
   background: #4a4a4c !important;
 }
 
+.card {
+  box-shadow: 0px 10px 10px #e0e0e0;
+}
+
 .starrating > input {
   display: none;
 } /* Remove radio buttons */
@@ -162,7 +172,7 @@ body {
 .starrating > label:before {
   content: "\f005"; /* Star */
   margin: 2px;
-  font-size: 8em;
+  font-size: 3em;
   font-family: FontAwesome;
   display: inline-block;
 }
@@ -186,11 +196,6 @@ body {
   background: #eee;
 }
 
-.content {
-  width: 420px;
-  margin-top: 100px;
-}
-
 .ratings {
   background-color: #fff;
   padding: 54px;
@@ -199,7 +204,7 @@ body {
 }
 
 .product-rating {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 .stars i {

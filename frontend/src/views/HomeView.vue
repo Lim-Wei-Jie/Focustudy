@@ -1,25 +1,32 @@
 <template>
   <div>
     <div class="mx-4 mt-3 mb-5 d-flex justify-content-between">
-      <h3>Focustudy</h3>
-      <button class="btn btn-dark rounded-circle"><fa icon="right-from-bracket"/></button>
+      <div class="d-flex">
+        <Icon icon="arcticons:bookshelf" width="40" color="black" />
+        <h3>Focustudy</h3>
+      </div>
+      <button class="btn btn-dark rounded-circle" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized"><fa icon="right-from-bracket"/></button>
     </div>
-    <div>
-      <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
-      <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
-      <h2 v-if="email">signed user: {{ email }}</h2>
-      <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
-      <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
-    </div>
+
     <!-- Default Page -->
     <div v-if="!sessionEnded" class="d-flex">
+      <Spotify></Spotify>
       <Timer @endSession="showRating"></Timer>
       <TaskList></TaskList>
     </div>
     <!-- Rating Page -->
     <Rating v-if="sessionEnded" @ratingComplete='returnDefault'></Rating>
 
-    <Spotify></Spotify>
+    <!-- Login Debug -->
+    <div>
+      <span>IsInit: {{ Vue3GoogleOauth.isInit }}</span>
+      <br>
+      <span>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</span>
+      <br>
+      <span v-if="email">signed user: {{ email }}</span>
+      <br>
+      <button type="button" class="btn btn-dark btn-sm" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">Get authCode</button>
+    </div>
   </div>
 </template>
 
@@ -27,6 +34,7 @@
 // @ is an alias to /src
 import { mapState, mapMutations } from "vuex"
 import { inject, toRefs } from "vue";
+import { Icon } from "@iconify/vue";
 import Timer from "@/components/Timer.vue";
 import TaskList from "@/components/TaskList.vue";
 import Rating from "@/components/Rating.vue"
@@ -43,7 +51,7 @@ export default {
     ...mapState(["email"])
   },
   components: {
-    Timer, Rating, TaskList, Spotify
+    Icon, Timer, Rating, TaskList, Spotify
   },
   methods: {
     ...mapMutations(["updateEmail"]),

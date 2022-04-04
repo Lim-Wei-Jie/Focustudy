@@ -26,10 +26,6 @@ class Rating(db.Model):
         self.email = email
         self.currentDate = currentDate
         self.rating = rating
-        
-    # Enables object to be represented as a JSON string
-    def json(self):
-        return {"ratingId": self.ratingId, "email": self.email, "currentDate":self.currentDate, "rating": self.rating}
 
 # http://127.0.0.1:5001/addRating
 @app.route("/addRating", methods=['POST'])
@@ -55,36 +51,6 @@ def addRating():
             "data": "Rating posted."
         }
     ), 201
-    
-# http://127.0.0.1:5001/getRatings
-@app.route("/getRatings", methods=["POST"])
-def getRatings():
-    data = request.get_json()
-
-    # Filter by email
-    ratinglist = Rating.query.filter(Rating.email == data["email"]).all()
-
-    if len(ratinglist):
-        # Return in json format
-        return jsonify(
-            {
-                "code": 200,
-                "data": {
-                    # Create a json representation for each rating
-                    "ratings": [ rating.json() for rating in ratinglist]
-                }
-            }
-        )
-
-    return jsonify(
-        {
-            # Message
-            "code": 404,
-            "data": "No ratings found."
-        }
-        # Error code
-    ), 404
-    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)

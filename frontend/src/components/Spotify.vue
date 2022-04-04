@@ -1,7 +1,7 @@
 <template>
     <div class="spotify text-center" style="color:white">
         <div v-if="show" style="color:white">
-            <button class="btn btn-light m-2 mb-4" @click="getSongs()">Show My Music</button>
+            <button class="btn btn-success btn-sm m-2 mb-4" @click="getSongs()">Show My Music</button>
             <!-- hello -->
             <!-- {{this.tracks}} -->
             <!-- {{this.display}} -->
