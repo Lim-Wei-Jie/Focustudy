@@ -89,29 +89,7 @@ export default {
 };
 </script>
 
-<<<<<<< Updated upstream
 <style scoped>
-=======
-<style>
-#app {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: black;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* body {
-  font-family: 'Poppins', sans-serif;
-} */
-
->>>>>>> Stashed changes
 .container {
   max-width: 300px;
   margin: auto;
@@ -123,31 +101,4 @@ export default {
   background: #f7f8f7;
   box-shadow: 0.5px 5px 10px 12px #e4e4e4;
 }
-<<<<<<< Updated upstream
-=======
-.btn {
-  display: inline-block;
-  background: #043631;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  /* cursor: pointer; */
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-.btn:focus {
-  outline: none;
-}
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
-  background: #043631;
-}
->>>>>>> Stashed changes
 </style>
