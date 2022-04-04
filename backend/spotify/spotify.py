@@ -1,5 +1,4 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify
 from flask_cors import CORS
 
 import spotipy
@@ -8,19 +7,11 @@ from spotipy.oauth2 import SpotifyOAuth
 
 client_ID='61da850bbe2a4846a02394330c92992b'
 client_SECRET='59b2d5bfd8f143c48211b04a5767d5ac'   
-redirect_url='http://0.0.0.0:5000/'
+redirect_url='http://127.0.0.1:5004/'
 
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/TaskList'
-# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
-# export dbURL=mysql+mysqlconnector://root:root@localhost:3306/TaskList
-# app.config['SQLALEHCMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
-
 CORS(app)
-
-print("you're in")
 
 @app.route("/music", methods=["POST", "GET"])
 def top_tracks():
@@ -46,9 +37,5 @@ def top_tracks():
         }
     ), 404
 
-    # for idx, item in enumerate(results['items']):
-    #     track = item['track']
-    #     print(" ", idx, track['artists'][0]['name'], " - ", track['name'])
-
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5004, debug=True)

@@ -19,7 +19,7 @@
 
 <script>
 
-import getTopTracks from '../endpoint/endpoint.js'
+import { getTopTracks } from '../endpoint/endpoint.js'
 
 export default {
     name: "Spotify",
