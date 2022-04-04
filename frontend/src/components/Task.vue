@@ -1,6 +1,6 @@
 <template>
 
-    <div @click="$emit('toggle-reminder', task.task_id)" :class="[task.reminder ? 'reminder' : '', 'task']">
+    <div>
         <p class="align-left">
             <i @click="strikethrough" class="tick fa-solid fa-check fa-lg"></i>
             <span style="padding-left: 10px;" :style="{textDecoration: striked ? 'line-through' : ''}">
@@ -10,10 +10,6 @@
         <p class="align-right">
             <i @click="$emit('delete-task', task.task_id)" class="fas fa-times fa-lg"></i>
         </p>
-        <!-- <br> -->
-        <!-- <p v-if="task.day!=''" class="align-left">
-            {{ task.day }}
-        </p> -->
     </div>
 
 </template>

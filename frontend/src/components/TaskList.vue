@@ -3,7 +3,6 @@
     <Header @show-task="showAdd" :showAddTask="showAddTask" />
     <AddTask v-if="showAddTask" @add-task="addTask" />
     <Tasks
-      @toggle-reminder="toggleReminder"
       @delete-task="deleteTask"
       :tasks="tasks"
     />
@@ -75,13 +74,6 @@ export default {
           console.log(error_message);
         });
     },
-    // force() {
-    //   this.render = false;
-
-    //   this.$nextTick(() => {
-    //     this.render = true;
-    //   });
-    // },
   },
   created() {
     this.allTasks();
