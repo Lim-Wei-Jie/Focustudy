@@ -116,5 +116,5 @@ services:
       dockerfile: Dockerfile
     image: 01371965/spotify:focustudy
     restart: always
-    environment:
-      PYTHONUNBUFFERED: 1
+    ports:
+      - "5005:5005"

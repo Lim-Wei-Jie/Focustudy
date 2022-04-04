@@ -203,9 +203,9 @@ export function deleteTask(email, task_id) {
 
 export function getTopTracks() {
     return new Promise((resolve, reject) => {
-        let api_endpoint = 'http://127.0.0.1:5004/music';
+        let api_endpoint = 'http://127.0.0.1:5005/music';
         axios
-            .post(api_endpoint)
+            .get(api_endpoint)
             .then((response) => {
                 console.log(response.data.data);
                 resolve(response.data.data);
