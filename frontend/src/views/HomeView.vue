@@ -15,6 +15,8 @@
 
     <!-- Rating Page -->
     <Rating v-if="sessionEnded" @ratingComplete='returnDefault'></Rating>
+
+    <Spotify></Spotify>
   </div>
 </template>
 
@@ -23,6 +25,7 @@
 import Timer from "@/components/Timer.vue";
 import TaskList from "@/components/TaskList.vue";
 import Rating from "@/components/Rating.vue"
+import Spotify from '@/components/Spotify.vue';
 
 export default {
   name: "HomeView",
@@ -32,7 +35,7 @@ export default {
     }
   },
   components: {
-    Timer, Rating, TaskList
+    Timer, Rating, TaskList, Spotify
   },
   methods: {
     showRating(event) {
