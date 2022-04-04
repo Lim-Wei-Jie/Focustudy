@@ -19,14 +19,13 @@
     </div>
   </section>
 
-  <div>
+  <!-- <div>
     <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
     <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
     <h2 v-if="email">signed user: {{ email }}</h2>
     <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
     <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
-    <!-- <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button> -->
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -67,6 +66,7 @@ export default {
         await this.$gAuth.signOut();
         console.log("isAuthorized", this.Vue3GoogleOauth.isAuthorized);
         this.updateEmail("");
+        sessionStorage.clear();
       } catch (error) {
         console.error(error);
       }
@@ -74,9 +74,6 @@ export default {
 
     ...mapMutations(["updateEmail"])
 
-    // handleClickDisconnect() {
-    //   window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
-    // },
   },
   setup(props) {
     const { isSignIn } = toRefs(props);
