@@ -1,16 +1,13 @@
-import email
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 import os, sys
 from os import environ
 
-import requests
 from invokes import invoke_http
 
 import amqp_setup
 import pika
-import json
 
 app = Flask(__name__)
 CORS(app)
@@ -54,54 +51,70 @@ def processAllSessions(email):
   # TIME
   print('\n-----Invoking time microservice-----')
   time_result = invoke_http(displayTime_URL, method='POST', json=email)
-  print(time_result)
+
   # Check the time_result if is failure, send to error MS
   time_code = time_result["code"]
 
   if time_code not in range(200, 300):
-    print('\n\n-----Publishing the (time error) message with routing_key=time.error-----')
+    print('\n\n-----Publishing the (time retrieval error) message with routing_key=time.retrieval.error-----')
 
     # Send time error message to Error queue
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
-      routing_key="time.error",
+      routing_key="time.retrieval.error",
       body="An error occured retrieving time record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nTime status ({:d}) published to the RabbitMQ Exchange.")
+    print("\nTime status published to the RabbitMQ Exchange.")
 
     return {
       "code": 500,
       "message": "Time record retrieval failure sent for error handling."
     }
 
+  else:
+        print('\n\n-----Publishing the (time retrieval log) message with routing_key=time.retrieval.log-----')        
+         
+        amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="time.retrieval.log", 
+            body="Time record retrieval success.")
+    
+        print("\nTime retrieval log published to RabbitMQ Exchange.\n")
+
   ##########################################################################
 
   # RATING
   print('\n-----Invoking rating microservice-----')
   rating_result = invoke_http(displayRating_URL, method='POST', json=email)
-  print(rating_result)
+
   # Check the rating_result if is failure, send to error MS
   rating_code = rating_result["code"]
 
   if rating_code not in range(200, 300):
-    print('\n\n-----Publishing the (rating error) message with routing_key=rating.error-----')
+    print('\n\n-----Publishing the (rating retrieval error) message with routing_key=rating.retrieval.error-----')
 
     # Send rating error message to Error queue
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
-      routing_key="rating.error",
+      routing_key="rating.retrieval.error",
       body="An error occured retrieving rating record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nRating status ({:d}) published to the RabbitMQ Exchange.")
+    print("\nRating retrieval status published to the RabbitMQ Exchange.")
 
     return {
         "code": 400,
         "message": "Rating record retrieval failure sent for error handling."
     }
+  
+  else:
+      print('\n\n-----Publishing the (rating retrieval log) message with routing_key=rating.retrieval.log-----')        
+        
+      amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="rating.retrieval.log", 
+          body="Rating record retrieval success.")
+  
+      print("\nRating retrieval log published to RabbitMQ Exchange.\n")
 
   # Return retrieved data
   return {

@@ -3,7 +3,7 @@ import os
 
 import amqp_setup
 
-monitorBindingKey='*.log'
+monitorBindingKey='#.log'
 
 def receiveSessionLog():
     amqp_setup.check_setup()

@@ -28,7 +28,7 @@ queue_name = 'Error'
 channel.queue_declare(queue=queue_name, durable=True)
 
 # bind error queue
-routing_key = '*.error'
+routing_key = '#.error'
 channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_key)
 
 ##########################################################################################
@@ -40,7 +40,7 @@ queue_name = 'Activity_Log'
 channel.queue_declare(queue=queue_name, durable=True)
 
 # bind error queue
-routing_key = '*.log'
+routing_key = '#.log'
 channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_key)
 
 ##########################################################################################

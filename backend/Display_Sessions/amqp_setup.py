@@ -15,7 +15,7 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 # declare exchange
-exchangename= "display_sessions_topic"
+exchangename= "record_session_topic"
 exchangetype= "topic"
 channel.exchange_declare(exchange=exchangename, exchange_type=exchangetype, durable=True)
 
@@ -28,7 +28,19 @@ queue_name = 'Error'
 channel.queue_declare(queue=queue_name, durable=True)
 
 # bind error queue
-routing_key = '*.error'
+routing_key = '#.error'
+channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_key)
+
+##########################################################################################
+
+# ACTIVITY LOG
+
+# declare activity log queue
+queue_name = 'Activity_Log'
+channel.queue_declare(queue=queue_name, durable=True)
+
+# bind error queue
+routing_key = '#.log'
 channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_key)
 
 ##########################################################################################
