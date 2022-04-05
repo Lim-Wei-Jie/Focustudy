@@ -67,8 +67,9 @@ export default {
     background-color: black;
     max-width: 500px;
     margin: 30px auto;
-    overflow: auto;
+    overflow: scroll;
     min-height: 50px;
+    max-height: 300px;
     /* border: 1px solid steelblue; */
     padding: 30px;
     border-radius: 20px;
