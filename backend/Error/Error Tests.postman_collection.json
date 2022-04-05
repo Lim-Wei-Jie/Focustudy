@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "6f1e8bbc-3187-4168-8b5b-75d3ce00a115",
+		"name": "Error Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Time Creation Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": 1,\r\n        \"startDate\": 1,\r\n        \"duration\": 1\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"test\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rating Creation Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": 1,\r\n        \"startDate\": 1,\r\n        \"duration\": 1\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"test\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

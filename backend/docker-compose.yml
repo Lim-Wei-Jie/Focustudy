@@ -14,7 +14,7 @@ services:
     build:
       context: ./Timer/
       dockerfile: Dockerfile
-    image: 01371965/time:focustudy
+    image: esdg2t1/time:focustudy
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/timer
@@ -28,7 +28,7 @@ services:
     build:
       context: ./Rating/
       dockerfile: Dockerfile
-    image: 01371965/rating:focustudy
+    image: esdg2t1/rating:focustudy
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/rating
@@ -55,7 +55,7 @@ services:
     build:
       context: ./Error/
       dockerfile: Dockerfile
-    image: 01371965/error:focustudy
+    image: esdg2t1/error:focustudy
     restart: always
     # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
     depends_on:
@@ -73,7 +73,7 @@ services:
     build:
       context: ./Record_Session/
       dockerfile: Dockerfile
-    image: 01371965/record_session:focustudy
+    image: esdg2t1/record_session:focustudy
     restart: always
     # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
     depends_on:
@@ -98,7 +98,7 @@ services:
     build:
       context: ./TaskList/
       dockerfile: Dockerfile
-    image: 01371965/tasklist:focustudy
+    image: esdg2t1/tasklist:focustudy
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/tasklist
@@ -114,7 +114,7 @@ services:
     build:
       context: ./Spotify/
       dockerfile: Dockerfile
-    image: 01371965/spotify:focustudy
+    image: esdg2t1/spotify:focustudy
     restart: always
     ports:
       - "5005:5005"

@@ -67,7 +67,7 @@ def processRecordSession(session_data):
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
       routing_key="time.error",
-      body="An error occured adding time record.",
+      body="{'code' : 500, 'message': 'An error occured adding time record'}",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
@@ -94,7 +94,7 @@ def processRecordSession(session_data):
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
       routing_key="rating.error",
-      body="An error occured adding rating record.",
+      body="{'code' : 400, 'message': 'An error occured adding rating record'}",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 

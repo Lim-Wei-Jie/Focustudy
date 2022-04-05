@@ -23,7 +23,7 @@ def callback(channel, method, properties, body):
 def processError(errorMsg):
   print("Printing the error message:")
   try:
-    print("--DATA:", errorMsg)
+    print("--MESSAGE:", errorMsg)
   except Exception as e:
     print("--ERROR:", e)
   print()

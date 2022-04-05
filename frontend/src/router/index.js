@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "../views/SignIn.vue";
+import DisplaySessionsView from "../views/DisplaySessionsView.vue";
 
 const routes = [
   // Homepage
@@ -15,6 +16,12 @@ const routes = [
     name: "auth",
     component: SignIn
   },
+  // Display Sessions
+  {
+    path: "/sessions",
+    name: "sessions",
+    component: DisplaySessionsView,
+  }
 ];
 
 const router = createRouter({

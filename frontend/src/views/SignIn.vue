@@ -3,7 +3,7 @@
 
   <!-- Page -->
   <section class="vh-100 background">
-    <div class="container py-5 h-100">
+    <div class="container py-3 h-100">
       <div class="row d-flex justify-content-center align-items-center" style="height: 85%">
         <div class="col col-xl-10">
           <!-- App Logo -->

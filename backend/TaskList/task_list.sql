@@ -42,13 +42,13 @@ CREATE TABLE IF NOT EXISTS `task_list` (
 --
 
 INSERT INTO `task_list` (`email`, `task_description`) VALUES
-('a@gmail.com', 'esm change report'),
-('huiqing.koh.2020@smu.edu.sg', 'analytics wireframe'),
-('huiqing.koh.2020@smu.edu.sg', 'task list backend'),
-('sanchanag.2020@smu.edu.sg', 'spotify api'),
-('sanchanag.2020@smu.edu.sg', 'gcal api'),
-('sophia.chow.2020@smu.edu.sg', 'sleep'),
-('sophia.chow.2020@smu.edu.sg', 'sleep more');
+
+/* test email filter */
+("a@gmail.com", "test email"),
+
+("esdg2t1@gmail.com", "finish esd"),
+("esdg2t1@gmail.com", "study for finals"),
+("esdg2t1@gmail.com", "presentation slides");
 
 COMMIT;
 

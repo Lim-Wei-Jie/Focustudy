@@ -6,7 +6,6 @@
       @delete-task="deleteTask"
       :tasks="tasks"
     />
-    <button class="btn btn-dark btn-sm" @click="allTasks">Refresh</button>
   </div>
 </template>
 
