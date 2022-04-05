@@ -80,7 +80,7 @@ export function displaySessions(email) {
             .then((res) => {
                 console.log(res.data);
                 // returns to 
-                resolve(res.data)
+                resolve(res.data.data)
             })
             .catch((err) => {
                 reject(err.message)
