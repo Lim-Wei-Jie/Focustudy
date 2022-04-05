@@ -11,7 +11,7 @@ import { displaySessions } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
 export default {
-  name: "ActivityLog",
+  name: "Sessions",
   data() {
     return {
       userData: {}

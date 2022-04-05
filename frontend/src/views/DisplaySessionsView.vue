@@ -25,6 +25,9 @@
           ><fa icon="home"
         /></router-link>
 
+        <!-- Sessions component -->
+        <Sessions />
+
     </div>
   </div>
 </template>
@@ -32,6 +35,7 @@
 <script>
 // @ is an alias to /src
 import { Icon } from "@iconify/vue";
+import Sessions from "@/components/Sessions.vue"
 
 export default {
   name: "DisplaySessionsView",
@@ -40,6 +44,7 @@ export default {
   },
   components: {
     Icon,
+    Sessions
   },
 };
 </script>
