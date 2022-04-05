@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_cors import CORS
 from os import environ
 
@@ -57,16 +58,26 @@ def addRating():
 def getRatings():
     data = request.get_json()
 
-    # Filter by email
-    ratinglist = Rating.query.filter(Rating.email == data["email"]).all()
+    # For selected user, avg ratings in same date, order by date descending
+    ratingList = db.session.\
+        query(Rating.currentDate.label("date"), func.avg(Rating.rating).label('avgRating')).\
+            group_by(Rating.currentDate).\
+                order_by(Rating.currentDate.desc()).\
+                    filter(Rating.email == data["email"]).\
+                        all()
 
-    if len(ratinglist):
-        # Return in json format
+    if len(ratingList):
+        result = []
+        for rating in ratingList:
+            result.append({
+                "date": rating.date,
+                "avgRating": round(rating.avgRating, 2)
+            })
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "ratings": [ rating.json() for rating in ratinglist]
+                    "ratings": result
                 }
             }
         )

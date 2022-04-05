@@ -54,7 +54,7 @@ def processAllSessions(email):
   # TIME
   print('\n-----Invoking time microservice-----')
   time_result = invoke_http(displayTime_URL, method='POST', json=email)
-
+  print(time_result)
   # Check the time_result if is failure, send to error MS
   time_code = time_result["code"]
 
@@ -81,7 +81,7 @@ def processAllSessions(email):
   # RATING
   print('\n-----Invoking rating microservice-----')
   rating_result = invoke_http(displayRating_URL, method='POST', json=email)
-
+  print(rating_result)
   # Check the rating_result if is failure, send to error MS
   rating_code = rating_result["code"]
 

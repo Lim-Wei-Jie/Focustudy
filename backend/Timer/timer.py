@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import extract, and_, func
-from datetime import date, timedelta
+from sqlalchemy import func
 from flask_cors import CORS
 from os import environ
 
@@ -33,11 +32,11 @@ class Timer(db.Model):
 def getTimesAll():
     data = request.get_json()
 
-    # For selected user, sum durations in same year, order by year
+    # For selected user, sum durations in same date, order by date descending
     timeList = db.session.\
-        query(extract('year', Timer.startDate).label("range"), func.sum(Timer.duration).label('total')).\
-            group_by(extract('year', Timer.startDate)).\
-                order_by(extract('year', Timer.startDate)).\
+        query(Timer.startDate.label("date"), func.sum(Timer.duration).label('totalDuration')).\
+            group_by(Timer.startDate).\
+                order_by(Timer.startDate.desc()).\
                     filter(Timer.email == data["email"]).\
                         all()
 
@@ -45,8 +44,8 @@ def getTimesAll():
         result = []
         for time in timeList:
             result.append({
-                "range": time.range,
-                "total": time.total / 3600
+                "date": time.date,
+                "totalDuration": round(time.totalDuration / 3600, 2)
             })
         return jsonify(
             {
