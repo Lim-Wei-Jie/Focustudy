@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "6f1e8bbc-3187-4168-8b5b-75d3ce00a115",
+		"name": "AMQP Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Time Creation Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"duration\": 2468\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"currentDate\": \"2022-04-03\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rating Creation Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"startDate\": \"2022-04-03\",\r\n        \"duration\": 2468\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rating Creation Failure Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"startDate\": \"2022-04-03\",\r\n        \"duration\": 2468\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"currentDate\": \"2022-04-03\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
