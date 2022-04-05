@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "../views/SignIn.vue";
-import AnalyticsView from "../views/AnalyticsView.vue";
+import ActivitiesView from "../views/ActivitiesView.vue";
 
 const routes = [
   // Homepage
@@ -18,9 +18,9 @@ const routes = [
   },
   // Analytics
   {
-    path: "/analytics",
-    name: "analytics",
-    component: AnalyticsView
+    path: "/activity",
+    name: "activity",
+    component: ActivitiesView
   },
 ];
 

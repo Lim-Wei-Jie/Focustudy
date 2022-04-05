@@ -83,7 +83,7 @@ export function displaySessions(email) {
                 resolve(res.data)
             })
             .catch((err) => {
-                reject(err)
+                reject(err.message)
             })
     })
 }

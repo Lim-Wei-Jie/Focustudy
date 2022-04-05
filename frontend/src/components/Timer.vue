@@ -91,7 +91,6 @@
 </template>
 
 <script>
-// import {addTime} from "../endpoint/endpoint.js"
 import { mapState, mapMutations } from "vuex"
 
 export default {

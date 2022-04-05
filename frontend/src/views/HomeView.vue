@@ -1,10 +1,18 @@
 <template>
   <div>
     <div class="mx-4 mt-3 mb-5 d-flex justify-content-between">
+      <!-- App Icon -->
       <div class="d-flex">
         <Icon icon="arcticons:bookshelf" width="40" color="black" />
         <h3>Focustudy</h3>
       </div>
+      <!-- Activity -->
+      <router-link
+        to="/activity"
+        class="bg-light p-2 text-dark rounded-3 text-decoration-none border"
+        ><fa icon="chart-simple"
+      /></router-link>
+      <!-- Log out -->
       <button class="btn btn-dark rounded-circle" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized"><fa icon="right-from-bracket"/></button>
     </div>
 

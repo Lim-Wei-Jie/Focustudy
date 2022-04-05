@@ -66,7 +66,6 @@ def getRatings():
             {
                 "code": 200,
                 "data": {
-                    # Create a json representation for each rating
                     "ratings": [ rating.json() for rating in ratinglist]
                 }
             }
