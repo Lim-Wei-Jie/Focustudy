@@ -50,44 +50,6 @@ export function deleteTask(email, task_id) {
 
 // ----------------------------------------------------------------------------------------------------------------
 
-// TIME
-
-// Add time record
-export function addTime(record) {
-    let api_endpoint = `http://127.0.0.1:5000/addTime`;
-    axios
-        .post(api_endpoint, record)
-        .then((response) => {
-            // {"code": 201, "data": "New time recorded."}
-            console.log(response.data);
-        })
-        .catch((error) => {
-            // {"code": 500, "data": "An error occurred creating time record."}
-            console.log(error)
-        });
-}
-
-// ----------------------------------------------------------------------------------------------------------------
-
-// RATING
-
-// Add rating record
-export function addRating(record) {
-    let api_endpoint = "http://127.0.0.1:5000/addRating";
-    axios
-        .post(api_endpoint, record)
-        .then((response) => {
-            // { "code": 201, "data": "Rating posted." }
-            console.log(response.data);
-        })
-        .catch((error) => {
-            // { "code": 500, "data": "An error occurred creating time record." }
-            console.log(error)
-        });
-}
-
-// ----------------------------------------------------------------------------------------------------------------
-
 // RECORD SESSION
 
 export function recordSession(sessionData) {
@@ -102,6 +64,26 @@ export function recordSession(sessionData) {
             })
             .catch((err) => {
                 reject(err)
+            })
+    })
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+
+// DISPLAY SESSION
+
+export function displaySessions(email) {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = "http://127.0.0.1:5200/display_sessions"
+        axios
+            .post(api_endpoint, email)
+            .then((res) => {
+                console.log(res.data);
+                // returns to 
+                resolve(res.data)
+            })
+            .catch((err) => {
+                reject(err.message)
             })
     })
 }

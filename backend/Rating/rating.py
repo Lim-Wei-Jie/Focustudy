@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_cors import CORS
 from os import environ
 
@@ -51,6 +52,45 @@ def addRating():
             "data": "Rating posted."
         }
     ), 201
+    
+# http://127.0.0.1:5001/getRatings
+@app.route("/getRatings", methods=["POST"])
+def getRatings():
+    data = request.get_json()
+
+    # For selected user, avg ratings in same date, order by date descending
+    ratingList = db.session.\
+        query(Rating.currentDate.label("date"), func.avg(Rating.rating).label('avgRating')).\
+            group_by(Rating.currentDate).\
+                order_by(Rating.currentDate.desc()).\
+                    filter(Rating.email == data["email"]).\
+                        all()
+
+    if len(ratingList):
+        result = []
+        for rating in ratingList:
+            result.append({
+                "date": rating.date,
+                "avgRating": round(rating.avgRating, 2)
+            })
+        return jsonify(
+            {
+                "code": 200,
+                "data": {
+                    "ratings": result
+                }
+            }
+        )
+
+    return jsonify(
+        {
+            # Message
+            "code": 404,
+            "data": "No ratings found."
+        }
+        # Error code
+    ), 404
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)

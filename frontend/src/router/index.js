@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "../views/SignIn.vue";
 import DisplaySessionsView from "../views/DisplaySessionsView.vue";
+import ActivitiesView from "../views/ActivitiesView.vue";
 
 const routes = [
   // Homepage
@@ -21,7 +22,13 @@ const routes = [
     path: "/sessions",
     name: "sessions",
     component: DisplaySessionsView,
-  }
+  },
+  // Analytics
+  {
+    path: "/activity",
+    name: "activity",
+    component: ActivitiesView
+  },
 ];
 
 const router = createRouter({

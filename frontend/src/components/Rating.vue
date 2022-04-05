@@ -16,7 +16,7 @@
                   flex-row-reverse
                 "
               >
-              
+
                 <input
                   type="radio"
                   id="star5"

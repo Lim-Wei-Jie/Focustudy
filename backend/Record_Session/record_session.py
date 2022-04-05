@@ -4,12 +4,10 @@ from flask_cors import CORS
 import os, sys
 from os import environ
 
-import requests
 from invokes import invoke_http
 
 import amqp_setup
 import pika
-import json
 
 app = Flask(__name__)
 CORS(app)
@@ -61,22 +59,30 @@ def processRecordSession(session_data):
   time_code = time_result["code"]
 
   if time_code not in range(200, 300):
-    print('\n\n-----Publishing the (time error) message with routing_key=time.error-----')
+    print('\n\n-----Publishing the (time creation error) message with routing_key=time.creation.error-----')
 
     # Send time error message to Error queue
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
-      routing_key="time.error",
-      body="{'code' : 500, 'message': 'An error occured adding time record'}",
+      routing_key="time.creation.error",
+      body="An error occured adding time record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nTime status published to the RabbitMQ Exchange.")
+    print("\nTime creation status published to the RabbitMQ Exchange.")
 
     return {
       "code": 500,
       "message": "Time record creation failure sent for error handling."
     }
+
+  else:
+        print('\n\n-----Publishing the (time creation log) message with routing_key=time.creation.log-----')        
+         
+        amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="time.creation.log", 
+            body="Time record creation success.")
+    
+        print("\nTime creation log published to RabbitMQ Exchange.\n")
 
   ##########################################################################
 
@@ -88,22 +94,30 @@ def processRecordSession(session_data):
   rating_code = rating_result["code"]
 
   if rating_code not in range(200, 300):
-    print('\n\n-----Publishing the (rating error) message with routing_key=rating.error-----')
+    print('\n\n-----Publishing the (rating creation error) message with routing_key=rating.creation.error-----')
 
     # Send rating error message to Error queue
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
-      routing_key="rating.error",
-      body="{'code' : 400, 'message': 'An error occured adding rating record'}",
+      routing_key="rating.creation.error",
+      body="An error occured adding rating record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
-    print("\nRating status published to the RabbitMQ Exchange.")
+    print("\nRating creation status published to the RabbitMQ Exchange.")
 
     return {
         "code": 400,
         "message": "Rating record creation failure sent for error handling."
     }
+  
+  else:
+      print('\n\n-----Publishing the (rating creation log) message with routing_key=rating.creation.log-----')        
+        
+      amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="rating.creation.log", 
+          body="Rating record creation success.")
+  
+      print("\nRating creation log published to RabbitMQ Exchange.\n")
 
   # Return created session
   return {
@@ -116,5 +130,5 @@ def processRecordSession(session_data):
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
-  print("This is flask " + os.path.basename(__file__) + " for getting rating...")
+  print("This is flask " + os.path.basename(__file__) + " for adding time and rating...")
   app.run(host="0.0.0.0", port=5100, debug=True)
