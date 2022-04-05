@@ -19,14 +19,7 @@
       </div>
     </div>
   </section>
-
-  <!-- <div>
-    <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
-    <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
-    <h2 v-if="email">signed user: {{ email }}</h2>
-    <button type="button" class="btn btn-outline-dark" @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
-    <button type="button" class="btn btn-outline-dark" @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
-  </div> -->
+  
 </template>
 
 <script>

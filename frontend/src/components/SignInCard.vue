@@ -9,7 +9,9 @@
       <!-- right card sign in -->
       <div class="col-md-6 col-lg-6 d-flex align-items-center">
         <div class="card-body p-4 p-lg-5 text-black">
-          <h1>Welcome.</h1>
+          <h2>Welcome to Focustudy!</h2>
+          <br>
+          <h5>Get started by signing in with Google</h5>
           <br>
           <!-- sign in -->
           <button type="button" class="btn btn-sm btn-outline-dark px-3" @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">
