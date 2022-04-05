@@ -9,6 +9,11 @@
         <h3>Focustudy</h3>
       </div>
 
+      <!-- User name -->
+      <div class="d-flex">
+        <h5>Welcome, {{email.split('@')[0]}}!</h5>
+      </div>
+
       <div class="d-flex">
         <!-- To DisplaySessionsView -->
         <router-link
