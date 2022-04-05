@@ -78,6 +78,14 @@ def processRecordSession(session_data):
       "message": "Time record creation failure sent for error handling."
     }
 
+  else:
+        print('\n\n-----Publishing the (time log) message with routing_key=time.log-----')        
+         
+        amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="time.log", 
+            body="Time record creation success.")
+    
+        print("\nTime log published to RabbitMQ Exchange.\n")
+
   ##########################################################################
 
   # RATING
@@ -104,6 +112,14 @@ def processRecordSession(session_data):
         "code": 400,
         "message": "Rating record creation failure sent for error handling."
     }
+  
+  else:
+      print('\n\n-----Publishing the (rating log) message with routing_key=rating.log-----')        
+        
+      amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="rating.log", 
+          body="Rating record creation success.")
+  
+      print("\nRating log published to RabbitMQ Exchange.\n")
 
   # Return created session
   return {

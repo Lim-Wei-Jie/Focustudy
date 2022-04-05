@@ -33,6 +33,18 @@ channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_
 
 ##########################################################################################
 
+# ACTIVITY LOG
+
+# declare activity log queue
+queue_name = 'Activity_Log'
+channel.queue_declare(queue=queue_name, durable=True)
+
+# bind error queue
+routing_key = '*.log'
+channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key=routing_key)
+
+##########################################################################################
+
 # checking if shared connection and channel expired, timed out, or disconnected by broker/client
 # re-establish the connection/channel if they have been closed
 def check_setup():

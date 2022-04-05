@@ -143,3 +143,21 @@ services:
     restart: always
     ports:
       - "5005:5005"
+
+  ###################################
+  # Activity Log microservice
+  ###################################
+  activity_log:
+    build:
+      context: ./ActivityLog/
+      dockerfile: Dockerfile
+    image: 01371965/activity_log:focustudy
+    restart: always
+    # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
