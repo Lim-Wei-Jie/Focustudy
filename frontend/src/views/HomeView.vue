@@ -40,15 +40,16 @@
 
     <!-- Default Page -->
     <div v-if="!sessionEnded" class="d-flex">
-      <Spotify></Spotify>
-      <Timer @endSession="showRating"></Timer>
-      <TaskList></TaskList>
+      <Spotify />
+      <Timer @endSession="showRating" />
+      <NewTaskList />
+      <TaskList />
     </div>
     <!-- Rating Page -->
     <Rating v-if="sessionEnded" @ratingComplete="returnDefault"></Rating>
 
     <!-- Login Debug -->
-    <div>
+    <!-- <div>
       <span>IsInit: {{ Vue3GoogleOauth.isInit }}</span>
       <br />
       <span>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</span>
@@ -63,7 +64,8 @@
       >
         Get authCode
       </button>
-    </div>
+    </div> -->
+    
   </div>
 </template>
 
@@ -73,6 +75,7 @@ import { mapState, mapMutations } from "vuex";
 import { inject, toRefs } from "vue";
 import { Icon } from "@iconify/vue";
 import Timer from "@/components/Timer.vue";
+import NewTaskList from "@/components/NewTaskList.vue"
 import TaskList from "@/components/TaskList.vue";
 import Rating from "@/components/Rating.vue";
 import Spotify from "@/components/Spotify.vue";
@@ -91,6 +94,7 @@ export default {
     Icon,
     Timer,
     Rating,
+    NewTaskList,
     TaskList,
     Spotify,
   },
