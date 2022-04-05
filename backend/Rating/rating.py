@@ -26,10 +26,6 @@ class Rating(db.Model):
         self.email = email
         self.currentDate = currentDate
         self.rating = rating
-        
-    # Enables object to be represented as a JSON string
-    def json(self):
-        return {"ratingId": self.ratingId, "email": self.email, "currentDate":self.currentDate, "rating": self.rating}
 
 # http://127.0.0.1:5001/addRating
 @app.route("/addRating", methods=['POST'])
