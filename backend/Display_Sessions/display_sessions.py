@@ -1,3 +1,4 @@
+import email
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -14,19 +15,19 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-addRating_URL = environ.get('addRating_URL') or "http://localhost:5001/addRating"
-addTime_URL = environ.get('addTime_URL') or "http://localhost:5002/addTime"
+displayRating_URL = environ.get('displayRating_URL') or "http://localhost:5001/getRatings"
+displayTime_URL = environ.get('displayTime_URL') or "http://localhost:5002/getTimesAll"
 
-@app.route("/record_session", methods=["POST"])
-def record_session():
+@app.route("/display_sessions", methods=["POST"])
+def display_sessions():
   # Simple check of input format and data of the request are JSON
   if request.is_json:
     try:
-      session_data = request.get_json()
-      print("\nReceived a session in JSON:", session_data)
+      email = request.get_json()
+      print("\nReceived email in JSON:", email)
 
-      # send session info {time, ratings} to time MS and rating MS
-      result = processRecordSession(session_data)
+      # send email info {email} to time MS and rating MS
+      result = processAllSessions(email)
       print('\n------------------------')
       print('\nresult: ', result)
       return jsonify(result), result["code"]
@@ -40,7 +41,7 @@ def record_session():
 
       return jsonify({
         "code": 500,
-        "message": "record_session.py internal error: " + ex_str
+        "message": "display_sessions.py internal error: " + ex_str
       }), 500
 
   return jsonify({
@@ -48,14 +49,11 @@ def record_session():
     "message": "Invalid JSON input: " + str(request.get_data())
   }), 400
 
-def processRecordSession(session_data):
-
-  time_data = session_data['timeData']
-  rating_data = session_data['ratingData']
+def processAllSessions(email):
 
   # TIME
   print('\n-----Invoking time microservice-----')
-  time_result = invoke_http(addTime_URL, method='POST', json=time_data)
+  time_result = invoke_http(displayTime_URL, method='POST', json=email)
 
   # Check the time_result if is failure, send to error MS
   time_code = time_result["code"]
@@ -67,7 +65,7 @@ def processRecordSession(session_data):
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
       routing_key="time.error",
-      body="An error occured adding time record.",
+      body="An error occured retrieving time record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
@@ -75,14 +73,14 @@ def processRecordSession(session_data):
 
     return {
       "code": 500,
-      "message": "Time record creation failure sent for error handling."
+      "message": "Time record retrieval failure sent for error handling."
     }
 
   ##########################################################################
 
   # RATING
   print('\n-----Invoking rating microservice-----')
-  rating_result = invoke_http(addRating_URL, method='POST', json=rating_data)
+  rating_result = invoke_http(displayRating_URL, method='POST', json=email)
 
   # Check the rating_result if is failure, send to error MS
   rating_code = rating_result["code"]
@@ -94,7 +92,7 @@ def processRecordSession(session_data):
     amqp_setup.channel.basic_publish(
       exchange=amqp_setup.exchangename,
       routing_key="rating.error",
-      body="An error occured adding rating record.",
+      body="An error occured retrieving rating record.",
       properties=pika.BasicProperties(delivery_mode = 2)
     )
 
@@ -102,19 +100,19 @@ def processRecordSession(session_data):
 
     return {
         "code": 400,
-        "message": "Rating record creation failure sent for error handling."
+        "message": "Rating record retrieval failure sent for error handling."
     }
 
-  # Return created session
+  # Return retrieved data
   return {
       "code": 201,
       "data": {
-        "time_data": time_data,
-        "rating_data": rating_data
+        "time_data": time_result,
+        "rating_data": rating_result
       }
   }
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
-  print("This is flask " + os.path.basename(__file__) + " for adding time and rating...")
-  app.run(host="0.0.0.0", port=5100, debug=True)
+  print("This is flask " + os.path.basename(__file__) + " for getting time and rating...")
+  app.run(host="0.0.0.0", port=5200, debug=True)

@@ -185,6 +185,23 @@ export function recordSession(sessionData) {
     })
 }
 
+// Call display_sessions complex MS
+export function displaySessions(email) {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = "http://127.0.0.1:5200/display_sessions"
+        axios
+            .post(api_endpoint, email)
+            .then((res) => {
+                console.log(res.data);
+                // returns to 
+                resolve(res.data)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
+
 export function deleteTask(email, task_id) {
     return new Promise((resolve, reject) => {
         let api_endpoint = `http://127.0.0.1:5000/task_list/delete`;

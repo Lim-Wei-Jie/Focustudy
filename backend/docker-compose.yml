@@ -90,6 +90,31 @@ services:
       PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5100:5100"
+  
+  #########################################
+  # Display Session complex microservice
+  #########################################
+  display_sessions:
+    build:
+      context: ./Display_Sessions/
+      dockerfile: Dockerfile
+    image: 01371965/display_sessions:focustudy
+    restart: always
+    # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
+    depends_on:
+      - timer
+      - rating
+      - error
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      displayTime_URL: http://timer:5002/getTimesAll
+      displayRating_URL: http://rating:5001/getRatings
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+    ports:
+      - "5200:5200"
 
   #######################
   # TaskList microservice
