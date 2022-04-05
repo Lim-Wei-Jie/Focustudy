@@ -6,7 +6,34 @@
 	},
 	"item": [
 		{
-			"name": "Time Creation Failure",
+			"name": "Record Session - Session Creation Success",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"startDate\": \"2022-04-03\",\r\n        \"duration\": 2468\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"currentDate\": \"2022-04-03\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5100/record_session",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"record_session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Record Session - Time Creation Failure",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -33,7 +60,7 @@
 			"response": []
 		},
 		{
-			"name": "Rating Creation Failure",
+			"name": "Record Session - Rating Creation Failure",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -60,13 +87,13 @@
 			"response": []
 		},
 		{
-			"name": "Rating Creation Failure Copy",
+			"name": "Display Sessions - Session Retrieval Success",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"timeData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"startDate\": \"2022-04-03\",\r\n        \"duration\": 2468\r\n    },\r\n    \"ratingData\": {\r\n        \"email\": \"a@gmail.com\",\r\n        \"currentDate\": \"2022-04-03\",\r\n        \"rating\": 5\r\n    }\r\n}",
+					"raw": "{\r\n    \"email\": \"esdg2t1@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,13 +101,67 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5100/record_session",
+					"raw": "localhost:5200/display_sessions",
 					"host": [
 						"localhost"
 					],
-					"port": "5100",
+					"port": "5200",
 					"path": [
-						"record_session"
+						"display_sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Display Sessions - Time Retrieval Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"c@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5200/display_sessions",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"display_sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Display Sessions - Rating Retrieval Failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"b@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5200/display_sessions",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"display_sessions"
 					]
 				}
 			},

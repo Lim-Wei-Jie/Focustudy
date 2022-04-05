@@ -98,7 +98,7 @@ services:
     build:
       context: ./Display_Sessions/
       dockerfile: Dockerfile
-    image: 01371965/display_sessions:focustudy
+    image: esdg2t1/display_sessions:focustudy
     restart: always
     # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
     depends_on:
@@ -151,7 +151,7 @@ services:
     build:
       context: ./ActivityLog/
       dockerfile: Dockerfile
-    image: 01371965/activity_log:focustudy
+    image: esdg2t1/activity_log:focustudy
     restart: always
     # command: ["./wait-for-it.sh", "rabbitmq"] # testing spinning up rabbitMQ
     depends_on:

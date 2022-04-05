@@ -11,7 +11,7 @@ CREATE TABLE timer (
 INSERT INTO timer (email, startDate, duration) VALUES
 
 /* test email filter */
-("a@gmail.com", "2022-03-25", 2313),
+("b@gmail.com", "2022-03-25", 2313),
 
 ("esdg2t1@gmail.com", "2022-03-25", 4135),
 ("esdg2t1@gmail.com", "2022-03-25", 4263),
