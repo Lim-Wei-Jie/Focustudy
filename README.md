@@ -1,5 +1,3 @@
-# Focustudy
-
 # :wave: is213-project
 
 ## 🤓 IS213 - G2 - Focustudy
@@ -13,6 +11,21 @@
 
 
 ## 🤓 Project Overview ##
+
+**What is the problem?**
+
+It’s getting harder and harder to focus. With everything going digital, the amount of time spent on our various devices has increased exponentially. The sheer amount of content exhausts our attention and leads to a decreased attention span. And studying is no exception
+
+<br>
+
+**How do we solve it?**
+
+Introducing, FOCUSTUDY, we aim to create an environment where students can configure their studying essentials - study timer, to-dos, music. It will all be available in one application, allowing them to remain focused as they work.
+
+
+<br>
+<hr>
+<br>
 
 
 
