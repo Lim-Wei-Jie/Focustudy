@@ -15,7 +15,7 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 # declare exchange
-exchangename= "record_session_topic"
+exchangename= "session_topic"
 exchangetype= "topic"
 channel.exchange_declare(exchange=exchangename, exchange_type=exchangetype, durable=True)
 
