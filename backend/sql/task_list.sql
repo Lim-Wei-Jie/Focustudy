@@ -46,9 +46,9 @@ INSERT INTO `task_list` (`email`, `task_description`) VALUES
 /* test email filter */
 ("a@gmail.com", "test email"),
 
-("esdg2t1@gmail.com", "finish esd"),
-("esdg2t1@gmail.com", "study for finals"),
-("esdg2t1@gmail.com", "presentation slides");
+("esdg2t1@gmail.com", "give esd g2t1 an A+!"),
+("esdg2t1@gmail.com", "go easy on us for finals"),
+("esdg2t1@gmail.com", "end the sem with a bang!");
 
 COMMIT;
 
