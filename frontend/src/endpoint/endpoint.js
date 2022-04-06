@@ -80,7 +80,7 @@ export function displaySessions(email) {
             .then((res) => {
                 console.log(res.data);
                 // returns to 
-                resolve(res.data)
+                resolve(res.data.data)
             })
             .catch((err) => {
                 reject(err.message)
@@ -107,3 +107,36 @@ export function getTopTracks() {
             });
     })
 }
+
+export function getAllPlaylists() {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = 'http://127.0.0.1:5005/playlists';
+        axios
+            .get(api_endpoint)
+            .then((response) => {
+                console.log(response.data.data);
+                resolve(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error)
+                reject([])
+            });
+    })
+}
+
+export function getChosenPlaylist(playlist_id) {
+    return new Promise((resolve, reject) => {
+        let api_endpoint = 'http://127.0.0.1:5005/chosen/' + playlist_id
+        axios
+            .post(api_endpoint, playlist_id)
+            .then((response) => {
+                console.log(response.data.data);
+                resolve(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error)
+                reject([])
+            });
+    })
+}
+

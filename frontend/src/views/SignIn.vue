@@ -9,9 +9,9 @@
           <!-- App Logo -->
           <div class="d-flex align-items-center mb-3 pb-1">
             <span class="h1 fw-bold">
-              <Icon icon="arcticons:bookshelf" width="50" color="white" />
+              <Icon icon="arcticons:bookshelf" width="60" color="white" />
             </span>
-            <h3 class="text-light">Focustudy</h3>
+            <h1 class="text-light">Focustudy</h1>
           </div>
           <!-- Card -->
           <SignInCard />

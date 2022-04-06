@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
   <div class="vh-100 bg-light">
-    <div class="mx-4 pt-3 mb-5 d-flex justify-content-between">
+    <div class="mx-4 pt-4 mb-5 d-flex justify-content-between">
 
       <!-- Logo -->
       <div class="d-flex">
@@ -10,9 +10,7 @@
       </div>
 
       <!-- User name -->
-      <div class="d-flex">
-        <h5>Welcome, {{email.split('@')[0]}}!</h5>
-      </div>
+      <h4>Welcome, <span class="text-warning">{{email.split('@')[0]}}</span>.</h4>
 
       <div class="d-flex">
         <!-- To DisplaySessionsView -->
@@ -28,12 +26,12 @@
             text-decoration-none
           "
           title="View Past Sessions"
-          ><fa icon="table"
-        /></router-link>
+          ><fa icon="clock"
+        /> History</router-link>
 
         <!-- Logout -->
         <button
-          class="btn btn-dark rounded-circle"
+          class="btn btn-outline-dark rounded-circle"
           @click="handleClickSignOut"
           :disabled="!Vue3GoogleOauth.isAuthorized"
           title="Logout"
