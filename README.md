@@ -67,7 +67,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 * The files are located here:
 
-![image]()
+
 
 1. On the localhost/phpmyadmin page, click on the 'Import' button and a 'Choose File' button will appear. Select a file and click 'Go'.
   
@@ -106,28 +106,27 @@ Introducing Focustudy, where we aim to create an environment where students can 
 ##### If you are using MAMP:
 
 1. Go to Focustudy/backend/docker-compose.yml.
-
 2. Replace the following lines with the code below:
 
-   - Line 20
+- Line 20
 
-     ```
-           dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/timer
-     ```
+```
+      dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/timer
+```
 
-   - Line 34
+- Line 34
 
-     ```
-           dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/rating
-     ```
+```
+      dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/rating
+```
 
-   - Line 129
+- Line 129
 
-     ```
-           dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/tasklist
-     ```
+```
+      dbURL: mysql+mysqlconnector://root:root@host.docker.internal:3306/tasklist
+```
 
-   <br>
+<br>
 
 1. Change directory into the backend folder.
 2. Type ```docker-compose up -d``` to build and run all the images in the backend folder.
@@ -136,9 +135,9 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 <br>
 
-- You should see the following output in the visual studio code terminal:
+- You should see the following output in the Visual Studio Code terminal:
 
-  ![](https://user-images.githubusercontent.com/89062463/161928947-4482ab14-3e51-45ba-a702-200a512d681d.png)
+![](https://user-images.githubusercontent.com/89062463/161928947-4482ab14-3e51-45ba-a702-200a512d681d.png)
 
 <br>
 
@@ -146,8 +145,9 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
   * Note that the screens below may defer from yours.
 
-1. Change directory into the frontend folder.
+1. Change directory to the frontend folder.
 2. Type ```npm run serve``` to run the frontend.
+3. Ctrl + Click or manually go to http://localhost:8000 to see our app!
 
 
 ![image](https://user-images.githubusercontent.com/89062463/161932600-d6d1f1a7-6252-411b-a190-3072c56289c6.png)
@@ -163,9 +163,9 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 - Login with your personal Google account, or use the account that we have prepared just for you! The account comes with database records already in place.
 
-  | Email:    | esdg2t1@gmail.com |
-  | --------- | ----------------- |
-  | Password: | dockerisfun1!     |
+| Email    | esdg2t1@gmail.com |
+| -------- | ----------------- |
+| Password | dockerisfun1!     |
 
 <br>
 
