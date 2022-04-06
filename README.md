@@ -99,6 +99,9 @@ Introducing Focustudy, where we aim to create an environment where students can 
 <br>
 
 ### First, run the docker compose file from the backend folder.
+  
+1. Go to Focusstudy/backend/docker-compose.yml.
+2. Ctrl + F and input 'esdg2t1'. Replace all with your docker id.
 
 ##### If you are using MAMP:
 
@@ -125,8 +128,8 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 <br>
 
-1. Change directory into the backend folder.
-2. Type ```docker-compose up -d``` to build and run all the images in the backend folder.
+3. Change directory into the backend folder.
+4. Type ```docker-compose up -d``` to build and run all the images in the backend folder.
 
 ![image](https://user-images.githubusercontent.com/89062463/161928446-ef7fc181-baff-4c2c-b1c9-c24dda09af67.png)
 
@@ -161,7 +164,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
   | -------- | ----------------- |
   | Password | dockerisfun1!     |
   
-![image](https://user-images.githubusercontent.com/89060200/162003989-66951c40-d350-4ea9-b331-6ea1067375f4.png)
+![image](https://user-images.githubusercontent.com/89060200/162009269-85a33387-0f9b-4e31-8857-d2ed42209366.png)
 
 <br>
 
