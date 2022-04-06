@@ -2,27 +2,55 @@
   <!-- eslint-disable -->
   <div class="container">
 
-    <div class="title">
-      Task List <br>
-      (trying new template that auto updates - weijie)
+    <div class="title text-center mb-2">
+      Task List
     </div>
 
-    <ul v-for="task in tasks" :key="task.id">
-      {{task.task_description}}
+    <!-- task list -->
+    <ul class="my mx-0 p-0">
+      <!-- each row -->
+      <li v-for="task in tasks" :key="task.id" class="d-flex border rounded my-2 py-1 px-3">
+        <!-- each task -->
+        <div class="col-lg-11 col-10 m-0 p-0">
+          <p :class="{ done: task.done }">{{task.task_description}}</p>
+        </div>
+        <!-- icons for done and delete task -->
+        <div class="col-lg-1 col-2 d-flex m-0 p-0 justify-content-between align-items-center">
+          <span @click="toggleDone(task)"><i class="far fa-check-circle text-success me-1"></i></span>
+          <span @click="delCurrTask(task.id)"><i class="far fa-trash-alt text-danger"></i></span>
+        </div>
+      </li>
     </ul>
+
+    <!-- add task -->
+    <div class="input-group">
+      <input
+        class="form-control form-control-sm shadow-none"
+        type="text"
+        name="newTask"
+        v-model="newTask"
+        @keyup.enter="onEnter"
+        placeholder="Task Name"
+        maxlength="30"
+      />
+      <div class="input-group-append">
+        <button @click.prevent="addNewTask" type="button" class="btn btn-sm btn-outline-dark">Add</button>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { getTasks } from "../endpoint/endpoint.js";
+import { getTasks, deleteTask, addTask } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
 export default {
   data() {
     return {
-      tasks: ref([])
+      tasks: ref([]),
+      newTask: ''
     }
   },
   setup() {
@@ -34,25 +62,57 @@ export default {
   },
 
   created() {
+    this.allTasks()
+  },
 
-    getTasks({email: this.email})
-      .then((res) => {
-        this.processTask(res)
+  methods: {
+    allTasks() {
+      getTasks({email: this.email})
+      .then((taskData) => {
+        for (var id of Object.keys(taskData.data)) {
+          this.tasks.push({
+            id: id,
+            task_description: taskData.data[id]["task_description"],
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
       })
-  },
+    },
 
-  methods: {
-    processTask(taskData) {
-      for (var id of Object.keys(taskData.data)) {
-        this.tasks.push({
-          id: id,
-          task_description: taskData.data[id]["task_description"],
+    delCurrTask(id) {
+      if (confirm("Are you sure?")) {
+        deleteTask({
+          email: this.email,
+          task_id: id
         });
       }
-    }
+    },
+
+    toggleDone(task) {
+      task.done = !task.done
+    },
+
+    addNewTask() {
+      if (!this.newTask) {
+        alert("Please add a task.");
+        return;
+      }
+
+      addTask({
+        email: this.email,
+        task_description: this.newTask,
+      });
+
+      this.newTask = "";
+    },
+
+    onEnter() {
+      this.addNewTask()
+    },
+
+    
   }
 }
 </script>
@@ -74,7 +134,7 @@ export default {
 }
 
 .container {
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
   overflow: auto;
   min-height: 300px;
@@ -86,9 +146,11 @@ export default {
 }
 
 .title {
-  text-align: center;
   font-size: 20px;
   color: #043631;
 }
 
+.done {
+  text-decoration: line-through;
+}
 </style>
