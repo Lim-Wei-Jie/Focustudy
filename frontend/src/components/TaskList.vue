@@ -4,6 +4,7 @@
 
     <div class="title text-center mb-2">
       Task List
+      <i class="fa fa-refresh" aria-hidden="true" @click="allTasks"></i>
     </div>
 
     <!-- task list -->
@@ -42,14 +43,13 @@
 </template>
 
 <script>
-import { ref } from 'vue';
 import { getTasks, deleteTask, addTask } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
 export default {
   data() {
     return {
-      tasks: ref([]),
+      tasks: [],
       newTask: ''
     }
   },
@@ -67,6 +67,7 @@ export default {
 
   methods: {
     allTasks() {
+      this.tasks = []
       getTasks({email: this.email})
       .then((taskData) => {
         for (var id of Object.keys(taskData.data)) {
