@@ -89,6 +89,7 @@ export default {
 
 <style scoped>
 .card {
+  text-align: center;
   border-radius: 1rem;
   background: linear-gradient(to right, white 50%, #e8e4e4 0%);
   border-width: 0px;
