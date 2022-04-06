@@ -7,8 +7,21 @@
       (trying new template that auto updates - weijie)
     </div>
 
-    <ul v-for="task in tasks" :key="task.id">
-      {{task.task_description}}
+    <!-- task list -->
+    <ul class="my mx-0 p-0">
+      <!-- each row -->
+      <li v-for="task in tasks" :key="task.id" class="d-flex border rounded py-1 px-3">
+        <!-- each task -->
+        <div class="col-lg-11 col-10 m-0 p-0">
+          <p :class="{ done: task.done }">{{task.task_description}}</p>
+          
+        </div>
+        <!-- icons for done and delete task -->
+        <div class="col-lg-1 col-2 d-flex m-0 p-0 justify-content-between align-items-center">
+          <span @click="toggleDone(task)"><i class="far fa-check-circle text-success me-1"></i></span>
+          <span @click="delCurrTask(task.id)"><i class="far fa-trash-alt text-danger"></i></span>
+        </div>
+      </li>
     </ul>
 
   </div>
@@ -16,13 +29,13 @@
 
 <script>
 import { ref } from 'vue';
-import { getTasks } from "../endpoint/endpoint.js";
+import { getTasks, deleteTask } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
 export default {
   data() {
     return {
-      tasks: ref([])
+      tasks: ref([]),
     }
   },
   setup() {
@@ -52,7 +65,20 @@ export default {
           task_description: taskData.data[id]["task_description"],
         });
       }
-    }
+    },
+
+    delCurrTask(id) {
+      if (confirm("Are you sure?")) {
+        deleteTask({
+          email: this.email,
+          task_id: id
+        });
+      }
+    },
+
+    toggleDone(task) {
+      task.done = !task.done
+    },
   }
 }
 </script>
@@ -74,7 +100,7 @@ export default {
 }
 
 .container {
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
   overflow: auto;
   min-height: 300px;
@@ -91,4 +117,7 @@ export default {
   color: #043631;
 }
 
+.done {
+  text-decoration: line-through;
+}
 </style>
