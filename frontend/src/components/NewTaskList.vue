@@ -96,14 +96,14 @@ export default {
 
     addNewTask() {
       if (!this.newTask) {
-        alert("Please add a task.");
-        return;
+        alert("Please add a task.")
+        return
       }
 
       addTask({
         email: this.email,
         task_description: this.newTask,
-      });
+      })
 
       this.newTask = "";
     },
