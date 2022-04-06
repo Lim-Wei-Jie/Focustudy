@@ -21,10 +21,10 @@ Project Overview
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 What is the problem?
-   - It’s getting harder and harder to focus. With everything going digital, the amount of time spent on our various devices has increased exponentially. The sheer amount of content exhausts our attention and leads to a decreased attention span. And studying is no exception
+It’s getting harder and harder to focus. With everything going digital, the amount of time spent on our various devices has increased exponentially. The sheer amount of content exhausts our attention and leads to a decreased attention span. And studying is no exception
 
 How do we solve it?
-   - Introducing Focustudy, where we aim to create an environment where students can configure their studying essentials - study timer, to-dos, music. It will all be available in one application, allowing them to remain focused as they work.
+Introducing Focustudy, where we aim to create an environment where students can configure their studying essentials - study timer, to-dos, music. It will all be available in one application, allowing them to remain focused as they work.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ How To Use Focustudy
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 1. Welcome to Focustudy. Login with Google to start focusing!
-   - Login with your personal Google account, or use the account that we have prepared just for you! The account comes with database records already in place.
+   - Use the following account that we have prepared just for you! The account comes with database records already in place.
 
 #####################################################################################
 

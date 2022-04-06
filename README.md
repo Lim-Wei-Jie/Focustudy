@@ -161,7 +161,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Welcome to Focustudy. Login with Google to start focusing!
   
-- Login with your personal Google account, or use the account that we have prepared just for you! The account comes with database records already in place.
+- Use the following account that we have prepared just for you! The account comes with database records already in place.
 
   | Email    | esdg2t1@gmail.com |
   | -------- | ----------------- |
