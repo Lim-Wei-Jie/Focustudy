@@ -126,4 +126,4 @@ AMQP Testing
    - Open Postman and import Focustudy/backend/AMQP Tests.postman_collection.json.
 
 2. Testing Error and Activity Log microservices
-   - Requests have been prepared for you to simulate errors in Record Session and Display Sessions microservices. Messages will be printed in the console.
+   - Requests have been prepared for you to simulate errors and activity in Record Session and Display Sessions microservices. Messages will be printed in the console.

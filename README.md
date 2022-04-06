@@ -231,7 +231,6 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Testing Error and Activity Log microservices
 
-- Requests have been prepared for you to simulate errors in Record Session and Display Sessions microservices. Messages will be printed in the console.
+- Requests have been prepared for you to simulate errors and activity in Record Session and Display Sessions microservices. Messages will be printed in the console.
 
 ![image](https://user-images.githubusercontent.com/89060200/161990508-a642c3f0-918a-4d03-934d-e328233402c7.png)
-
