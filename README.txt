@@ -11,6 +11,9 @@ Group Members:
 - Ricky Goh Rui Yu (ricky.goh.2020)
 - Sophia Chow Hui Ru (sophia.chow.2020)
 
+GitHub Repository:
+https://github.com/Lim-Wei-Jie/Focustudy
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Project Overview
