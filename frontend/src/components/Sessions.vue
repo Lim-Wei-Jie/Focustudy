@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable -->
-  <div class="container">
+  <div class="container text-center">
     <h3>Here are your past sessions.</h3>
     <table class="table table-bordered table-hover mt-5">
       <thead class="bg-dark text-light">
