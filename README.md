@@ -124,6 +124,77 @@ file: [focustudy_sql_files.zip](https://github.com/Lim-Wei-Jie/Focustudy/files/8
   
   
 ![image](https://user-images.githubusercontent.com/89062463/161932600-d6d1f1a7-6252-411b-a190-3072c56289c6.png)
+
+
+<br>
+<hr>
+<br>
+  
+  
+  
+  
+  
+## 🤓 How to Use Our Web Application (for Visitors to our Website) ##
+  
+**1. Click on "Sign in with Google"**
+  
+![image](https://user-images.githubusercontent.com/89062463/161939859-c623fddb-2ab6-4529-a3df-38d96cb21ff0.png)
+  
+
+<br>
+
+**2. Click on "Sign in with Google"**
+
+<insert image here>
+  
+<br>
+
+  
+**3. Once you have successfully login, you are brought to an overview. On this page, user can see the timer, tasklist and spotify music player. User can also add task or remove task,look for a song, or start the timer for a study session**
+  
+![image](https://user-images.githubusercontent.com/89062463/161943524-b3f171b0-5324-40c8-9546-1b9a34b2ffe6.png)
+
+<br>
+  
+  
+
+**4. User starts a study session by, adding a task , looking for a song and setting a time in the timer**
+  
+![image](https://user-images.githubusercontent.com/89062463/161943877-ec99895e-0e41-452a-bba5-1fc3b694d580.png)
+
+<br>
+  
+
+**5. Once the timer countdowns to 0, user is brought to a rating section where user rates his/her experience for this particular study session**
+  
+![image](https://user-images.githubusercontent.com/89062463/161944166-93ced17d-8ab2-443b-ad9e-bbbfa4811a03.png)
+
+<br>
+
+
+**6. Once the user completes his/her rating, user sees their rating summary and clicks exit**
+  
+![image](https://user-images.githubusercontent.com/89062463/161944762-7d016f44-846b-4a96-b6fb-376aacc75cc5.png)
+
+<br>
+  
+
+**7. User clicks on the logout button(highlighted in red) to exit FOCUSTUDY**
+  
+![image](https://user-images.githubusercontent.com/89062463/161947571-a3cd87f9-77e1-4433-99e6-7a22da2fd972.png)
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
   
   
   
