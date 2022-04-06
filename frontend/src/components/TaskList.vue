@@ -53,9 +53,6 @@ export default {
       newTask: ''
     }
   },
-  setup() {
-    
-  },
 
   computed: {
     ...mapState(["email"]),
