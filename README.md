@@ -27,15 +27,13 @@ It’s getting harder and harder to focus. With everything going digital, the am
 Introducing Focustudy, where we aim to create an environment where students can configure their studying essentials - study timer, to-dos, music. It will all be available in one application, allowing them to remain focused as they work.
 
 <br>
-
 <hr>
 <br>
 
 ## :computer: How to Install Our Web Application ##
 * This method is applicable to both Mac OS and Windows OS
 
-  <br>
-
+<br>
 
 ### Firstly, clone this repository into your local environment.
 
@@ -67,7 +65,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 * The files are located here:
 
-
+![image](https://user-images.githubusercontent.com/89060200/161988130-a9117a40-be67-47fb-bff0-8ea00cf30b8a.png)
 
 1. On the localhost/phpmyadmin page, click on the 'Import' button and a 'Choose File' button will appear. Select a file and click 'Go'.
   
@@ -79,7 +77,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ![image](https://user-images.githubusercontent.com/89062463/161901577-de4b947e-d212-4e83-b42d-0436e270215a.png)
 
-  <br>
+<br>
 
 ### Next, install the node modules used in this repository
 
@@ -91,17 +89,16 @@ Introducing Focustudy, where we aim to create an environment where students can 
 ![image](https://user-images.githubusercontent.com/89062463/161926166-26749e88-00fe-4297-b52d-072d828bf697.png)
 
 <br>
-
 <hr>
 <br>
 
- ## :runner: You are done with the set-up! Now lets run our application on your localhost. ##
+## :runner: You are done with the set-up! Now lets run our application on your localhost. ##
 
 - Note that the screens below may defer from yours.
 
 <br>
 
-  ### First, run the docker compose file from the backend folder.
+### First, run the docker compose file from the backend folder.
 
 ##### If you are using MAMP:
 
@@ -133,8 +130,6 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ![image](https://user-images.githubusercontent.com/89062463/161928446-ef7fc181-baff-4c2c-b1c9-c24dda09af67.png)
 
-<br>
-
 - You should see the following output in the Visual Studio Code terminal:
 
 ![](https://user-images.githubusercontent.com/89062463/161928947-4482ab14-3e51-45ba-a702-200a512d681d.png)
@@ -143,12 +138,11 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Next, run the frontend of Focustudy from the frontend folder.
 
-  * Note that the screens below may defer from yours.
+* Note that the screens below may defer from yours.
 
 1. Change directory to the frontend folder.
 2. Type ```npm run serve``` to run the frontend.
 3. Ctrl + Click or manually go to http://localhost:8000 to see our app!
-
 
 ![image](https://user-images.githubusercontent.com/89062463/161932600-d6d1f1a7-6252-411b-a190-3072c56289c6.png)
 
@@ -160,40 +154,43 @@ Introducing Focustudy, where we aim to create an environment where students can 
 ## :book: How To Use Focustudy ##
 
 ### Welcome to Focustudy. Login with Google to start focusing!
-
+  
+![image](https://user-images.githubusercontent.com/89060200/161986564-00151e28-b3a8-41d2-8bea-2a37e3cf2c26.png)
+  
 - Login with your personal Google account, or use the account that we have prepared just for you! The account comes with database records already in place.
 
-| Email    | esdg2t1@gmail.com |
-| -------- | ----------------- |
-| Password | dockerisfun1!     |
+  | Email    | esdg2t1@gmail.com |
+  | -------- | ----------------- |
+  | Password | dockerisfun1!     |
 
 <br>
 
 ### Upon successful login, you will be brought to Focustudy's home page.
 
-- Here, you can:
-  1. Start a study session
-  2. Upon completing a study session, you will be prompted to rate it
-  3. View, add and delete tasks in your to-do list
-  4. Play music from Spotify
+1. Start a study session
+2. Upon completing a study session, you will be prompted to rate it
+3. View, add and delete tasks in your to-do list
+4. Play music from Spotify
 
 <br>
 
 ### Interested in your past study sessions?
 
-- You can view all your past study sessions by pressing the "History" button at the top right of the screen.
+- Press the "History" button located at the top right of the home page.
+  
+- You will be brought to the history page where you will be able to view all your past study sessions sessions.
+  
+![image](https://user-images.githubusercontent.com/89060200/161986914-83e50f47-4499-4a7a-8981-84dc335f214f.png)
 
 <br>
 
 ### We are sad to see you go!
 
-- Log out by clicking on the exit button at the top right corner of the screen.
+- Log out by clicking on the exit button at the top right corner of the home page.
 
 <br>
-
 <hr>
 <br>
-
 
 ## :rabbit: AMQP Testing ##
 
