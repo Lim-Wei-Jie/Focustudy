@@ -2,19 +2,17 @@
   <!-- eslint-disable -->
   <div class="container">
 
-    <div class="title">
-      Task List <br>
-      (trying new template that auto updates - weijie)
+    <div class="title text-center mb-2">
+      Task List
     </div>
 
     <!-- task list -->
     <ul class="my mx-0 p-0">
       <!-- each row -->
-      <li v-for="task in tasks" :key="task.id" class="d-flex border rounded py-1 px-3">
+      <li v-for="task in tasks" :key="task.id" class="d-flex border rounded my-2 py-1 px-3">
         <!-- each task -->
         <div class="col-lg-11 col-10 m-0 p-0">
           <p :class="{ done: task.done }">{{task.task_description}}</p>
-          
         </div>
         <!-- icons for done and delete task -->
         <div class="col-lg-1 col-2 d-flex m-0 p-0 justify-content-between align-items-center">
@@ -24,18 +22,35 @@
       </li>
     </ul>
 
+    <!-- add task -->
+    <div class="input-group">
+      <input
+        class="form-control form-control-sm shadow-none"
+        type="text"
+        name="newTask"
+        v-model="newTask"
+        @keyup.enter="onEnter"
+        placeholder="Task Name"
+        maxlength="30"
+      />
+      <div class="input-group-append">
+        <button @click.prevent="addNewTask" type="button" class="btn btn-sm btn-outline-dark">Add</button>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { getTasks, deleteTask } from "../endpoint/endpoint.js";
+import { getTasks, deleteTask, addTask } from "../endpoint/endpoint.js";
 import { mapState } from "vuex"
 
 export default {
   data() {
     return {
       tasks: ref([]),
+      newTask: ''
     }
   },
   setup() {
@@ -47,24 +62,23 @@ export default {
   },
 
   created() {
+    this.allTasks()
+  },
 
-    getTasks({email: this.email})
-      .then((res) => {
-        this.processTask(res)
+  methods: {
+    allTasks() {
+      getTasks({email: this.email})
+      .then((taskData) => {
+        for (var id of Object.keys(taskData.data)) {
+          this.tasks.push({
+            id: id,
+            task_description: taskData.data[id]["task_description"],
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
       })
-  },
-
-  methods: {
-    processTask(taskData) {
-      for (var id of Object.keys(taskData.data)) {
-        this.tasks.push({
-          id: id,
-          task_description: taskData.data[id]["task_description"],
-        });
-      }
     },
 
     delCurrTask(id) {
@@ -79,6 +93,26 @@ export default {
     toggleDone(task) {
       task.done = !task.done
     },
+
+    addNewTask() {
+      if (!this.newTask) {
+        alert("Please add a task.");
+        return;
+      }
+
+      addTask({
+        email: this.email,
+        task_description: this.newTask,
+      });
+
+      this.newTask = "";
+    },
+
+    onEnter() {
+      this.addNewTask()
+    },
+
+    
   }
 }
 </script>
@@ -112,7 +146,6 @@ export default {
 }
 
 .title {
-  text-align: center;
   font-size: 20px;
   color: #043631;
 }
