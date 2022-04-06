@@ -167,10 +167,10 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Upon successful login, you will be brought to Focustudy's home page.
 
-1. Start a study session
-2. Upon completing a study session, you will be prompted to rate it
-3. View, add and delete tasks in your to-do list
-4. Play music from Spotify
+1. Start a study session.
+2. Upon completing a study session, you will be prompted to rate it.
+3. View, add and delete tasks in your to-do list.
+4. Play music from Spotify.
 
 <br>
 
@@ -198,8 +198,14 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 - Open Postman and import Focustudy/backend/AMQP Tests.postman_collection.json.
 
+![image](https://user-images.githubusercontent.com/89060200/161989167-c102d86d-6468-4023-bb17-f02d41661fce.png)
+![image](https://user-images.githubusercontent.com/89060200/161990384-c72f685b-70e4-4286-a661-270ccd23d437.png)
+
 <br>
 
 ### Testing Error and Activity Log microservices
 
 - Requests have been prepared for you to simulate errors in Record Session and Display Sessions microservices. Messages will be printed in the console.
+
+![image](https://user-images.githubusercontent.com/89060200/161990508-a642c3f0-918a-4d03-934d-e328233402c7.png)
+
