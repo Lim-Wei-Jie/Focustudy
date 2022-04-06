@@ -45,7 +45,6 @@
     <div v-if="!sessionEnded" class="d-flex">
       <Spotify />
       <Timer @endSession="showRating" />
-      <NewTaskList />
       <TaskList />
     </div>
     <!-- Rating Page -->
@@ -78,7 +77,6 @@ import { mapState, mapMutations } from "vuex";
 import { inject, toRefs } from "vue";
 import { Icon } from "@iconify/vue";
 import Timer from "@/components/Timer.vue";
-import NewTaskList from "@/components/NewTaskList.vue"
 import TaskList from "@/components/TaskList.vue";
 import Rating from "@/components/Rating.vue";
 import Spotify from "@/components/Spotify.vue";
@@ -97,7 +95,6 @@ export default {
     Icon,
     Timer,
     Rating,
-    NewTaskList,
     TaskList,
     Spotify,
   },
