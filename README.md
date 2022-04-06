@@ -155,22 +155,37 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Welcome to Focustudy. Login with Google to start focusing!
   
-![image](https://user-images.githubusercontent.com/89060200/161986564-00151e28-b3a8-41d2-8bea-2a37e3cf2c26.png)
-  
 - Login with your personal Google account, or use the account that we have prepared just for you! The account comes with database records already in place.
 
   | Email    | esdg2t1@gmail.com |
   | -------- | ----------------- |
   | Password | dockerisfun1!     |
+  
+![image](https://user-images.githubusercontent.com/89060200/162003989-66951c40-d350-4ea9-b331-6ea1067375f4.png)
 
 <br>
 
 ### Upon successful login, you will be brought to Focustudy's home page.
+  
+![image](https://user-images.githubusercontent.com/89060200/162004551-0d9aef41-cdb7-41a1-a6f6-763c8afefe9a.png)
 
 1. Start a study session.
+  
+![image](https://user-images.githubusercontent.com/89060200/162004743-fb8ae57a-1606-4026-88ae-6eda2958672f.png)
+
 2. Upon completing a study session, you will be prompted to rate it.
+  
+![image](https://user-images.githubusercontent.com/89060200/162004833-428bf5d9-7dee-463d-af02-b8aab72bf93e.png)
+
+![image](https://user-images.githubusercontent.com/89060200/162004886-4f9fd0a2-2078-46d0-bbd5-3a4004372abf.png)
+
 3. View, add and delete tasks in your to-do list.
+
+![image](https://user-images.githubusercontent.com/89060200/162005043-3fb2a6d7-db9f-4264-b6c6-8466851197c6.png)
+
 4. Play music from Spotify.
+  
+![image](https://user-images.githubusercontent.com/89060200/162005131-0e515f20-49d4-4c7a-8414-6233c01b51af.png)
 
 <br>
 
@@ -178,15 +193,19 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 - Press the "History" button located at the top right of the home page.
   
+![image](https://user-images.githubusercontent.com/89060200/162005340-be9c067d-4fdc-4fe5-b56b-c8c319864998.png)
+  
 - You will be brought to the history page where you will be able to view all your past study sessions sessions.
   
-![image](https://user-images.githubusercontent.com/89060200/161986914-83e50f47-4499-4a7a-8981-84dc335f214f.png)
+![image](https://user-images.githubusercontent.com/89060200/162005506-5ee10603-3ada-411d-a370-58d9d68c1910.png)
 
 <br>
 
 ### We are sad to see you go!
 
 - Log out by clicking on the exit button at the top right corner of the home page.
+  
+![image](https://user-images.githubusercontent.com/89060200/162005404-5e984811-25d9-4e6f-9f50-f7466db66023.png)
 
 <br>
 <hr>
@@ -199,6 +218,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 - Open Postman and import Focustudy/backend/AMQP Tests.postman_collection.json.
 
 ![image](https://user-images.githubusercontent.com/89060200/161989167-c102d86d-6468-4023-bb17-f02d41661fce.png)
+  
 ![image](https://user-images.githubusercontent.com/89060200/161990384-c72f685b-70e4-4286-a661-270ccd23d437.png)
 
 <br>
