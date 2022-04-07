@@ -144,7 +144,7 @@ Introducing Focustudy, where we aim to create an environment where students can 
 
 ### Next, run the frontend of Focustudy from the frontend folder.
 
-* Note that the screens below may defer from yours.
+* Note that the screens below may differ from yours.
 
 1. Change directory to the frontend folder.
 2. Type ```npm run serve``` to run the frontend.
